@@ -3,13 +3,14 @@ package com.onitsura12.farmdel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.onitsura12.farmdel.databinding.ActivityMainBinding
+import com.onitsura12.farmdel.databinding.ActivityStartBinding
 
-class MainActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityStartBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

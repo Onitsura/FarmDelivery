@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1098191070010",
+    "firebase_url": "https://farmdelivery-712f7-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "farmdelivery-712f7",
+    "storage_bucket": "farmdelivery-712f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098191070010:android:5f777a21f17d8188812603",
+        "android_client_info": {
+          "package_name": "com.onitsura12.farmdel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098191070010-dlv56ef7bkavill1grrv3m7c0jekkrj4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onitsura12.farmdel",
+            "certificate_hash": "197ee4fe2e06bc2d5090e733c34718189706cf03"
+          }
+        },
+        {
+          "client_id": "1098191070010-ibjt4egr37up81rtb7rpdc6u4hismc7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbYxsN-HkEuOBSt6-53uf9dq9phR5hqfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098191070010-ibjt4egr37up81rtb7rpdc6u4hismc7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
