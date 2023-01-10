@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_app"
+    app:startDestination="@id/accountFragment">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.onitsura12.farmdel.fragments.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_accDetailsFragment"
+            app:destination="@id/accDetailsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_accOrdersFragment"
+            app:destination="@id/accOrdersFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_accAddressFragment"
+            app:destination="@id/accAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.onitsura12.farmdel.fragments.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.onitsura12.farmdel.fragments.shop.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/accOrdersFragment"
+        android:name="com.onitsura12.farmdel.fragments.account.AccOrdersFragment"
+        android:label="fragment_acc_orders"
+        tools:layout="@layout/fragment_acc_orders" />
+    <fragment
+        android:id="@+id/accAddressFragment"
+        android:name="com.onitsura12.farmdel.fragments.account.AccAddressFragment"
+        android:label="fragment_account_address"
+        tools:layout="@layout/fragment_account_address" >
+        <action
+            android:id="@+id/action_accAddressFragment_to_accAddAddressFragment"
+            app:destination="@id/accAddAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accDetailsFragment"
+        android:name="com.onitsura12.farmdel.fragments.account.AccDetailsFragment"
+        android:label="fragment_account_details"
+        tools:layout="@layout/fragment_account_details" />
+    <fragment
+        android:id="@+id/accAddAddressFragment"
+        android:name="com.onitsura12.farmdel.fragments.account.AccAddAddressFragment"
+        android:label="fragment_acc_add_address"
+        tools:layout="@layout/fragment_acc_add_address" />
+</navigation>

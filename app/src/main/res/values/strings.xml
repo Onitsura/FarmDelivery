@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">FarmDel</string>
+    <string name="sample_name">Колбас Мяснов</string>
+    <string name="account_info">Информация об аккаунте</string>
+    <string name="account_orders">Мои заказы</string>
+    <string name="account_address">Адреса доставки</string>
+    <string name="account_sign_out">Выйти из аккаунта</string>
+    <string name="sample_email">example@google.com</string>
+    <string name="sample_phone_number">+79999999999</string>
+    <string name="personal_details">Личные данные</string>
+    <string name="acc_address">Адреса доставки</string>
+    <string name="address_city">Город</string>
+    <string name="sample_city">Sample city</string>
+    <string name="address_entrance">Подъезд</string>
+    <string name="address_flat">Квартира</string>
+    <string name="address_floor">Этаж</string>
+    <string name="address_street">Улица</string>
+    <string name="sample_street">Sample street</string>
+    <string name="address_sample_entrance">Sample entrance</string>
+    <string name="address_sample_floor">Sample floor</string>
+    <string name="address_sample_flat">Sample flat</string>
+    <string name="hint_city">Введите город</string>
+    <string name="hint_street">Введите улицу</string>
+    <string name="hint_entrance">Подъезд</string>
+    <string name="hint_floor">Этаж</string>
+    <string name="hint_flat">Квартира</string>
+    <string name="acc_new_address">Новый адрес</string>
 </resources>
