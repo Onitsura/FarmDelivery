@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="2dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="2dp"
+    android:paddingBottom="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/primary_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvOrderItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12sp"
+            android:text="@string/order_item_name"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvOrderItemTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:text="@string/order_item_total"
+            android:layout_marginEnd="20dp"
+            />
+        <TextView
+            android:id="@+id/tvOrderItemCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/order_item_count"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="40dp"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>

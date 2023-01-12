@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.account.AccountFragment">
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:src="@drawable/splash_blur"-->
+<!--        android:scaleType="fitXY"/>-->
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +20,6 @@
 
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_margin="5dp"
                 android:id="@+id/accountPhoto"
                 android:layout_width="80dp"
                 android:layout_height="0dp"
@@ -59,7 +65,6 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf=""
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/account_details"/>
 
@@ -92,7 +97,6 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf=""
                 app:layout_constraintTop_toTopOf="@+id/accDetailsIcon"
                 android:src="@drawable/account_orders"/>
 
@@ -126,7 +130,6 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf=""
                 app:layout_constraintTop_toTopOf="@+id/accOrdersIcon"
                 android:src="@drawable/account_address"/>
 

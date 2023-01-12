@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="2dp"
+    android:paddingTop="4dp"
+    android:paddingEnd="2dp"
+    android:paddingBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:src="@drawable/splash"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:weightSum="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvCartItemName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/cart_sample_name"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+            <TextView
+                android:id="@+id/tvCartItemCost"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/sample_cost"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tvCartItemWeight"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/sample_weight"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="vertical">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/cartItemIncreaseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                app:riv_corner_radius="40dip"
+                android:src="@drawable/plus"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/cartItemCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="18dp"
+                android:text="@string/sample_count"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/cartItemDecreaseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                app:riv_corner_radius="40dip"
+                android:src="@drawable/minus"
+                android:layout_weight="1"
+                />
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

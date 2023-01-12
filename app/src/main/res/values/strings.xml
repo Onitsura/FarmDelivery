@@ -25,4 +25,27 @@
     <string name="hint_floor">Этаж</string>
     <string name="hint_flat">Квартира</string>
     <string name="acc_new_address">Новый адрес</string>
+    <string name="order_number">Заказ #</string>
+    <string name="order_placed">Создан</string>
+    <string name="order_items">Позиций:</string>
+    <string name="order_cost">Итого:</string>
+    <string name="order_item_name">Курочка</string>
+    <string name="order_item_total">Итого</string>
+    <string name="order_item_count">Штук</string>
+    <string name="cart">Корзина</string>
+    <string name="checkout_btn">Заказать</string>
+    <string name="cart_sample_name">Копчёности</string>
+    <string name="sample_cost">250 руб / кг</string>
+    <string name="sample_weight">2,5 - 3 кг</string>
+    <string name="sample_count">3</string>
+    <string name="order_success">Заказ создан</string>
+    <string name="success_order">Ваш заказ успешно создан</string>
+    <string name="delivery_time">Мы свяжемся с вами за 1-1,5 часа до доставки</string>
+    <string name="shop">Фермерские продукты</string>
+    <string name="sign_google">Войти с Google-аккаунтом</string>
+    <string name="unauthorized">Продолжить без авторизации</string>
+    <string name="title_shop">Магазин</string>
+    <string name="title_cart">Корзина</string>
+    <string name="title_account">Аккаунт</string>
+    <string name="save_btn">Сохранить адрес</string>
 </resources>

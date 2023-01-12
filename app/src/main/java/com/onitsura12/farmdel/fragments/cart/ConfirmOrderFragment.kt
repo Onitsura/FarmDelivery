@@ -1,4 +1,4 @@
-package com.onitsura12.farmdel.fragments.account
+package com.onitsura12.farmdel.fragments.cart
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,33 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.onitsura12.farmdel.R
-import com.onitsura12.farmdel.databinding.FragmentAccOrdersBinding
+import com.onitsura12.farmdel.databinding.FragmentConfirmOrderBinding
 
-class AccOrdersFragment : Fragment() {
+class ConfirmOrderFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AccOrdersFragment()
+        fun newInstance() = ConfirmOrderFragment()
     }
 
-    private lateinit var viewModel: AccOrdersViewModel
-    private lateinit var binding: FragmentAccOrdersBinding
+    private lateinit var viewModel: ConfirmOrderViewModel
+    private lateinit var binding: FragmentConfirmOrderBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAccOrdersBinding.inflate(layoutInflater)
+        binding = FragmentConfirmOrderBinding.inflate(layoutInflater)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.accOrdersBackButton.setOnClickListener {
-            findNavController().navigate(R.id.accountFragment)
-        }
+
+
     }
 
 }
