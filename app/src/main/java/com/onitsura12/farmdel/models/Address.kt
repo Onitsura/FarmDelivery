@@ -5,5 +5,6 @@ data class Address(
     val street: String,
     val entrance: String,
     val floor: String,
-    val flat: String
+    val flat: String,
+    val id: String
 )
