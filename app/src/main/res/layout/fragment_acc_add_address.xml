@@ -55,6 +55,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/etCity"
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginStart="10dp"
@@ -72,6 +73,7 @@
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/etStreet"
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginStart="10dp"

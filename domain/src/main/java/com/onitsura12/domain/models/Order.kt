@@ -1,4 +1,4 @@
-package com.onitsura12.farmdel.models
+package com.onitsura12.domain.models
 
 data class Order(
     val number: String,
