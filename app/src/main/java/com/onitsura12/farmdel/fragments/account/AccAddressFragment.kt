@@ -34,9 +34,7 @@ class AccAddressFragment : Fragment() {
             "newAddress", viewLifecycleOwner
         ) { _, bundle ->
             val newAddress = viewModel.convertToAddress(bundle.getStringArrayList("newAddress")!!)
-            Log.e("Addr", newAddress.toString())
             viewModel.addressList.value!!.add(newAddress)
-            Log.e("Addr", viewModel.addressList.value.toString())
 
         }
         return binding.root

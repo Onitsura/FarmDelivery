@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentMainBinding
+import com.onitsura12.farmdel.utils.FirebaseHelper
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHOTO
 
 class MainFragment : Fragment() {
 
@@ -23,7 +27,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -32,6 +36,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
+
             val bottomNavigationView = mainBottomNavigationView
             val navController = (childFragmentManager.findFragmentById(R.id.mainContainerView) as
                     NavHostFragment).navController
@@ -39,5 +44,8 @@ class MainFragment : Fragment() {
             navController)
         }
     }
+
+
+
 
 }

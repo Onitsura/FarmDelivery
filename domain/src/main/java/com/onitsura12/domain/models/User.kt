@@ -1,11 +1,12 @@
 package com.onitsura12.domain.models
 
 data class User(
-    val name: String?,
-    val lastName: String?,
-    val phone: String,
-    val eMail: String?,
-    val orders: List<Order?>,
-    val address: Address?,
-    val cart: List<ShopItem?>
+    var name: String? = "",
+    val lastName: String? = "",
+    var phone: String = "",
+    val eMail: String? = "",
+    var photoUrl: String? = "",
+    val orders: List<Order?> = listOf(),
+    val address: Address? = null,
+    val cart: List<ShopItem?> = listOf()
 )

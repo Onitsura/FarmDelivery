@@ -9,7 +9,11 @@
         android:id="@+id/shopFragment"
         android:name="com.onitsura12.farmdel.fragments.shop.ShopFragment"
         android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_addShopItemFragment"
+            app:destination="@id/addShopItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.onitsura12.farmdel.fragments.account.AccountFragment"
@@ -76,4 +80,17 @@
             android:id="@+id/action_confirmOrderFragment_to_cartSuccessFragment"
             app:destination="@id/cartSuccessFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addShopItemFragment"
+        android:name="com.onitsura12.farmdel.fragments.shop.AddShopItemFragment"
+        android:label="fragment_add_shop_item"
+        tools:layout="@layout/fragment_add_shop_item" >
+        <action
+            android:id="@+id/action_addShopItemFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment"
+        android:label="BottomSheetFragment" />
 </navigation>

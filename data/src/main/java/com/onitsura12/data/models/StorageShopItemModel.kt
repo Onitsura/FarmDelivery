@@ -8,6 +8,7 @@ data class StorageShopItemModel(
 //    @PrimaryKey
     val title: String,
     val cost: String,
-    val count: String,
-    val weight: String?
+    val count: String?,
+    val weight: String?,
+    val imagePath: String?
 )

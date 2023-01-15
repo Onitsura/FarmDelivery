@@ -19,18 +19,15 @@
 
 
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <ImageView
                 android:id="@+id/accountPhoto"
                 android:layout_width="80dp"
-                android:layout_height="0dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="40dp"
-                app:riv_border_width="1dip"
-                app:riv_corner_radius="40dip"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@mipmap/ic_launcher_round"
-                />
+                android:src="@mipmap/ic_launcher_round"/>
 
 
             <TextView

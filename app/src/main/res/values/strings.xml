@@ -6,7 +6,7 @@
     <string name="account_address">Адреса доставки</string>
     <string name="account_sign_out">Выйти из аккаунта</string>
     <string name="sample_email">example@google.com</string>
-    <string name="sample_phone_number">+79999999999</string>
+    <string name="sample_phone_number">+7(999)999–99–99</string>
     <string name="personal_details">Личные данные</string>
     <string name="acc_address">Адреса доставки</string>
     <string name="address_city">Город</string>
@@ -36,16 +36,16 @@
     <string name="checkout_btn">Заказать</string>
     <string name="cart_sample_name">Копчёности</string>
     <string name="sample_cost">250 руб / кг</string>
-    <string name="sample_weight">2,5 - 3 кг</string>
+    <string name="sample_weight">2,5 – 3 кг</string>
     <string name="sample_count">3</string>
     <string name="order_success">Заказ создан</string>
     <string name="success_order">Ваш заказ успешно создан</string>
-    <string name="delivery_time">Мы свяжемся с вами за 1-1,5 часа до доставки</string>
+    <string name="delivery_time">Мы свяжемся с вами за 1–1,5 часа до доставки</string>
     <string name="shop">Фермерские продукты</string>
     <string name="sign_google">Войти с Google-аккаунтом</string>
     <string name="unauthorized">Продолжить без авторизации</string>
     <string name="title_shop">Магазин</string>
     <string name="title_cart">Корзина</string>
     <string name="title_account">Аккаунт</string>
-    <string name="save_btn">Сохранить адрес</string>
+    <string name="save_btn">Сохранить</string>
 </resources>

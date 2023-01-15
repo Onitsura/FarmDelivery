@@ -62,7 +62,7 @@ class Mapper {
             )
         }
 
-        fun orderItemToDomain(item: StorageOrderItem): OrderItem{
+        private fun orderItemToDomain(item: StorageOrderItem): OrderItem{
             return OrderItem(
                 title = item.title,
                 count = item.count,
@@ -70,7 +70,7 @@ class Mapper {
             )
         }
 
-        fun orderItemToData(item: OrderItem): StorageOrderItem{
+        private fun orderItemToData(item: OrderItem): StorageOrderItem{
             return StorageOrderItem(
                 title = item.title,
                 count = item.count,
@@ -83,7 +83,8 @@ class Mapper {
                 title = storageShopItemModel.title,
                 cost = storageShopItemModel.cost,
                 count = storageShopItemModel.count,
-                weight = storageShopItemModel.weight
+                weight = storageShopItemModel.weight,
+                imagePath = storageShopItemModel.imagePath
             )
 
         }
@@ -93,7 +94,8 @@ class Mapper {
                 title = shopItem.title,
                 cost = shopItem.cost,
                 count = shopItem.count,
-                weight = shopItem.weight
+                weight = shopItem.weight,
+                imagePath = shopItem.imagePath
             )
         }
 

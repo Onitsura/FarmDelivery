@@ -11,4 +11,5 @@
     <color name="primary_dark">#6CC51D</color>
     <color name="primary_light">#EBFFD7</color>
     <color name="background">#F4F5F9</color>
+    <color name="red_light">#F4D8D4</color>
 </resources>
