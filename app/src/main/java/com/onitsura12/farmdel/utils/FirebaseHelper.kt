@@ -1,11 +1,11 @@
 package com.onitsura12.farmdel.utils
 
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.onitsura12.domain.models.User
-
-
+import com.onitsura12.farmdel.R
 
 
 class FirebaseHelper {
@@ -23,12 +23,23 @@ class FirebaseHelper {
         const val CHILD_FULLNAME = "fullname"
         const val CHILD_EMAIL = "e-mail"
         const val CHILD_PHOTO = "photo"
+        const val CHILD_ADDRESS = "address"
 
         fun initFirebase() {
             AUTH = FirebaseAuth.getInstance()
             REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
             USER = User()
             UID = AUTH.currentUser?.uid.toString()
+
         }
+
+
+
+
+
+
+
+
+
     }
 }

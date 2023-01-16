@@ -79,6 +79,30 @@
                     android:layout_weight="3"
                     android:text="@string/sample_name"
                     android:textColor="@color/black" />
+                <EditText
+                    android:id="@+id/etAccountName"
+                    android:inputType="textPersonName"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="3"
+                    android:hint="@string/et_name"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="gone"/>
+                <ImageView
+                    android:id="@+id/editNameButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/edit_pen"
+                    android:layout_weight="1"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/applyNameButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/apply_icon"
+                    android:layout_weight="1"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
@@ -107,22 +131,23 @@
 
                 <EditText
                     android:id="@+id/etAccountPhone"
+                    android:inputType="phone"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="3"
                     android:hint="@string/sample_phone_number"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:visibility="visible"/>
+                    android:visibility="gone"/>
                 <ImageView
-                    android:id="@+id/editButton"
+                    android:id="@+id/editPhoneButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/edit_pen"
                     android:layout_weight="1"
                     android:visibility="visible"/>
                 <ImageView
-                    android:id="@+id/applyButton"
+                    android:id="@+id/applyPhoneButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/apply_icon"

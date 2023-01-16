@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@id/accAddAddressBackButton"
-            android:weightSum="10">
+            android:weightSum="9">
 
             <TextView
                 android:layout_width="match_parent"
@@ -79,6 +79,23 @@
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:hint="@string/hint_street"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/address_house"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etHouse"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:hint="@string/hint_house"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

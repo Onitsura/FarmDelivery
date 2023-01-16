@@ -14,6 +14,7 @@ import com.onitsura12.farmdel.databinding.FragmentMainBinding
 import com.onitsura12.farmdel.utils.FirebaseHelper
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHOTO
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initFirebase
 
 class MainFragment : Fragment() {
 
@@ -36,7 +37,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
+            initFirebase()
             val bottomNavigationView = mainBottomNavigationView
             val navController = (childFragmentManager.findFragmentById(R.id.mainContainerView) as
                     NavHostFragment).navController

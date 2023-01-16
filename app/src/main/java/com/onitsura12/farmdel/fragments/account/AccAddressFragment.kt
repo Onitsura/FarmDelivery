@@ -20,7 +20,7 @@ class AccAddressFragment : Fragment() {
         fun newInstance() = AccAddressFragment()
     }
 
-    private val viewModel: AccAddressViewModel by activityViewModels()
+    private lateinit var viewModel: AccAddressViewModel
     private lateinit var binding: FragmentAccountAddressBinding
     private val adapter: AddressAdapter = AddressAdapter()
 
@@ -29,24 +29,15 @@ class AccAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccountAddressBinding.inflate(layoutInflater)
-
-        parentFragmentManager.setFragmentResultListener(
-            "newAddress", viewLifecycleOwner
-        ) { _, bundle ->
-            val newAddress = viewModel.convertToAddress(bundle.getStringArrayList("newAddress")!!)
-            viewModel.addressList.value!!.add(newAddress)
-
-        }
+        viewModel = AccAddressViewModel()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.addressList.observe(viewLifecycleOwner){
-            adapter.submitList(it)
-        }
         initRcView()
+
+
 
         binding.accAddressBackButton.setOnClickListener {
             findNavController().popBackStack()
@@ -60,6 +51,9 @@ class AccAddressFragment : Fragment() {
     private fun initRcView(){
         binding.addressRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.addressRcView.adapter = adapter
+        viewModel.addressList.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
     }
 
 

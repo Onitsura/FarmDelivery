@@ -1,34 +1,51 @@
 package com.onitsura12.farmdel.fragments.account
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.onitsura12.domain.models.Address
 import com.onitsura12.domain.repository.UserRepository
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ADDRESS
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AccAddressViewModel @Inject constructor(userRepository: UserRepository) : ViewModel() {
+class AccAddressViewModel @Inject constructor() : ViewModel() {
 
     private val _addressList: MutableLiveData<ArrayList<Address>> = MutableLiveData()
     val addressList: LiveData<ArrayList<Address>> = _addressList
 
 
     init{
-        _addressList.value = ArrayList()
+        initAddressList()
     }
 
+    private fun initAddressList(){
+        val list = arrayListOf<Address>()
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_ADDRESS)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(addressSnapshot in snapshot.children){
+                        val address = addressSnapshot.getValue(Address::class.java)
+                        list.add(address!!)
+                        _addressList.value = list
+                    }
+                }
 
-    fun convertToAddress(list: ArrayList<String?>): Address {
-        return Address(
-            city = list[0],
-            street = list[1],
-            entrance = list[2],
-            floor = list[3],
-            flat = list[4],
-            id = list[5]!!
-        )
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
 }

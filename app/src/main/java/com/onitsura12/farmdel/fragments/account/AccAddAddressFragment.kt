@@ -14,6 +14,10 @@ import androidx.navigation.fragment.findNavController
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccAddAddressBinding
 import com.onitsura12.domain.models.Address
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ADDRESS
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
 
 class AccAddAddressFragment : Fragment() {
 
@@ -27,7 +31,7 @@ class AccAddAddressFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAccAddAddressBinding.inflate(layoutInflater)
 
         return binding.root
@@ -35,39 +39,28 @@ class AccAddAddressFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply{
+        binding.apply {
             accAddAddressBackButton.setOnClickListener {
                 findNavController().navigate(R.id.accAddressFragment)
             }
             saveButton.setOnClickListener {
-                //TODO add in RV address
-                val newAddress = Address(city = etCity.text.toString(), street =
-                etStreet.text.toString(), entrance = etEntrance.text.toString(), floor = etFloor
-                    .text.toString(), flat = etFlat.text.toString(), id = viewModel.getId().toString())
-                viewModel.newAddress.value = newAddress
-                if (viewModel.newAddress.value != null) {
-                    Log.e("Addr", viewModel.newAddress.value.toString())
-                    saveAddress(viewModel.newAddress.value!!)
-
+                val newAddress = Address(
+                    city = etCity.text.toString(),
+                    street = etStreet.text.toString(),
+                    entrance = etEntrance.text.toString(),
+                    house = etHouse.text.toString(),
+                    floor = etFloor.text.toString(),
+                    flat = etFlat.text.toString(),
+                    id = viewModel.getId().toString()
+                )
+                REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_ADDRESS)
+                    .child(newAddress.id).setValue(newAddress)
                     findNavController().navigate(R.id.accAddressFragment)
-                }
-                else{
-                    Log.e("Addr", viewModel.newAddress.value.toString())
-                    Toast.makeText(requireContext(), "Something going wrong", Toast.LENGTH_SHORT).show()
-                }
             }
         }
     }
 
 
 
-
-    private fun saveAddress(newAddress: Address){
-        val address = viewModel.convertToArrayList(newAddress)
-        val bundle = Bundle()
-        bundle.putStringArrayList("newAddress", address)
-        setFragmentResult("newAddress", bundle)
-
-    }
 
 }

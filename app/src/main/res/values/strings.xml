@@ -48,4 +48,8 @@
     <string name="title_cart">Корзина</string>
     <string name="title_account">Аккаунт</string>
     <string name="save_btn">Сохранить</string>
+    <string name="et_name">Введите имя</string>
+    <string name="hint_house">Введите номер дома</string>
+    <string name="address_house">Номер дома</string>
+    <string name="sample_house">Sample house</string>
 </resources>

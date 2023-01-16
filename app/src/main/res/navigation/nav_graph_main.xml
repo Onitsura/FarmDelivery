@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_accountFragment_to_accAddressFragment"
             app:destination="@id/accAddressFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/accAddAddressFragment"

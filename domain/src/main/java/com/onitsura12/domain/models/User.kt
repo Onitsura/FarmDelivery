@@ -4,7 +4,7 @@ data class User(
     var name: String? = "",
     val lastName: String? = "",
     var phone: String = "",
-    val eMail: String? = "",
+    var eMail: String? = "",
     var photoUrl: String? = "",
     val orders: List<Order?> = listOf(),
     val address: Address? = null,

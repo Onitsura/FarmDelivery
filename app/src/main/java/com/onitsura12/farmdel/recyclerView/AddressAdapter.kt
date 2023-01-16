@@ -18,7 +18,8 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.ItemHolder>(ItemCompa
             binding.apply {
                 tvCity.text = address.city
                 tvStreet.text = address.street
-                tvEntrance.text = address.street
+                tvHouse.text = address.house
+                tvEntrance.text = address.entrance
                 tvFloor.text = address.floor
                 tvFlat.text = address.flat
             }
@@ -45,7 +46,7 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.ItemHolder>(ItemCompa
 
 
 
-    class ItemComparator() : DiffUtil.ItemCallback<Address>(){
+    class ItemComparator : DiffUtil.ItemCallback<Address>(){
         override fun areItemsTheSame(oldItem: Address, newItem: Address): Boolean {
             return oldItem.id == newItem.id
         }

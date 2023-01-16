@@ -26,7 +26,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHONE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 
-
+//TODO разнести логику с вью моделью
 class LoginFragment : Fragment() {
 
     companion object {
