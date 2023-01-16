@@ -29,14 +29,6 @@ class ShopFragment : Fragment() {
         viewModel = ShopViewModel()
         binding = FragmentShopBinding.inflate(layoutInflater)
 
-        parentFragmentManager.setFragmentResultListener(
-            "newItem", viewLifecycleOwner
-        ) { _, bundle ->
-            val newItem =
-                viewModel.convertToShopItem((bundle.getStringArrayList("newItem") as ArrayList<String>))
-            viewModel.shopItemList.value!!.add(newItem)
-        }
-
         return binding.root
     }
 

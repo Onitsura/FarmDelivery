@@ -20,14 +20,16 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
                 itemTitle.text = shopItem.title
                 itemCost.text = shopItem.cost
                 cartItemCounter.text = shopItem.count
-
-                Picasso.get()
-                    .load(shopItem.imagePath)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_launcher_background)
-                    .centerCrop()
-                    .fit()
-                    .into(ivItem)
+                if (shopItem.imagePath != null && shopItem.imagePath!!.isNotEmpty() && shopItem
+                        .imagePath!!.isNotBlank()) {
+                    Picasso.get()
+                        .load(shopItem.imagePath)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_background)
+                        .centerCrop()
+                        .fit()
+                        .into(ivItem)
+                }
 
                 binding.cartItemDecreaseButton.setOnClickListener {
                     if ((cartItemCounter.text as String).toInt() > 0) {
@@ -65,7 +67,7 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
     }
 
 
-    class ItemComparator() : DiffUtil.ItemCallback<ShopItem>() {
+    class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {
         override fun areItemsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
             return oldItem.title == newItem.title
         }

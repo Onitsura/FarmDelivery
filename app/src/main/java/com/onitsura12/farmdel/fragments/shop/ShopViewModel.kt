@@ -4,28 +4,42 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.onitsura12.domain.models.Address
 import com.onitsura12.domain.models.ShopItem
+import com.onitsura12.farmdel.utils.FirebaseHelper
 
 class ShopViewModel : ViewModel() {
 
-     val shopItemList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
-//    val shopItemList: LiveData<ArrayList<ShopItem>> = _shopItemList
-//    val newItem: MutableLiveData<ShopItem> = MutableLiveData()
+    private val _shopItemList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
+    val shopItemList: LiveData<ArrayList<ShopItem>> = _shopItemList
+    val newItem: MutableLiveData<ShopItem> = MutableLiveData()
 
     //TODO пока заглушаем правильную логику, и напрямую кидаем новые элеменеты в список, дальше
     // будем тянуть из Firebase
     init {
-        shopItemList.value = arrayListOf()
+        initSuppliesList()
     }
 
-    fun convertToShopItem(arrayList: ArrayList<String>): ShopItem{
-        return ShopItem(
-            title = arrayList[0],
-            cost = arrayList[1],
-            imagePath = arrayList[2],
-            count = arrayList[3],
-            weight = arrayList[4]
-        )
+    private fun initSuppliesList(){
+        val list = arrayListOf<ShopItem>()
+        FirebaseHelper.REF_DATABASE_ROOT.child(FirebaseHelper.NODE_SUPPLIES)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(supplySnapshot in snapshot.children){
+                        val address = supplySnapshot.getValue(ShopItem::class.java)
+                        list.add(address!!)
+                        _shopItemList.value = list
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
 
