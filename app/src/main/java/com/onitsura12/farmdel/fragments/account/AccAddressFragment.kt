@@ -40,7 +40,7 @@ class AccAddressFragment : Fragment() {
 
 
         binding.accAddressBackButton.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.accountFragment)
         }
         binding.accAddAddressButton.setOnClickListener {
             findNavController().navigate(R.id.accAddAddressFragment)

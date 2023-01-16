@@ -49,7 +49,9 @@
         tools:layout="@layout/fragment_account_address" >
         <action
             android:id="@+id/action_accAddressFragment_to_accAddAddressFragment"
-            app:destination="@id/accAddAddressFragment" />
+            app:destination="@id/accAddAddressFragment"
+            app:popUpTo="@+id/nav_graph_main"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_accAddressFragment_to_cartSuccessFragment"
             app:popUpTo="@+id/nav_graph_main"
