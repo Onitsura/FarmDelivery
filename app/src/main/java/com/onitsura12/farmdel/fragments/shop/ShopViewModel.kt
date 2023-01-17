@@ -15,10 +15,9 @@ class ShopViewModel : ViewModel() {
 
     private val _shopItemList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
     val shopItemList: LiveData<ArrayList<ShopItem>> = _shopItemList
-    val newItem: MutableLiveData<ShopItem> = MutableLiveData()
 
-    //TODO пока заглушаем правильную логику, и напрямую кидаем новые элеменеты в список, дальше
-    // будем тянуть из Firebase
+
+
     init {
         initSuppliesList()
     }

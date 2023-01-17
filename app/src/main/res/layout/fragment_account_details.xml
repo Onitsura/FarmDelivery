@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.account.AccDetailsFragment">
+    tools:context=".fragments.account.AccDetailsFragment"
+    android:background="@color/background">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,8 +15,8 @@
 
         <ImageButton
             android:id="@+id/accAddressBackButton"
-            android:layout_width="23dp"
-            android:layout_height="16dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:backgroundTint="@color/background"
             android:src="@drawable/back_arrow"
             app:layout_constraintTop_toTopOf="parent"
@@ -125,7 +126,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:textColor="@color/black"
-                    android:text="@string/sample_phone_number"
                     android:visibility="visible"
                     android:textSize="14sp"/>
 

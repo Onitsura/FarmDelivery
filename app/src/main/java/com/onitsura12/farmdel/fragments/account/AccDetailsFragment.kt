@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.fragments.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,8 +71,7 @@ class AccDetailsFragment : Fragment() {
     private fun setupAccPhone() {
         if (UID != "") {
             binding.apply {
-                if (USER.phone.isBlank() || USER.phone.isEmpty()) {
-                    accountPhone.text = USER.phone
+                if (USER.phone.isBlank() || USER.phone.isEmpty() || USER.phone == "null") {
                     accountPhone.setBackgroundColor(
                         ContextCompat.getColor(requireContext(), R.color.red_light)
                     )

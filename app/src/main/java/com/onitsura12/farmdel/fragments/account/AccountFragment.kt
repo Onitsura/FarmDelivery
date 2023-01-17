@@ -26,6 +26,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
 import com.squareup.picasso.Picasso
 
 class AccountFragment : Fragment() {
@@ -45,7 +46,6 @@ class AccountFragment : Fragment() {
     ): View {
         binding = FragmentAccountBinding.inflate(layoutInflater)
         viewModel = AccountViewModel()
-
         return binding.root
     }
 
@@ -54,6 +54,7 @@ class AccountFragment : Fragment() {
         viewModel.userName.observe(viewLifecycleOwner){
             binding.accountName.text = it
         }
+        initUser()
 
         binding.apply {
 
@@ -64,7 +65,6 @@ class AccountFragment : Fragment() {
                 googleIcon.visibility = View.VISIBLE
             }
             accDetailsText.setOnClickListener {
-                Log.e("UID", UID)
                 if (UID != "" && UID != "null") {
                     findNavController().navigate(R.id.action_accountFragment_to_accDetailsFragment)
                 }
@@ -122,7 +122,6 @@ class AccountFragment : Fragment() {
 
 
 
-
     private fun getClient(): GoogleSignInClient {
         val gso = GoogleSignInOptions
             .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -143,26 +142,9 @@ class AccountFragment : Fragment() {
     }
 
 
-    private fun initUser() {
-        val uid = AUTH.currentUser?.uid.toString()
-        val dateMap = mutableMapOf<String, Any?>()
-        dateMap[FirebaseHelper.CHILD_ID] = uid
-        dateMap[FirebaseHelper.CHILD_PHONE] = AUTH.currentUser?.phoneNumber
-        dateMap[CHILD_FULLNAME] = AUTH.currentUser?.displayName
-        dateMap[FirebaseHelper.CHILD_EMAIL] = AUTH.currentUser?.email
-        dateMap[FirebaseHelper.CHILD_PHOTO] = AUTH.currentUser?.photoUrl
 
 
 
-        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-            .addOnCompleteListener { task->
-                if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Добро пожаловать", Toast.LENGTH_SHORT).show()
-
-                } else Toast.makeText(requireContext(), task.exception?.message.toString(), Toast
-                    .LENGTH_SHORT).show()
-            }
-    }
 
 
 

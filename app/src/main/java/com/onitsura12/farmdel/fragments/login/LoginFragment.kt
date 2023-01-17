@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.fragments.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ID
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHONE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
 
 //TODO разнести логику с вью моделью
 class LoginFragment : Fragment() {
@@ -59,7 +61,6 @@ class LoginFragment : Fragment() {
 
                 if (account != null){
                     firebaseAuth(account.idToken!!)
-                    initUser()
                     findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                 }
             }
@@ -70,9 +71,11 @@ class LoginFragment : Fragment() {
 
 
         checkAuth()
+
         
         binding.tvGoogleAuth.setOnClickListener {
             signInWithGoogle()
+
         }
         binding.tvPrivateMode.setOnClickListener {
             Toast.makeText(requireContext(), "Can't go this way now", Toast.LENGTH_SHORT).show()
@@ -105,25 +108,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun initUser() {
-        val uid = AUTH.currentUser?.uid.toString()
-        val dateMap = mutableMapOf<String, Any?>()
-        dateMap[CHILD_ID] = uid
-        dateMap[CHILD_PHONE] = AUTH.currentUser?.phoneNumber
-        dateMap[CHILD_FULLNAME] = AUTH.currentUser?.displayName
-        dateMap[CHILD_EMAIL] = AUTH.currentUser?.email
-        dateMap[FirebaseHelper.CHILD_PHOTO] = AUTH.currentUser?.photoUrl
 
-
-
-        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-            .addOnCompleteListener { task->
-                if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "Добро пожаловать", Toast.LENGTH_SHORT).show()
-
-                } else Toast.makeText(requireContext(), task.exception?.message.toString(), Toast
-                    .LENGTH_SHORT).show()
-            }
-    }
 
 }

@@ -3,6 +3,9 @@ package com.onitsura12.farmdel.fragments.account
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.onitsura12.farmdel.utils.FirebaseHelper
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
@@ -23,28 +26,37 @@ class AccountViewModel : ViewModel() {
 
     }
 
-    private fun setupAccInfo(){
+    private fun setupAccInfo() {
         setupAccName()
         setupAccEmail()
         setupAccPhone()
     }
 
-    private fun setupAccName(){
+    private fun setupAccName() {
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
             .child(CHILD_FULLNAME)
-            .get()
-            .addOnCompleteListener {
-                if (it.result.value == null) {
-                    USER.name = "Пользователь"
-                    userName.value = USER.name
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value == null) {
+                        USER.name = "Пользователь"
+                        userName.value = USER.name
 
-                } else {
-                    USER.name = it.result.value.toString()
-                    userName.value = USER.name
+                    } else {
+                        USER.name = snapshot.value.toString()
+                        userName.value = USER.name
+                    }
                 }
-            }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+
     }
+
     private fun setupAccEmail() {
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_EMAIL).get()
             .addOnCompleteListener {
@@ -56,11 +68,13 @@ class AccountViewModel : ViewModel() {
 
 
     private fun setupAccPhone() {
-
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_PHONE).get()
             .addOnCompleteListener {
                 USER.phone = it.result.value.toString()
 
             }
     }
-}
+
+
+
+    }

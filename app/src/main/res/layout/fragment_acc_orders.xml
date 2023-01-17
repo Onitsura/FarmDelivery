@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.account.AccOrdersFragment">
+    tools:context=".fragments.account.AccOrdersFragment"
+    android:background="@color/background">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,8 +14,8 @@
 
         <ImageButton
             android:id="@+id/accOrdersBackButton"
-            android:layout_width="23dp"
-            android:layout_height="16dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
             android:backgroundTint="@color/background"

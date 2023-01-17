@@ -5,5 +5,5 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 class AccDetailsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
 }
