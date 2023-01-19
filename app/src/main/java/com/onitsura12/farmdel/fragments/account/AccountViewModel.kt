@@ -61,7 +61,6 @@ class AccountViewModel : ViewModel() {
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_EMAIL).get()
             .addOnCompleteListener {
                 USER.eMail = it.result.value.toString()
-
             }
 
     }

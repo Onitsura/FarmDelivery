@@ -66,7 +66,8 @@ class Mapper {
             return OrderItem(
                 title = item.title,
                 count = item.count,
-                price = item.price
+                price = item.price,
+                deliveryDate = null
             )
         }
 

@@ -69,8 +69,8 @@
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
         <action
-            android:id="@+id/action_cartFragment_to_accAddressFragment"
-            app:destination="@id/accAddressFragment" />
+            android:id="@+id/action_cartFragment_to_confirmOrderFragment"
+            app:destination="@id/confirmOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartSuccessFragment"

@@ -25,7 +25,7 @@ class AccAddAddressFragment : Fragment() {
         fun newInstance() = AccAddAddressFragment()
     }
 
-    private val viewModel: AccAddAddressViewModel by activityViewModels()
+    private lateinit var viewModel: AccAddAddressViewModel
     private lateinit var binding: FragmentAccAddAddressBinding
 
     override fun onCreateView(
@@ -33,7 +33,7 @@ class AccAddAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccAddAddressBinding.inflate(layoutInflater)
-
+        viewModel = AccAddAddressViewModel()
         return binding.root
     }
 
@@ -53,8 +53,7 @@ class AccAddAddressFragment : Fragment() {
                     flat = etFlat.text.toString(),
                     id = viewModel.getId().toString()
                 )
-                REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_ADDRESS)
-                    .child(newAddress.id).setValue(newAddress)
+                viewModel.createNewAddress(newAddress = newAddress)
                     findNavController().navigate(R.id.accAddressFragment)
             }
         }

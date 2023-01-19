@@ -6,7 +6,7 @@ data class User(
     var phone: String = "",
     var eMail: String? = "",
     var photoUrl: String? = "",
-    val orders: List<Order?> = listOf(),
-    val address: Address? = null,
-    val cart: List<ShopItem?> = listOf()
+    var orders: List<Order?> = listOf(),
+    var address: Address? = null,
+    var cart: List<ShopItem?> = listOf()
 )

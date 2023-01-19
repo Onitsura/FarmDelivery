@@ -15,6 +15,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHOTO
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initFirebase
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
 
 class MainFragment : Fragment() {
 

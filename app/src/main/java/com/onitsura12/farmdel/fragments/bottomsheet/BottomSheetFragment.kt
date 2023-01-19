@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding.apply {
             //Setting up listener to adapter
             val listener = object : OnListItemClickListener {
-                override fun onClick(view: View, position: Int) {
+                override fun onClick(view: ViewGroup, position: Int) {
                     val item = viewModel.imagesList.value!![position]
                     viewModel.markItem(item)
                     viewModel.selectedImage.value = item.path.toString()

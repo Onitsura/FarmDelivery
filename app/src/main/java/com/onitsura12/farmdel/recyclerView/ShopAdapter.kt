@@ -1,7 +1,10 @@
 package com.onitsura12.farmdel.recyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.allViews
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +15,18 @@ import com.squareup.picasso.Picasso
 
 class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator()) {
 
+    private var mListener: OnListItemClickListener? = null
 
-    class ItemHolder(private val binding: ShopItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+
+    fun setListener(listener: OnListItemClickListener) {
+        mListener = listener
+    }
+
+    class ItemHolder(private val binding: ShopItemBinding, listener: OnListItemClickListener?) :
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        private val mListener = listener
+
         fun bind(shopItem: ShopItem) {
             binding.apply {
                 itemTitle.text = shopItem.title
@@ -30,36 +42,27 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
                         .fit()
                         .into(ivItem)
                 }
+                itemView.setOnClickListener(this@ItemHolder)
 
-                binding.cartItemDecreaseButton.setOnClickListener {
-                    if ((cartItemCounter.text as String).toInt() > 0) {
-                        val newValue = (cartItemCounter.text as String?)!!.toInt() - 1
-                        cartItemCounter.text = newValue.toString()
-                    }
-                }
-
-                binding.cartItemIncreaseButton.setOnClickListener {
-                    val newValue = (cartItemCounter.text as String?)!!.toInt() + 1
-                    cartItemCounter.text = newValue.toString()
-                }
+            }
+        }
+        override fun onClick(view: View?) {
+            if (view != null) {
+                mListener?.onClick(view = view as ViewGroup, position = layoutPosition)
             }
         }
 
-        companion object {
-            fun create(parent: ViewGroup): ItemHolder {
-                return ItemHolder(
-                    ShopItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent, false
-                    )
-                )
-            }
-        }
+
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        return ItemHolder.create(parent = parent)
+        return ItemHolder(
+            ShopItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false
+            ), listener = mListener
+        )
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
@@ -77,4 +80,7 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
         }
 
     }
+//    override fun getItemId(position: Int): Long {
+//        return getItem(position).cost.toLong()
+//    }
 }

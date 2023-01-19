@@ -27,6 +27,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHONE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
 
 //TODO разнести логику с вью моделью
 class LoginFragment : Fragment() {
@@ -68,7 +69,6 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "smthng goes wrong", Toast.LENGTH_SHORT).show()
             }
         }
-
 
         checkAuth()
 

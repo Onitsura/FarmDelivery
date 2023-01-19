@@ -112,7 +112,7 @@ class AccountFragment : Fragment() {
                     }
                 }
                 catch (e: ApiException){
-                    Toast.makeText(requireContext(), "smthng goes wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), e.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         }

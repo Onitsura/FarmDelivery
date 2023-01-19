@@ -1,9 +1,12 @@
 package com.onitsura12.domain.models
 
+import java.util.Date
+
 data class ShopItem(
     val title: String = "",
     val cost: String = "",
-    val count: String? = "",
+    var count: String? = "",
     val weight: String? = "",
-    val imagePath: String? = ""
+    var imagePath: String? = "",
+    val deliveryDate: Date? = null
 )

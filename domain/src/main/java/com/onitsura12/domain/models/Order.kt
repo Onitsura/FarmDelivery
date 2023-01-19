@@ -1,5 +1,7 @@
 package com.onitsura12.domain.models
 
+import java.util.Date
+
 data class Order(
     val number: String,
     val items: List<OrderItem>,
@@ -9,5 +11,6 @@ data class Order(
 data class OrderItem(
     val title: String,
     val count: Int,
-    val price: Int
+    val price: Int,
+    val deliveryDate: Date?
 )

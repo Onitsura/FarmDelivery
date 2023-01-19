@@ -9,17 +9,21 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.onitsura12.domain.models.User
 import com.onitsura12.farmdel.R
+import java.sql.Types.REF
+import java.util.*
 
 
 class FirebaseHelper {
 
 
     companion object {
+
         lateinit var AUTH: FirebaseAuth
         lateinit var UID: String
         lateinit var REF_DATABASE_ROOT: DatabaseReference
         lateinit var USER: User
 
+        const val NODE_WHITELIST = "whitelist"
         const val NODE_SUPPLIES = "supplies"
         const val NODE_USERS = "users"
         const val CHILD_ID = "id"
@@ -28,6 +32,15 @@ class FirebaseHelper {
         const val CHILD_EMAIL = "e-mail"
         const val CHILD_PHOTO = "photo"
         const val CHILD_ADDRESS = "address"
+        const val CHILD_CART = "cart"
+        const val CHILD_CART_TITLE = "title"
+        const val CHILD_CART_COST = "cost"
+        const val CHILD_CART_COUNT = "count"
+        const val CHILD_CART_WEIGHT = "weight"
+        const val CHILD_CART_IMAGE_PATH = "image_path"
+        const val CHILD_CART_DELIVERY_DATE = "delivery_date"
+
+
 
         fun initFirebase() {
             AUTH = FirebaseAuth.getInstance()
@@ -45,9 +58,6 @@ class FirebaseHelper {
             dataMap[CHILD_FULLNAME] = AUTH.currentUser?.displayName
             dataMap[CHILD_EMAIL] = AUTH.currentUser?.email
 
-             Log.i("init", UID)
-             Log.i("init", USER.toString())
-            Log.i("init", AUTH.currentUser?.phoneNumber.toString())
             REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
                 .addOnCompleteListener {
                     if (it.isComplete) {

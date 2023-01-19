@@ -33,7 +33,7 @@
     <string name="order_item_total">Итого</string>
     <string name="order_item_count">Штук</string>
     <string name="cart">Корзина</string>
-    <string name="checkout_btn">Заказать</string>
+    <string name="checkout_btn">Далее</string>
     <string name="cart_sample_name">Копчёности</string>
     <string name="sample_cost">250 руб / кг</string>
     <string name="sample_weight">2,5 – 3 кг</string>
@@ -52,4 +52,6 @@
     <string name="hint_house">Введите номер дома</string>
     <string name="address_house">Номер дома</string>
     <string name="sample_house">Sample house</string>
+    <string name="sample_delivery_date">Ближайшая дата доставки</string>
+    <string name="confirm_button">Заказать</string>
 </resources>

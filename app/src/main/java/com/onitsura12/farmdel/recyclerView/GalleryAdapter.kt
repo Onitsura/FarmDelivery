@@ -28,7 +28,6 @@ class GalleryAdapter : ListAdapter<ImageModel, GalleryAdapter.ItemHolder>(ItemCo
         fun bind(image: ImageModel) {
             binding.apply {
 
-
                 Picasso.get().load(image.path)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_background)
@@ -41,7 +40,7 @@ class GalleryAdapter : ListAdapter<ImageModel, GalleryAdapter.ItemHolder>(ItemCo
         }
 
         override fun onClick(view: View?) {
-            mListener?.onClick(view = view!!, position = adapterPosition)
+            mListener?.onClick(view = view!! as ViewGroup, position = adapterPosition)
         }
 
 
