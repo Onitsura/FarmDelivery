@@ -3,7 +3,7 @@ package com.onitsura12.farmdel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.onitsura12.farmdel.databinding.ActivityMainBinding
-import com.onitsura12.farmdel.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

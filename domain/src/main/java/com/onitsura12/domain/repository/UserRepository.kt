@@ -1,11 +1,13 @@
 package com.onitsura12.domain.repository
 
 import com.onitsura12.domain.models.User
+import kotlinx.coroutines.flow.Flow
+
 
 interface UserRepository {
 
-    fun saveUser(user: User)
+    suspend fun saveUser(user: User)
 
-    fun getUser(): User
+    suspend fun getUser(uid: String)
 
 }

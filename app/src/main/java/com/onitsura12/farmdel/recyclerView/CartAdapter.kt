@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.recyclerView
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,6 +21,8 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
 
         fun bind(shopItem: ShopItem) {
             binding.apply {
+
+                if(shopItem.count!!.toInt() > 0){
                 tvCartItemName.text = shopItem.title
                 tvCartItemCost.text = shopItem.cost
                 tvCartItemWeight.text = shopItem.weight
@@ -50,6 +53,17 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
                         cartItemCounter.text = newValue.toString()
 
                     }
+                }
+                }
+                else {
+                    ivPreview.visibility = View.GONE
+                    tvCartItemName.visibility = View.GONE
+                    tvCartItemCost.visibility = View.GONE
+                    tvCartItemWeight.visibility = View.GONE
+                    tvDeliveryDate.visibility = View.GONE
+                    cartItemCounter.visibility = View.GONE
+                    cartItemDecreaseButton.visibility = View.GONE
+                    cartItemIncreaseButton.visibility = View.GONE
                 }
             }
         }

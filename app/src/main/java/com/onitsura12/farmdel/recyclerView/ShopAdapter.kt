@@ -1,10 +1,7 @@
 package com.onitsura12.farmdel.recyclerView
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.allViews
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,22 +10,24 @@ import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.ShopItemBinding
 import com.squareup.picasso.Picasso
 
-class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator()) {
+class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrement:(cartItem: ShopItem)-> Unit) :
+    ListAdapter<ShopItem,
+        ShopAdapter
+.ItemHolder>
+    (ItemComparator()) {
 
-    private var mListener: OnListItemClickListener? = null
+
+    class ItemHolder(private val binding: ShopItemBinding,
+                     ) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
-    fun setListener(listener: OnListItemClickListener) {
-        mListener = listener
-    }
 
-    class ItemHolder(private val binding: ShopItemBinding, listener: OnListItemClickListener?) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        private val mListener = listener
-
-        fun bind(shopItem: ShopItem) {
+        fun bind(shopItem: ShopItem, clickIncrement:(cartItem: ShopItem)-> Unit, clickDecrement:(cartItem: ShopItem)->
+        Unit) {
             binding.apply {
+
                 itemTitle.text = shopItem.title
                 itemCost.text = shopItem.cost
                 cartItemCounter.text = shopItem.count
@@ -42,37 +41,55 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
                         .fit()
                         .into(ivItem)
                 }
-                itemView.setOnClickListener(this@ItemHolder)
+                cartItemDecreaseButton.setOnClickListener {
+                    clickDecrement.invoke(shopItem)
+                    if (shopItem.count!!.toInt() != 0){
+                        cartItemCounter.text = shopItem.count
+                    }
+                    if (cartItemCounter.text!!.toString().toInt() > 0){
+                        val newValue = cartItemCounter.text!!.toString().toInt() - 1
+                        cartItemCounter.text = newValue.toString()
+                    }
 
+
+                }
+                cartItemIncreaseButton.setOnClickListener {
+                    clickIncrement.invoke(shopItem)
+                    if (shopItem.count!!.toInt() != 0){
+                        cartItemCounter.text = shopItem.count
+                    }
+                    val newValue = cartItemCounter.text!!.toString().toInt() + 1
+                    cartItemCounter.text = newValue.toString()
+                }
             }
         }
-        override fun onClick(view: View?) {
-            if (view != null) {
-                mListener?.onClick(view = view as ViewGroup, position = layoutPosition)
-            }
-        }
+
 
 
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
+
         return ItemHolder(
             ShopItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent, false
-            ), listener = mListener
+            )
         )
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickIncrement = clickIncrement,
+            clickDecrement = clickDecrement)
     }
+
+
 
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {
         override fun areItemsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
@@ -80,7 +97,5 @@ class ShopAdapter : ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator
         }
 
     }
-//    override fun getItemId(position: Int): Long {
-//        return getItem(position).cost.toLong()
-//    }
+
 }

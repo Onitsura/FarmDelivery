@@ -9,24 +9,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountBinding
-import com.onitsura12.farmdel.utils.FirebaseHelper
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.USER
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
 import com.squareup.picasso.Picasso
 
 class AccountFragment : Fragment() {
@@ -35,7 +31,7 @@ class AccountFragment : Fragment() {
         fun newInstance() = AccountFragment()
     }
 
-    private lateinit var viewModel: AccountViewModel
+    private val viewModel: AccountViewModel by activityViewModels()
     private lateinit var binding: FragmentAccountBinding
     private lateinit var launcher: ActivityResultLauncher<Intent>
 
@@ -45,7 +41,6 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccountBinding.inflate(layoutInflater)
-        viewModel = AccountViewModel()
         return binding.root
     }
 
@@ -55,6 +50,11 @@ class AccountFragment : Fragment() {
             binding.accountName.text = it
         }
         initUser()
+
+        viewModel.userName.observe(viewLifecycleOwner){
+            Log.i("Firebse", it.toString())
+            binding.accountName.text = it
+        }
 
         binding.apply {
 
@@ -82,11 +82,11 @@ class AccountFragment : Fragment() {
                 accSignOutText.visibility = View.GONE
                 tvGoogleAuth.visibility = View.VISIBLE
                 googleIcon.visibility = View.VISIBLE
-                USER.name = "Пользователь"
+                USER.fullname = "Пользователь"
                 USER.phone = ""
                 USER.photoUrl = ""
                 UID = ""
-                viewModel.userName.value = USER.name
+                viewModel.userName.value = USER.fullname
             }
             tvGoogleAuth.setOnClickListener {
                 signInWithGoogle()

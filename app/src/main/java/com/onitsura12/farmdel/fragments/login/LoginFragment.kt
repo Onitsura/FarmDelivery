@@ -2,7 +2,7 @@ package com.onitsura12.farmdel.fragments.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,16 +18,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentLoginBinding
-import com.onitsura12.farmdel.utils.FirebaseHelper
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_EMAIL
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ID
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHONE
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+
 
 //TODO разнести логику с вью моделью
 class LoginFragment : Fragment() {

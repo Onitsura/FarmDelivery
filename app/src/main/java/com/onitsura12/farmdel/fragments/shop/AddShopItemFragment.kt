@@ -15,8 +15,9 @@ import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAddShopItemBinding
 import com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_SUPPLIES
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.squareup.picasso.Picasso
 import java.io.*
 

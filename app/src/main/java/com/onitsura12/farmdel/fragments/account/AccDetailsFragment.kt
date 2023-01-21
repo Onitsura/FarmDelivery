@@ -1,7 +1,6 @@
 package com.onitsura12.farmdel.fragments.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +8,14 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_PHONE
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountDetailsBinding
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_EMAIL
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHONE
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.USER
 
 class AccDetailsFragment : Fragment() {
 
@@ -86,13 +83,13 @@ class AccDetailsFragment : Fragment() {
     private fun setupAccName() {
         if (UID != "") {
             binding.apply {
-                if (USER.name!!.isBlank() || USER.name!!.isEmpty()) {
-                    accountName.text = USER.name
+                if (USER.fullname!!.isBlank() || USER.fullname!!.isEmpty()) {
+                    accountName.text = USER.fullname
                     accountName.setBackgroundColor(
                         ContextCompat.getColor(requireContext(), R.color.red_light)
                     )
                 } else {
-                    accountName.text = USER.name
+                    accountName.text = USER.fullname
                 }
             }
         }
@@ -120,10 +117,10 @@ class AccDetailsFragment : Fragment() {
                         .child(CHILD_FULLNAME)
                         .setValue(newName)
                         .addOnCompleteListener {
-                            USER.name = newName
+                            USER.fullname = newName
                             Toast.makeText(requireContext(), "Имя сохранено", Toast.LENGTH_SHORT)
                                 .show()
-                            accountName.text = USER.name
+                            accountName.text = USER.fullname
                             accountName.visibility = View.VISIBLE
                             etAccountName.visibility = View.GONE
                             editNameButton.visibility = View.VISIBLE

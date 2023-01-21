@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.domain.models.Address
-import com.onitsura12.farmdel.utils.FirebaseHelper
 
 class ConfirmOrderViewModel : ViewModel() {
     private val _addressList: MutableLiveData<ArrayList<Address>> = MutableLiveData()
@@ -21,9 +24,9 @@ class ConfirmOrderViewModel : ViewModel() {
 
     private fun initAddressList() {
         val list = arrayListOf<Address>()
-        FirebaseHelper.REF_DATABASE_ROOT.child(FirebaseHelper.NODE_USERS)
-            .child(FirebaseHelper.UID)
-            .child(FirebaseHelper.CHILD_ADDRESS)
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_ADDRESS)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (addressSnapshot in snapshot.children) {

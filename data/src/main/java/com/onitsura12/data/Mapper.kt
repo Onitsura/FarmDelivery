@@ -1,13 +1,7 @@
 package com.onitsura12.data
 
-import com.onitsura12.data.models.StorageOrder
-import com.onitsura12.data.models.StorageOrderItem
-import com.onitsura12.data.models.StorageShopItemModel
-import com.onitsura12.data.models.StorageUserModel
-import com.onitsura12.domain.models.Order
-import com.onitsura12.domain.models.OrderItem
-import com.onitsura12.domain.models.ShopItem
-import com.onitsura12.domain.models.User
+import com.onitsura12.data.models.*
+import com.onitsura12.domain.models.*
 
 class Mapper {
 
@@ -15,7 +9,7 @@ class Mapper {
 
         fun userToDomain(storageUserModel: StorageUserModel): User {
             return User(
-                name = storageUserModel.name,
+                fullname = storageUserModel.name,
                 lastName = storageUserModel.lastName,
                 phone = storageUserModel.phone,
                 eMail = storageUserModel.eMail,
@@ -27,7 +21,7 @@ class Mapper {
 
         fun userToData(user: User): StorageUserModel {
             return StorageUserModel(
-                name = user.name,
+                name = user.fullname,
                 lastName = user.lastName,
                 phone = user.phone,
                 eMail = user.eMail,
@@ -79,19 +73,19 @@ class Mapper {
             )
         }
 
-        fun shopItemToDomain(storageShopItemModel: StorageShopItemModel): ShopItem {
+        fun shopItemToDomain(storageShopItem: StorageShopItem): ShopItem {
             return ShopItem(
-                title = storageShopItemModel.title,
-                cost = storageShopItemModel.cost,
-                count = storageShopItemModel.count,
-                weight = storageShopItemModel.weight,
-                imagePath = storageShopItemModel.imagePath
+                title = storageShopItem.title,
+                cost = storageShopItem.cost,
+                count = storageShopItem.count,
+                weight = storageShopItem.weight,
+                imagePath = storageShopItem.imagePath
             )
 
         }
 
-        fun shopItemToData(shopItem: ShopItem): StorageShopItemModel {
-            return StorageShopItemModel(
+        fun shopItemToData(shopItem: ShopItem): StorageShopItem {
+            return StorageShopItem(
                 title = shopItem.title,
                 cost = shopItem.cost,
                 count = shopItem.count,
@@ -99,6 +93,47 @@ class Mapper {
                 imagePath = shopItem.imagePath
             )
         }
+
+        fun addressToData(address: Address): StorageAddress{
+            return StorageAddress(
+                city = address.city,
+                street = address.street,
+                house = address.house,
+                entrance = address.entrance,
+                floor = address.floor,
+                flat = address.flat,
+                id = address.id
+            )
+        }
+
+        fun addressToDomain(storageAddress: StorageAddress): Address{
+            return Address(
+                city = storageAddress.city,
+                street = storageAddress.street,
+                house = storageAddress.house,
+                entrance = storageAddress.entrance,
+                floor = storageAddress.floor,
+                flat = storageAddress.flat,
+                id = storageAddress.id
+            )
+        }
+
+        fun cartToData(cart: ArrayList<ShopItem>): ArrayList<StorageShopItem>{
+            val list = arrayListOf<StorageShopItem>()
+            for (i in cart.indices){
+                list.add(shopItemToData(cart[i]))
+            }
+            return list
+        }
+
+        fun cartToDomain(storageCart: ArrayList<StorageShopItem>): ArrayList<ShopItem>{
+                val list = arrayListOf<ShopItem>()
+                for (i in storageCart.indices){
+                    list.add(shopItemToDomain(storageCart[i]))
+                }
+                return list
+            }
+
 
     }
 }

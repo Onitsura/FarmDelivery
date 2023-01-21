@@ -14,9 +14,6 @@ import com.onitsura12.farmdel.recyclerView.CartAdapter
 
 class CartFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CartFragment()
-    }
 
     private lateinit var viewModel: CartViewModel
     private lateinit var binding: FragmentCartBinding
@@ -44,6 +41,7 @@ class CartFragment : Fragment() {
     private fun initRcView() {
         binding.cartRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRcView.adapter = adapter
+
         viewModel.cart.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }

@@ -1,26 +1,41 @@
 package com.onitsura12.farmdel.fragments.account
 
+
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.farmdel.utils.FirebaseHelper
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.AUTH
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.domain.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AccountViewModel : ViewModel() {
+@HiltViewModel
+class AccountViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
     val userName: MutableLiveData<String?> = MutableLiveData()
 
 
     init {
+
         UID = AUTH.currentUser?.uid.toString()
+        viewModelScope.launch {
+
+
+        }
+
         USER.photoUrl = AUTH.currentUser?.photoUrl.toString()
+
         setupAccInfo()
 
 
@@ -30,21 +45,21 @@ class AccountViewModel : ViewModel() {
         setupAccName()
         setupAccEmail()
         setupAccPhone()
+
     }
 
+
     private fun setupAccName() {
-        REF_DATABASE_ROOT.child(NODE_USERS)
-            .child(UID)
-            .child(CHILD_FULLNAME)
-            .addValueEventListener(object: ValueEventListener{
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_FULLNAME)
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.value == null) {
-                        USER.name = "Пользователь"
-                        userName.value = USER.name
+                        USER.fullname = "Пользователь"
+                        userName.value = USER.fullname
 
                     } else {
-                        USER.name = snapshot.value.toString()
-                        userName.value = USER.name
+                        USER.fullname = snapshot.value.toString()
+                        userName.value = USER.fullname
                     }
                 }
 
@@ -75,5 +90,4 @@ class AccountViewModel : ViewModel() {
     }
 
 
-
-    }
+}

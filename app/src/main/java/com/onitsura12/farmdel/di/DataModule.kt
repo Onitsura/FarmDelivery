@@ -1,15 +1,13 @@
 package com.onitsura12.farmdel.di
 
-import android.content.Context
 import com.onitsura12.data.Mapper
-import com.onitsura12.data.UserRepositoryImpl
 import com.onitsura12.data.UserStorage
-import com.onitsura12.data.storage.SharedPrefsUserStorage
+import com.onitsura12.data.repository.UserRepositoryImpl
+import com.onitsura12.data.storage.firebase.FirebaseUserStorage
 import com.onitsura12.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -37,11 +35,23 @@ class DataModule {
 //            .build()
 //    }
 
+//    @Provides
+//    @Singleton
+//    fun provideSharedPrefsUserStorage(@ApplicationContext context: Context):
+//            UserStorage {
+//        return SharedPrefsUserStorage(context = context)
+//    }
+
+//    @Provides
+//    @Singleton
+//    fun provideFirebase(){
+//        FirebaseHelper.initFirebase()
+//    }
+
     @Provides
     @Singleton
-    fun provideSharedPrefsUserStorage(@ApplicationContext context: Context):
-            UserStorage {
-        return SharedPrefsUserStorage(context = context)
+    fun provideFirebaseUserStorage(): UserStorage{
+        return FirebaseUserStorage()
     }
 
     @Provides

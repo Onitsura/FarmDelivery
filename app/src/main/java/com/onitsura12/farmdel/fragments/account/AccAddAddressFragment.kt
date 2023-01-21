@@ -1,23 +1,15 @@
 package com.onitsura12.farmdel.fragments.account
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.onitsura12.domain.models.Address
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccAddAddressBinding
-import com.onitsura12.domain.models.Address
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ADDRESS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.UID
+
 
 class AccAddAddressFragment : Fragment() {
 
