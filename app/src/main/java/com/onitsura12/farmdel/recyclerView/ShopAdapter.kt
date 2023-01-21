@@ -1,5 +1,6 @@
 package com.onitsura12.farmdel.recyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,10 +28,9 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
         fun bind(shopItem: ShopItem, clickIncrement:(cartItem: ShopItem)-> Unit, clickDecrement:(cartItem: ShopItem)->
         Unit) {
             binding.apply {
-
                 itemTitle.text = shopItem.title
                 itemCost.text = shopItem.cost
-                cartItemCounter.text = shopItem.count
+                cartItemCounter.text = shopItem.count.toString()
                 if (shopItem.imagePath != null && shopItem.imagePath!!.isNotEmpty() && shopItem
                         .imagePath!!.isNotBlank()) {
                     Picasso.get()
@@ -43,9 +43,6 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                 }
                 cartItemDecreaseButton.setOnClickListener {
                     clickDecrement.invoke(shopItem)
-                    if (shopItem.count!!.toInt() != 0){
-                        cartItemCounter.text = shopItem.count
-                    }
                     if (cartItemCounter.text!!.toString().toInt() > 0){
                         val newValue = cartItemCounter.text!!.toString().toInt() - 1
                         cartItemCounter.text = newValue.toString()
@@ -55,9 +52,6 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                 }
                 cartItemIncreaseButton.setOnClickListener {
                     clickIncrement.invoke(shopItem)
-                    if (shopItem.count!!.toInt() != 0){
-                        cartItemCounter.text = shopItem.count
-                    }
                     val newValue = cartItemCounter.text!!.toString().toInt() + 1
                     cartItemCounter.text = newValue.toString()
                 }
@@ -93,7 +87,7 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
         }
 
         override fun areContentsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
-            return oldItem == newItem
+            return oldItem.count == newItem.count
         }
 
     }

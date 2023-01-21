@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.fragments.shop
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,10 +52,7 @@ class ShopFragment : Fragment() {
             findNavController().navigate(R.id.action_shopFragment_to_addShopItemFragment)
         }
 
-        viewModel.adapterList.observe(viewLifecycleOwner) {
-            val list = it
-            adapter.submitList(list)
-        }
+
 
 
 
@@ -90,7 +88,9 @@ class ShopFragment : Fragment() {
         val clickIncrement: (cartItem: ShopItem)-> Unit = {viewModel.incrementItemCount(it)}
         val clickDecrement: (cartItem: ShopItem)-> Unit = {viewModel.decrementItemCount(it)}
         adapter = ShopAdapter(clickIncrement = clickIncrement, clickDecrement = clickDecrement)
-
+        viewModel.adapterList.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
     }
 

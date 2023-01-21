@@ -12,14 +12,16 @@ import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.CartItemBinding
 import com.squareup.picasso.Picasso
 
-class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator()) {
+class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrement:(cartItem: ShopItem)-> Unit) : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator()) {
 
 
     class ItemHolder(private val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(shopItem: ShopItem) {
+        fun bind(shopItem: ShopItem, clickIncrement:(cartItem: ShopItem)-> Unit, clickDecrement:
+            (cartItem: ShopItem)->
+        Unit) {
             binding.apply {
 
                 if(shopItem.count!!.toInt() > 0){
@@ -41,6 +43,7 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
                         .into(ivPreview)
 
                     binding.cartItemDecreaseButton.setOnClickListener {
+                        clickDecrement.invoke(shopItem)
                         if ((cartItemCounter.text as String).toInt() > 0) {
                             val newValue = (cartItemCounter.text as String?)!!.toInt() - 1
                             cartItemCounter.text = newValue.toString()
@@ -49,6 +52,7 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
                     }
 
                     binding.cartItemIncreaseButton.setOnClickListener {
+                        clickIncrement.invoke(shopItem)
                         val newValue = (cartItemCounter.text as String?)!!.toInt() + 1
                         cartItemCounter.text = newValue.toString()
 
@@ -88,7 +92,7 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickDecrement = clickDecrement, clickIncrement = clickIncrement)
     }
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {
@@ -97,7 +101,7 @@ class CartAdapter : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator
         }
 
         override fun areContentsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
-            return oldItem == newItem
+            return oldItem.count == newItem.count
         }
 
     }

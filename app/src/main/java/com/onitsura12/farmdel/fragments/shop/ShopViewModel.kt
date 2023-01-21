@@ -1,7 +1,7 @@
 package com.onitsura12.farmdel.fragments.shop
 
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +40,7 @@ class ShopViewModel : ViewModel() {
     init {
 
         initSuppliesList()
+
         getCart()
 
 
@@ -57,7 +58,6 @@ class ShopViewModel : ViewModel() {
                     }
                     _shopItemList.value = list
                     _adapterList.value = list
-                    Log.i("async", "shop")
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -83,7 +83,6 @@ class ShopViewModel : ViewModel() {
                     }
                     _cart.value = list
                     USER.cart = list
-                    Log.i("async", "cart")
                     updateCart()
 
 
@@ -99,6 +98,7 @@ class ShopViewModel : ViewModel() {
     }
 
 
+
     private fun updateCart() {
 
         val list = arrayListOf<ShopItem>()
@@ -110,33 +110,15 @@ class ShopViewModel : ViewModel() {
                         list.add(shopItem!!)
                     }
                     for (i in _cart.value!!.indices) {
-                        if (list.contains(_cart.value!![i])) {
-                            list.remove(_cart.value!![i])
+                        for (y in list.indices) {
+                            if (list[y].title == _cart.value!![i].title) {
+                                if (_cart.value!![i].count!!.toInt() > list[y].count!!.toInt()) {
+                                    list[y].count = _cart.value!![i].count
+                                }
+                            }
                         }
                     }
-                    for (i in list.indices) {
-                        addNewCartItem(list[i])
-                    }
-                    _cart.value!!.addAll(list)
 
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-    }
-
-    private fun updateAdapterList(){
-        val list = arrayListOf<ShopItem>()
-        REF_DATABASE_ROOT.child(NODE_SUPPLIES)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (supplySnapshot in snapshot.children) {
-                        val shopItem = supplySnapshot.getValue(ShopItem::class.java)
-                        list.add(shopItem!!)
-                    }
                     for (i in _cart.value!!.indices) {
                         if (list.contains(_cart.value!![i])) {
                             list.remove(_cart.value!![i])
@@ -146,6 +128,7 @@ class ShopViewModel : ViewModel() {
                         addNewCartItem(list[i])
                     }
                     _cart.value!!.addAll(list)
+                    checkTitles()
 
                 }
 
@@ -156,14 +139,56 @@ class ShopViewModel : ViewModel() {
             })
     }
 
-
-    //Метод сверки тайтлов в корзине и сапплаях
-    private fun checkTitles(cartList: ArrayList<ShopItem>, shopList: ArrayList<ShopItem>) {
-        for (i in 0 until shopList.size) {
-            if (!cartList.contains(element = shopList[i])) {
-                cartList.add(shopList[i])
+    private fun updateAdapterList() {
+        for (i in _adapterList.value!!.indices) {
+            for (y in _cart.value!!.indices) {
+                if (_cart.value!![y].title == _adapterList.value!![i].title) {
+                    if (_cart.value!![y].count!!.toInt() > _adapterList.value!![i]
+                            .count!!.toInt()
+                    ) {
+                        _adapterList.value = _cart.value
+                    }
+                }
             }
         }
+    }
+    private fun checkTitles(){
+        val list = arrayListOf<ShopItem>()
+        REF_DATABASE_ROOT
+            .child(NODE_SUPPLIES)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(cartSnapshot in snapshot.children){
+                        val cartItem = cartSnapshot.getValue(ShopItem::class.java)
+                        list.add(cartItem!!)
+
+                    }
+                    val removeList = arrayListOf<ShopItem>()
+                    if (list.size != _cart.value!!.size){
+
+                        for (i in _cart.value!!.indices) {
+                            var match = false
+                            for (j in list.indices) {
+                                if (_cart.value!![i].title == list[j].title){
+                                    match = true
+                                }
+                            }
+
+                            if (!match){
+                                removeList.add(_cart.value!![i])
+                            }
+                        }
+                    }
+                    _cart.value!!.removeAll(removeList.toSet())
+                    updateAdapterList()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
     }
 
 
