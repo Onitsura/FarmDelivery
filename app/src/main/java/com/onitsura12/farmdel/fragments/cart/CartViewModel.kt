@@ -26,8 +26,11 @@ class CartViewModel : ViewModel() {
 
 
     init {
-        initCart()
-        checkTitles()
+        if (UID.isNotBlank()) {
+            setupAccInfo()
+            initCart()
+            checkTitles()
+        }
 
     }
 
@@ -42,11 +45,13 @@ class CartViewModel : ViewModel() {
             .child(CHILD_CART)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
                     for(cartSnapshot in snapshot.children){
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
                         list.add(cartItem!!)
 
                     }
+
                     _cart.value = list
                 }
 
@@ -65,30 +70,34 @@ class CartViewModel : ViewModel() {
             .child(NODE_SUPPLIES)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for(cartSnapshot in snapshot.children){
+                    list.clear()
+                    for (cartSnapshot in snapshot.children) {
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
                         list.add(cartItem!!)
 
                     }
-                    val removeList = arrayListOf<ShopItem>()
-                    if (list.size != _cart.value!!.size){
+                    if (_cart.value != null) {
+                        val removeList = arrayListOf<ShopItem>()
+                        if (list.size != _cart.value!!.size) {
 
-                        for (i in _cart.value!!.indices) {
-                            var match = false
-                            for (j in list.indices) {
-                                if (_cart.value!![i].title == list[j].title){
-                                    match = true
+                            for (i in _cart.value!!.indices) {
+                                var match = false
+                                for (j in list.indices) {
+                                    if (_cart.value!![i].title == list[j].title) {
+                                        match = true
+                                    }
+
                                 }
-                                Log.i("match", list[j].title)
-                            }
-                            Log.i("match", match.toString())
 
-                            if (!match){
-                                removeList.add(_cart.value!![i])
+
+                                if (!match) {
+                                    removeList.add(_cart.value!![i])
+                                    removeFromCart(_cart.value!![i])
+                                }
                             }
                         }
+                        _cart.value!!.removeAll(removeList.toSet())
                     }
-                    _cart.value!!.removeAll(removeList.toSet())
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -97,6 +106,13 @@ class CartViewModel : ViewModel() {
 
             })
 
+    }
+
+    private fun removeFromCart(cartItem: ShopItem){
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_CART)
+            .child(cartItem.title).removeValue()
     }
 
 
@@ -139,7 +155,56 @@ class CartViewModel : ViewModel() {
         }
     }
 
+    private fun setupAccInfo() {
+        setupAccName()
+        setupAccEmail()
+        setupAccPhone()
 
+    }
+
+
+    private fun setupAccName() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_FULLNAME)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value == null) {
+                        USER.fullname = "Пользователь"
+
+
+                    } else {
+                        USER.fullname = snapshot.value.toString()
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+
+    }
+
+    private fun setupAccEmail() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_EMAIL).get()
+            .addOnCompleteListener {
+                USER.eMail = it.result.value.toString()
+            }
+
+    }
+
+
+    private fun setupAccPhone() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_PHONE).get()
+            .addOnCompleteListener {
+                USER.phone = it.result.value.toString()
+
+            }
+
+
+
+    }
 }
 
 

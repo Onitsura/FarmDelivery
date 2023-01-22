@@ -27,13 +27,25 @@
             android:id="@+id/tvOrderItemTotal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCost"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="12sp"
             android:textColor="@color/black"
             android:text="@string/order_item_total"
             android:layout_marginEnd="20dp"
             />
+        <TextView
+            android:id="@+id/tvOrderItemCost"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:text="5800"
+            android:layout_marginEnd="20dp"
+            />
+
         <TextView
             android:id="@+id/tvOrderItemCount"
             android:layout_width="wrap_content"
@@ -44,6 +56,16 @@
             android:textSize="12sp"
             android:textColor="@color/black"
             android:layout_marginEnd="40dp"/>
+        <TextView
+            android:id="@+id/tvOrderItemCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="5"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="20dp"/>
 
 
 

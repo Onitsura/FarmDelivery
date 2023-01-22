@@ -30,7 +30,7 @@
     <string name="order_items">Позиций:</string>
     <string name="order_cost">Итого:</string>
     <string name="order_item_name">Курочка</string>
-    <string name="order_item_total">Итого</string>
+    <string name="order_item_total">Стоимость</string>
     <string name="order_item_count">Штук</string>
     <string name="cart">Корзина</string>
     <string name="checkout_btn">Далее</string>
@@ -54,4 +54,5 @@
     <string name="sample_house">Sample house</string>
     <string name="sample_delivery_date">Ближайшая дата доставки</string>
     <string name="confirm_button">Заказать</string>
+    <string name="primary_switch_text">Установить как основной</string>
 </resources>

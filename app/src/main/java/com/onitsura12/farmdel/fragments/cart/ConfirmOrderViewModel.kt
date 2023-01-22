@@ -7,18 +7,29 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.domain.models.Address
+import com.onitsura12.domain.models.Order
+import com.onitsura12.domain.models.ShopItem
+import kotlin.random.Random
 
 class ConfirmOrderViewModel : ViewModel() {
     private val _addressList: MutableLiveData<ArrayList<Address>> = MutableLiveData()
     val addressList: LiveData<ArrayList<Address>> = _addressList
-
+    private val _orderItemsList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
+    val orderItemsList: LiveData<ArrayList<ShopItem>> = _orderItemsList
+    private val _number: MutableLiveData<String> = MutableLiveData()
 
     init {
         initAddressList()
+        initOrderItemsList()
+        getNumber()
     }
 
 
@@ -29,11 +40,15 @@ class ConfirmOrderViewModel : ViewModel() {
             .child(CHILD_ADDRESS)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
                     for (addressSnapshot in snapshot.children) {
                         val address = addressSnapshot.getValue(Address::class.java)
-                        list.add(address!!)
-                        _addressList.value = list
+                        if (address!!.primary) {
+                            list.add(address)
+                        }
+
                     }
+                    _addressList.value = list
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -42,4 +57,112 @@ class ConfirmOrderViewModel : ViewModel() {
 
             })
     }
+
+    private fun initOrderItemsList() {
+
+        val list = arrayListOf<ShopItem>()
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_CART)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
+                    for (cartSnapshot in snapshot.children) {
+                        val cartItem = cartSnapshot.getValue(ShopItem::class.java)
+                        list.add(cartItem!!)
+
+                    }
+
+                    _orderItemsList.value = list
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+
+    }
+
+    fun markAddress(address: Address) {
+        val dataMap = mutableMapOf<String, Any?>()
+        dataMap[CHILD_ADDRESS_PRIMARY] = !address.primary
+
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_ADDRESS)
+            .child(address.id)
+            .updateChildren(dataMap)
+            .addOnCompleteListener {
+            }
+    }
+
+    private fun getNumber(){
+        val ref = REF_DATABASE_ROOT.child(NODE_USERS).child(NODE_ORDERS)
+
+        if (ref.toString().isEmpty()){
+            _number.value = "1"
+        }
+        else{
+            ref.addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list: ArrayList<Order> = arrayListOf()
+                    for (item in snapshot.children){
+                        val orderItem = item.getValue(Order::class.java)
+                        if (orderItem != null) {
+                            list.add(orderItem)
+                        }
+                    }
+                    var maxNumber = 0
+                    for (i in list.indices){
+                        if (list[i].number.toInt() > maxNumber){
+                            maxNumber = list[i].number.toInt()
+                        }
+                    }
+                    _number.value = (maxNumber+ 1).toString()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
+
+    }
+
+    private fun getId(): String{
+        return Random.nextInt(50000).toString()
+    }
+
+    fun createOrder(){
+        val list = _orderItemsList.value
+        val items = arrayListOf<ShopItem>()
+        if (list != null) {
+            for (i in list.indices){
+                if (list[i].count != "0"){
+                    items.add(list[i])
+                }
+            }
+        }
+
+        val newOrder = Order(
+            id = getId(),
+            number = _number.value.toString(),
+            items = items,
+            address = _addressList.value!![0],
+            userPhone = USER.phone,
+            userName = USER.fullname
+        )
+
+        REF_DATABASE_ROOT.child(NODE_ORDERS).child(newOrder.id).setValue(newOrder)
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(NODE_ORDERS).child(newOrder.id)
+            .setValue(newOrder)
+
+    }
+    fun cleanCart(){
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_CART).setValue("")
+    }
+
 }

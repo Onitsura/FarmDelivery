@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.fragments.shop
 
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -52,6 +53,7 @@ class ShopViewModel : ViewModel() {
         REF_DATABASE_ROOT.child(NODE_SUPPLIES)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
                     for (supplySnapshot in snapshot.children) {
                         val shopItem = supplySnapshot.getValue(ShopItem::class.java)
                         list.add(shopItem!!)
@@ -59,6 +61,7 @@ class ShopViewModel : ViewModel() {
                     _shopItemList.value = list
                     _adapterList.value = list
                 }
+
 
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
@@ -74,18 +77,14 @@ class ShopViewModel : ViewModel() {
             .child(CHILD_CART)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
                     for (cartSnapshot in snapshot.children) {
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
-
                         list.add(cartItem!!)
-
-
                     }
                     _cart.value = list
                     USER.cart = list
                     updateCart()
-
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -105,6 +104,7 @@ class ShopViewModel : ViewModel() {
         REF_DATABASE_ROOT.child(NODE_SUPPLIES)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list.clear()
                     for (supplySnapshot in snapshot.children) {
                         val shopItem = supplySnapshot.getValue(ShopItem::class.java)
                         list.add(shopItem!!)
@@ -140,12 +140,13 @@ class ShopViewModel : ViewModel() {
     }
 
     private fun updateAdapterList() {
-        for (i in _adapterList.value!!.indices) {
-            for (y in _cart.value!!.indices) {
+        for (y in _cart.value!!.indices) {
+            for (i in _adapterList.value!!.indices) {
                 if (_cart.value!![y].title == _adapterList.value!![i].title) {
                     if (_cart.value!![y].count!!.toInt() > _adapterList.value!![i]
                             .count!!.toInt()
                     ) {
+
                         _adapterList.value = _cart.value
                     }
                 }
@@ -158,9 +159,10 @@ class ShopViewModel : ViewModel() {
             .child(NODE_SUPPLIES)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for(cartSnapshot in snapshot.children){
-                        val cartItem = cartSnapshot.getValue(ShopItem::class.java)
-                        list.add(cartItem!!)
+                    list.clear()
+                    for(shopSnapshot in snapshot.children){
+                        val shopItem = shopSnapshot.getValue(ShopItem::class.java)
+                        list.add(shopItem!!)
 
                     }
                     val removeList = arrayListOf<ShopItem>()

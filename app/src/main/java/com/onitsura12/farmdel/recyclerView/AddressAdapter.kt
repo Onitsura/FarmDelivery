@@ -5,16 +5,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onitsura12.farmdel.databinding.AddressItemBinding
 import com.onitsura12.domain.models.Address
+import com.onitsura12.farmdel.databinding.AddressItemBinding
 
 
-class AddressAdapter : ListAdapter<Address, AddressAdapter.ItemHolder>(ItemComparator()) {
+class AddressAdapter(private val markAddress: (address: Address) -> Unit) : ListAdapter<Address,
+        AddressAdapter
+        .ItemHolder>
+    (
+    ItemComparator
+        ()
+) {
 
 
-
-    class ItemHolder(private val binding: AddressItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(address: Address){
+    class ItemHolder(
+        private val binding: AddressItemBinding,
+        private val markAddress: (address: Address) -> Unit
+    ) :
+        RecyclerView.ViewHolder(
+            binding
+                .root
+        ) {
+        fun bind(address: Address) {
             binding.apply {
                 tvCity.text = address.city
                 tvStreet.text = address.street
@@ -22,21 +34,30 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.ItemHolder>(ItemCompa
                 tvEntrance.text = address.entrance
                 tvFloor.text = address.floor
                 tvFlat.text = address.flat
+
+                if (address.primary) {
+                    switchPrimary.isChecked = true
+                }
+
+
+                switchPrimary.setOnClickListener {
+                    markAddress.invoke(address)
+
+                }
             }
         }
 
-        companion object{
-            fun create(parent: ViewGroup): ItemHolder{
-                return ItemHolder(AddressItemBinding.inflate(LayoutInflater.from(parent.context),
-                    parent, false))
-            }
-        }
+
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        return ItemHolder.create(parent = parent)
+        return ItemHolder(
+            AddressItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent, false
+            ), markAddress = markAddress
+        )
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
@@ -44,15 +65,13 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.ItemHolder>(ItemCompa
     }
 
 
-
-
-    class ItemComparator : DiffUtil.ItemCallback<Address>(){
+    class ItemComparator : DiffUtil.ItemCallback<Address>() {
         override fun areItemsTheSame(oldItem: Address, newItem: Address): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Address, newItem: Address): Boolean {
-            return oldItem == newItem
+            return oldItem.primary == newItem.primary
         }
 
     }

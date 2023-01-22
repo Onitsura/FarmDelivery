@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onitsura12.domain.models.Address
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountAddressBinding
 import com.onitsura12.farmdel.recyclerView.AddressAdapter
@@ -22,7 +24,7 @@ class AccAddressFragment : Fragment() {
 
     private lateinit var viewModel: AccAddressViewModel
     private lateinit var binding: FragmentAccountAddressBinding
-    private val adapter: AddressAdapter = AddressAdapter()
+    private lateinit var adapter: AddressAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,9 @@ class AccAddressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
-
+        viewModel.addressList.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
 
         binding.accAddressBackButton.setOnClickListener {
@@ -49,11 +53,15 @@ class AccAddressFragment : Fragment() {
 
 
     private fun initRcView(){
+        val markAddress: (address: Address)-> Unit = {viewModel.markAddress(address = it)}
+        adapter = AddressAdapter(markAddress = markAddress)
         binding.addressRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.addressRcView.adapter = adapter
-        viewModel.addressList.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+        val itemAnimator = binding.addressRcView.itemAnimator
+        if (itemAnimator is DefaultItemAnimator){
+            itemAnimator.supportsChangeAnimations = false
         }
+
     }
 
 

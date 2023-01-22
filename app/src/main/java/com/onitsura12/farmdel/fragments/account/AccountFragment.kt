@@ -46,13 +46,12 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUser()
         viewModel.userName.observe(viewLifecycleOwner){
             binding.accountName.text = it
         }
-        initUser()
 
         viewModel.userName.observe(viewLifecycleOwner){
-            Log.i("Firebse", it.toString())
             binding.accountName.text = it
         }
 
@@ -65,7 +64,7 @@ class AccountFragment : Fragment() {
                 googleIcon.visibility = View.VISIBLE
             }
             accDetailsText.setOnClickListener {
-                if (UID != "" && UID != "null") {
+                if (UID.isNotEmpty()) {
                     findNavController().navigate(R.id.action_accountFragment_to_accDetailsFragment)
                 }
             }
@@ -89,15 +88,17 @@ class AccountFragment : Fragment() {
                 viewModel.userName.value = USER.fullname
             }
             tvGoogleAuth.setOnClickListener {
+                Log.i("AuthAcc", UID)
                 signInWithGoogle()
             }
-
-            Picasso.get().load(USER.photoUrl)
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_background)
-                .centerCrop()
-                .fit()
-                .into(accountPhoto)
+            if (UID.isNotEmpty()) {
+                Picasso.get().load(USER.photoUrl)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_background)
+                    .centerCrop()
+                    .fit()
+                    .into(accountPhoto)
+            }
 
             launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -107,7 +108,7 @@ class AccountFragment : Fragment() {
 
                     if (account != null){
                         firebaseAuth(account.idToken!!)
-                        initUser()
+//                        initUser()
                         findNavController().navigate(R.id.shopFragment)
                     }
                 }

@@ -24,12 +24,16 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
         Unit) {
             binding.apply {
 
-                if(shopItem.count!!.toInt() > 0){
+                if(shopItem.count!!.toInt() > 0) {
+
+
+                cartItemCounter.text = shopItem.count
+
                 tvCartItemName.text = shopItem.title
                 tvCartItemCost.text = shopItem.cost
                 tvCartItemWeight.text = shopItem.weight
                 tvDeliveryDate.text = shopItem.deliveryDate.toString()
-                cartItemCounter.text = shopItem.count
+
 
                 if (shopItem.imagePath != null && shopItem.imagePath!!.isNotEmpty() && shopItem
                         .imagePath!!.isNotBlank()
@@ -59,6 +63,7 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                     }
                 }
                 }
+
                 else {
                     ivPreview.visibility = View.GONE
                     tvCartItemName.visibility = View.GONE

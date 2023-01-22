@@ -1,143 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="2dp"
     android:paddingTop="4dp"
     android:paddingEnd="2dp"
     android:paddingBottom="4dp"
->
 
-    <LinearLayout
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:background="@color/background"
         android:orientation="vertical"
-        android:weightSum="10"
-        android:background="@color/background">
+        android:weightSum="10">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/address_city"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+
+        <TextView
+            android:id="@+id/tvCitySample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_city"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/primary_switch_text"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/switchPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
 
         <TextView
             android:id="@+id/tvCity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_weight="1"
             android:text="@string/sample_city"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCitySample" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:id="@+id/tvStreetSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/address_street"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCity" />
 
         <TextView
             android:id="@+id/tvStreet"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_weight="1"
             android:text="@string/sample_street"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStreetSample" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:id="@+id/tvHouseSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/address_house"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStreet" />
 
         <TextView
             android:id="@+id/tvHouse"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_weight="1"
             android:text="@string/sample_house"
-            android:textColor="@color/black" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_entrance"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_floor"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_flat"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:weightSum="3">
-
-            <TextView
-                android:id="@+id/tvEntrance"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_sample_entrance"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:id="@+id/tvFloor"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_sample_floor"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:id="@+id/tvFlat"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/address_sample_flat"
-                android:textColor="@color/black"
-                />
-
-        </LinearLayout>
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHouseSample" />
 
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvEntranceSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_entrance"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHouse" />
+
+        <TextView
+            android:id="@+id/tvFloorSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/address_floor"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvEntranceSample"
+            app:layout_constraintTop_toBottomOf="@id/tvHouse" />
+
+        <TextView
+            android:id="@+id/tvFlatSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="@string/address_flat"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvFloorSample"
+            app:layout_constraintTop_toBottomOf="@+id/tvHouse" />
+
+
+        <TextView
+            android:id="@+id/tvEntrance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_sample_entrance"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEntranceSample" />
+
+        <TextView
+            android:id="@+id/tvFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_sample_floor"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/tvFloorSample"
+            app:layout_constraintTop_toBottomOf="@+id/tvFloorSample" />
+
+        <TextView
+            android:id="@+id/tvFlat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_sample_flat"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/tvFlatSample"
+            app:layout_constraintTop_toBottomOf="@+id/tvFlatSample" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

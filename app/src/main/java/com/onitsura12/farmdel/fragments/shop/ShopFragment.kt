@@ -33,14 +33,17 @@ class ShopFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ShopViewModel()
+
         binding = FragmentShopBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        firstSign()
+//        initUser()
         initRcView()
-        initUser()
+
         viewModel.isInWhiteList(UID)
 
         viewModel.showAddButton.observe(viewLifecycleOwner) {

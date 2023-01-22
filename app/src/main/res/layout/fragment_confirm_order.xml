@@ -39,19 +39,22 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addressRcView"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/backButton"
             android:backgroundTint="@color/background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/cartRcView"
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartRcView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:backgroundTint="@color/background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressRcView"
             app:layout_constraintBottom_toTopOf="@+id/confirm_button"
             android:layout_marginBottom="10dp"
             />

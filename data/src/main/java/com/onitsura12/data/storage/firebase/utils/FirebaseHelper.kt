@@ -1,8 +1,11 @@
 package com.onitsura12.data.storage.firebase.utils
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.onitsura12.domain.models.Address
+import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.domain.models.User
 
 
@@ -19,6 +22,7 @@ class FirebaseHelper {
         const val NODE_WHITELIST = "whitelist"
         const val NODE_SUPPLIES = "supplies"
         const val NODE_USERS = "users"
+        const val NODE_ORDERS = "orders"
         const val CHILD_ID = "id"
         const val CHILD_PHONE = "phone"
         const val CHILD_FULLNAME = "fullname"
@@ -32,6 +36,33 @@ class FirebaseHelper {
         const val CHILD_CART_WEIGHT = "weight"
         const val CHILD_CART_IMAGE_PATH = "imagePath"
         const val CHILD_CART_DELIVERY_DATE = "deliveryDate"
+        const val CHILD_ADDRESS_CITY = "city"
+        const val CHILD_ADDRESS_STREET = "street"
+        const val CHILD_ADDRESS_HOUSE = "house"
+        const val CHILD_ADDRESS_ENTRANCE = "entrance"
+        const val CHILD_ADDRESS_FLOOR = "floor"
+        const val CHILD_ADDRESS_FLAT = "flat"
+        const val CHILD_ADDRESS_ID = "id"
+        const val CHILD_ADDRESS_PRIMARY = "primary"
+        const val CHILD_ORDER_ID = "id"
+        const val CHILD_ORDER_NUMBER = "number"
+        const val CHILD_ORDER_ITEMS = "items"
+        const val CHILD_ORDER_ADDRESS = "address"
+        const val CHILD_ORDER_USER_PHONE = "userPhone"
+        const val CHILD_ORDER_USER_NAME = "userName"
+        const val CHILD_ORDER_AMOUNT = "amount"
+        const val CHILD_ORDER_DELIVERY_DATE = "deliveryDate"
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -52,12 +83,13 @@ class FirebaseHelper {
             dataMap[CHILD_EMAIL] = AUTH.currentUser?.email
 
             REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
-                .addOnCompleteListener {
-                    if (it.isComplete) {
+                .addOnSuccessListener {
+
                         USER.fullname = AUTH.currentUser?.displayName
                         USER.eMail = AUTH.currentUser?.email
+                    Log.i("Auth", USER.fullname.toString())
 
-                    }
+
                 }
         }
     }

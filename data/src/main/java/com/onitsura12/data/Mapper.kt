@@ -32,29 +32,29 @@ class Mapper {
 
         }
 
-        fun orderToDomain(order: StorageOrder): Order {
-            val list = arrayListOf<OrderItem>()
-            for (item in order.items){
-                list.add(orderItemToDomain(item))
-            }
-            return Order(
-                number = order.number,
-                items = list,
-                amount = order.amount
-            )
-        }
+//        fun orderToDomain(order: StorageOrder): Order {
+//            val list = arrayListOf<OrderItem>()
+//            for (item in order.items){
+//                list.add(orderItemToDomain(item))
+//            }
+//            return Order(
+//                number = order.number,
+//                items = list,
+//                amount = order.amount
+//            )
+//        }
 
-        fun orderToData(order: Order): StorageOrder{
-            val list = arrayListOf<StorageOrderItem>()
-            for (item in order.items){
-                list.add(orderItemToData(item))
-            }
-            return StorageOrder(
-                number = order.number,
-                items = list,
-                amount = order.amount
-            )
-        }
+//        fun orderToData(order: Order): StorageOrder{
+//            val list = arrayListOf<StorageOrderItem>()
+//            for (item in order.items){
+//                list.add(orderItemToData(item))
+//            }
+//            return StorageOrder(
+//                number = order.number,
+//                items = list,
+//                amount = order.amount
+//            )
+//        }
 
         private fun orderItemToDomain(item: StorageOrderItem): OrderItem{
             return OrderItem(
