@@ -52,13 +52,13 @@ class FirebaseHelper {
         const val CHILD_ORDER_USER_NAME = "userName"
         const val CHILD_ORDER_AMOUNT = "amount"
         const val CHILD_ORDER_DELIVERY_DATE = "deliveryDate"
-
-
-
-
-
-
-
+        const val CHILD_ORDER_PLACED_DATE = "placed"
+        const val CHILD_SUPPLY_TITLE = "title"
+        const val CHILD_SUPPLY_COST = "cost"
+        const val CHILD_SUPPLY_COUNT = "count"
+        const val CHILD_SUPPLY_WEIGHT = "weight"
+        const val CHILD_SUPPLY_IMAGE_PATH = "imagePath"
+        const val CHILD_SUPPLY_DELIVERY_DATE = "deliveryDate"
 
 
 

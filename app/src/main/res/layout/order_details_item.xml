@@ -1,77 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="2dp"
     android:paddingTop="4dp"
     android:paddingEnd="2dp"
     android:paddingBottom="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/primary_light"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/primary_light">
 
         <TextView
             android:id="@+id/tvOrderItemName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textSize="12sp"
             android:text="@string/order_item_name"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvOrderItemTotal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCost"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:text="@string/order_item_total"
             android:layout_marginEnd="20dp"
-            />
+            android:text="@string/order_item_total"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCost"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvOrderItemCost"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:text="5800"
             android:layout_marginEnd="20dp"
-            />
+            android:text="@string/sample_summary"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvOrderItemCount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="10dp"
             android:text="@string/order_item_count"
-            android:textSize="12sp"
             android:textColor="@color/black"
-            android:layout_marginEnd="40dp"/>
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCounter"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tvOrderItemCounter"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="5"
-            android:textSize="12sp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/sample_count"
             android:textColor="@color/black"
-            android:layout_marginEnd="20dp"/>
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvChangeDeliveryDateSample"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:text="@string/sample_date_text"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName" />
 
+        <EditText
+            android:id="@+id/etChangeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="@string/sample_date"
+            android:inputType="date"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_btn"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etChangeDate" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_accountFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_adminPanel"
+            app:destination="@id/adminPanel" />
     </fragment>
     <fragment
         android:id="@+id/accAddAddressFragment"
@@ -52,11 +55,6 @@
             app:destination="@id/accAddAddressFragment"
             app:popUpTo="@+id/nav_graph_main"
             app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_accAddressFragment_to_cartSuccessFragment"
-            app:popUpTo="@+id/nav_graph_main"
-            app:popUpToInclusive="true"
-            app:destination="@id/cartSuccessFragment" />
     </fragment>
     <fragment
         android:id="@+id/accDetailsFragment"
@@ -98,4 +96,26 @@
         android:id="@+id/bottomSheetFragment"
         android:name="com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment"
         android:label="BottomSheetFragment" />
+    <fragment
+        android:id="@+id/adminPanel"
+        android:name="com.onitsura12.farmdel.fragments.root.AdminPanel"
+        android:label="fragment_admin_panel"
+        tools:layout="@layout/fragment_admin_panel" >
+        <action
+            android:id="@+id/action_adminPanel_to_changeDeliveryDateFragment"
+            app:destination="@id/changeDeliveryDateFragment" />
+        <action
+            android:id="@+id/action_adminPanel_to_ordersToDeliveryFragment"
+            app:destination="@id/ordersToDeliveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersToDeliveryFragment"
+        android:name="com.onitsura12.farmdel.fragments.root.OrdersToDeliveryFragment"
+        android:label="fragment_orders_to_delivery"
+        tools:layout="@layout/fragment_orders_to_delivery" />
+    <fragment
+        android:id="@+id/changeDeliveryDateFragment"
+        android:name="com.onitsura12.farmdel.fragments.root.ChangeDeliveryDateFragment"
+        android:label="fragment_change_delivery_date"
+        tools:layout="@layout/fragment_change_delivery_date" />
 </navigation>

@@ -2,7 +2,6 @@ package com.onitsura12.farmdel.fragments.account
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,17 +46,15 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUser()
-        viewModel.userName.observe(viewLifecycleOwner){
+        initAdminPanel()
+        viewModel.userName.observe(viewLifecycleOwner) {
             binding.accountName.text = it
         }
 
-        viewModel.userName.observe(viewLifecycleOwner){
-            binding.accountName.text = it
-        }
 
         binding.apply {
 
-            if (UID == "" || UID == "null"){
+            if (UID == "" || UID == "null") {
                 accSignOut.visibility = View.GONE
                 accSignOutText.visibility = View.GONE
                 tvGoogleAuth.visibility = View.VISIBLE
@@ -88,11 +85,10 @@ class AccountFragment : Fragment() {
                 viewModel.userName.value = USER.fullname
             }
             tvGoogleAuth.setOnClickListener {
-                Log.i("AuthAcc", UID)
                 signInWithGoogle()
             }
             if (UID.isNotEmpty()) {
-                Picasso.get().load(USER.photoUrl)
+                Picasso.get().load(AUTH.currentUser?.photoUrl.toString())
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_background)
                     .centerCrop()
@@ -100,27 +96,24 @@ class AccountFragment : Fragment() {
                     .into(accountPhoto)
             }
 
-            launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
 
                 try {
                     val account = task.getResult(ApiException::class.java)
 
-                    if (account != null){
+                    if (account != null) {
                         firebaseAuth(account.idToken!!)
 //                        initUser()
                         findNavController().navigate(R.id.shopFragment)
                     }
-                }
-                catch (e: ApiException){
+                } catch (e: ApiException) {
                     Toast.makeText(requireContext(), e.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
     }
-
-
 
 
     private fun getClient(): GoogleSignInClient {
@@ -132,7 +125,7 @@ class AccountFragment : Fragment() {
         return GoogleSignIn.getClient(requireContext(), gso)
     }
 
-    private fun signInWithGoogle(){
+    private fun signInWithGoogle() {
         val signInClient = getClient()
         launcher.launch(signInClient.signInIntent)
     }
@@ -143,16 +136,15 @@ class AccountFragment : Fragment() {
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    private fun initAdminPanel() {
+        if (viewModel.root.value!!) {
+            binding.accAdminPanel.visibility = View.VISIBLE
+            binding.accAdminPanelButton.visibility = View.VISIBLE
+            binding.accAdminPanel.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_adminPanel)
+            }
+        }
+    }
 
 
 }

@@ -20,14 +20,14 @@
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:src="@drawable/splash"/>
+            android:src="@drawable/splash" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:weightSum="4"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/tvCartItemName"
@@ -35,69 +35,67 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/cart_sample_name"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvCartItemCost"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/sample_cost"
-                android:textColor="@color/black"
-                />
+                android:textColor="@color/black" />
+
             <TextView
                 android:id="@+id/tvCartItemWeight"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/sample_weight"/>
+                android:text="@string/sample_weight" />
+
             <TextView
                 android:id="@+id/tvDeliveryDate"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/sample_delivery_date"/>
+                android:text="@string/sample_delivery_date" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:weightSum="3"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="3">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/cartItemIncreaseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                app:riv_corner_radius="40dip"
-                android:src="@drawable/plus"
                 android:layout_weight="1"
-                />
+                android:src="@drawable/plus"
+                app:riv_corner_radius="40dip" />
+
             <TextView
                 android:id="@+id/cartItemCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginStart="18dp"
+                android:layout_weight="1"
                 android:text="@string/sample_count"
-                android:textSize="18sp"
                 android:textColor="@color/black"
-                />
+                android:textSize="18sp" />
+
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/cartItemDecreaseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
-                app:riv_corner_radius="40dip"
-                android:src="@drawable/minus"
                 android:layout_weight="1"
-                />
-
-
+                android:src="@drawable/minus"
+                app:riv_corner_radius="40dip" />
 
 
         </LinearLayout>

@@ -13,9 +13,6 @@ import com.onitsura12.farmdel.databinding.FragmentAccAddAddressBinding
 
 class AccAddAddressFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AccAddAddressFragment()
-    }
 
     private lateinit var viewModel: AccAddAddressViewModel
     private lateinit var binding: FragmentAccAddAddressBinding
@@ -33,7 +30,7 @@ class AccAddAddressFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             accAddAddressBackButton.setOnClickListener {
-                findNavController().navigate(R.id.accAddressFragment)
+                findNavController().popBackStack()
             }
             saveButton.setOnClickListener {
                 val newAddress = Address(
@@ -43,15 +40,14 @@ class AccAddAddressFragment : Fragment() {
                     house = etHouse.text.toString(),
                     floor = etFloor.text.toString(),
                     flat = etFlat.text.toString(),
-                    id = viewModel.getId().toString()
+                    id = viewModel.getId().toString(),
+                    primary = true
                 )
                 viewModel.createNewAddress(newAddress = newAddress)
-                    findNavController().navigate(R.id.accAddressFragment)
+                findNavController().popBackStack()
             }
         }
     }
-
-
 
 
 }

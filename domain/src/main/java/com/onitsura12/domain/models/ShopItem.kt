@@ -8,5 +8,5 @@ data class ShopItem(
     var count: String? = "0",
     val weight: String? = "",
     var imagePath: String? = "",
-    val deliveryDate: Date? = null
+    var deliveryDate: String? = null
 )

@@ -1,12 +1,14 @@
 package com.onitsura12.farmdel.fragments.account
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_PHONE
@@ -19,12 +21,8 @@ import com.onitsura12.farmdel.databinding.FragmentAccountDetailsBinding
 
 class AccDetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AccDetailsFragment()
-    }
 
-
-    private lateinit var viewModel: AccDetailsViewModel
+    private val viewModel: AccDetailsViewModel by activityViewModels()
     private lateinit var binding: FragmentAccountDetailsBinding
 
     override fun onCreateView(
@@ -39,59 +37,29 @@ class AccDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            accAddressBackButton.setOnClickListener {
-                findNavController().navigate(R.id.accountFragment)
+            accDetailsBackButton.setOnClickListener {
+                findNavController().popBackStack()
             }
-            setupAccInfo()
+
+            binding.apply {
+                viewModel.user.observe(viewLifecycleOwner) {
+                    //setup e-mail
+                    accountEmail.text = it.eMail
+                    //setup phone
+                    if (it.phone != "") {
+                        accountPhone.text = it.phone
+                    } else accountPhone.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.red_light
+                        )
+                    )
+                    //setup name
+                    accountName.text = it.fullname
+                }
+            }
             editPhoneNumber()
             editFullName()
-        }
-    }
-
-
-    private fun setupAccInfo() {
-        setupAccName()
-        setupAccPhone()
-        setupAccEmail()
-    }
-
-
-    private fun setupAccEmail() {
-        binding.apply {
-            if (UID != "") {
-                accountEmail.text = USER.eMail
-            }
-        }
-    }
-
-
-    private fun setupAccPhone() {
-        if (UID != "") {
-            binding.apply {
-                if (USER.phone.isBlank() || USER.phone.isEmpty() || USER.phone == "null") {
-                    accountPhone.setBackgroundColor(
-                        ContextCompat.getColor(requireContext(), R.color.red_light)
-                    )
-                } else {
-                    accountPhone.text = USER.phone
-                }
-            }
-        }
-    }
-
-
-    private fun setupAccName() {
-        if (UID != "") {
-            binding.apply {
-                if (USER.fullname!!.isBlank() || USER.fullname!!.isEmpty()) {
-                    accountName.text = USER.fullname
-                    accountName.setBackgroundColor(
-                        ContextCompat.getColor(requireContext(), R.color.red_light)
-                    )
-                } else {
-                    accountName.text = USER.fullname
-                }
-            }
         }
     }
 
@@ -112,26 +80,18 @@ class AccDetailsFragment : Fragment() {
                 } else {
                     val newName: String = etAccountName.text.toString()
 
-                    REF_DATABASE_ROOT.child(NODE_USERS)
-                        .child(UID)
-                        .child(CHILD_FULLNAME)
-                        .setValue(newName)
-                        .addOnCompleteListener {
-                            USER.fullname = newName
-                            Toast.makeText(requireContext(), "Имя сохранено", Toast.LENGTH_SHORT)
-                                .show()
-                            accountName.text = USER.fullname
-                            accountName.visibility = View.VISIBLE
-                            etAccountName.visibility = View.GONE
-                            editNameButton.visibility = View.VISIBLE
-                            applyNameButton.visibility = View.GONE
-                            accountName.setBackgroundColor(
-                                ContextCompat.getColor(
-                                    requireContext(), R.color
-                                        .white
-                                )
-                            )
-                        }
+                    viewModel.saveNewName(newName = newName, context = requireContext())
+                    accountName.text = USER.fullname
+                    accountName.visibility = View.VISIBLE
+                    etAccountName.visibility = View.GONE
+                    editNameButton.visibility = View.VISIBLE
+                    applyNameButton.visibility = View.GONE
+                    accountName.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(), R.color
+                                .white
+                        )
+                    )
                 }
             }
         }
@@ -149,42 +109,42 @@ class AccDetailsFragment : Fragment() {
             applyPhoneButton.setOnClickListener {
                 if (etAccountPhone.text.isEmpty() || etAccountPhone.text.isBlank()) {
                     Toast.makeText(
-                        requireContext(), "Телефон не может быть пустым", Toast
-                            .LENGTH_SHORT
-                    )
-                        .show()
-                } else {
-                    val newNumber: String = etAccountPhone.text.toString()
+                        requireContext(),
+                        "Телефон не может быть пустым",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    REF_DATABASE_ROOT.child(NODE_USERS)
-                        .child(UID)
-                        .child(CHILD_PHONE)
-                        .setValue(newNumber)
-                        .addOnCompleteListener {
-                            USER.phone = newNumber
-                            Toast.makeText(requireContext(), "Номер сохранён", Toast.LENGTH_SHORT)
-                                .show()
-                            accountPhone.text = USER.phone
-                            accountPhone.visibility = View.VISIBLE
-                            etAccountPhone.visibility = View.GONE
-                            editPhoneButton.visibility = View.VISIBLE
-                            applyPhoneButton.visibility = View.GONE
-                            accountPhone.setBackgroundColor(
-                                ContextCompat.getColor(
-                                    requireContext(), R.color
-                                        .white
-                                )
+                } else {
+
+                    viewModel.checkPhone(phone = etAccountPhone.text.toString())
+
+                    if (viewModel.isPhoneCorrect.value!!) {
+
+                        val newNumber: String = etAccountPhone.text.toString()
+
+                        viewModel.saveNewPhone(newPhone = newNumber, context = requireContext())
+
+                        accountPhone.text = USER.phone
+                        accountPhone.visibility = View.VISIBLE
+                        etAccountPhone.visibility = View.GONE
+                        editPhoneButton.visibility = View.VISIBLE
+                        applyPhoneButton.visibility = View.GONE
+                        accountPhone.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(), R.color
+                                    .white
                             )
-                        }
+                        )
+                    } else Toast.makeText(
+                        requireContext(),
+                        "Номер телефона должен содержать 10-12 " + "цифр",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
 
     }
-
-
-
-
 
 
 }

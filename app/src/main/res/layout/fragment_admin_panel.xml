@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragments.root.AdminPanel">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/accountBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/background">
+
+        <ImageButton
+            android:id="@+id/accAdminPanelBackButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:backgroundTint="@color/background"
+            android:src="@drawable/back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/admin_panel"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/accAdminPanelBackButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/accAdminIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="200dp"
+            android:src="@drawable/account_details"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/accAdminPanelBackButton" />
+
+        <TextView
+            android:id="@+id/changeDeliveryDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/change_delivery_date_sample"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/accAdminIcon"
+            app:layout_constraintTop_toTopOf="@+id/accAdminIcon" />
+
+        <ImageButton
+            android:layout_width="11dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/background"
+            android:src="@drawable/account_more_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/accAdminIcon" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ordersIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/account_orders"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/accAdminIcon" />
+
+        <TextView
+            android:id="@+id/ordersToDeliveryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/orders_to_delivery"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/ordersIcon"
+            app:layout_constraintTop_toTopOf="@+id/changeDeliveryDateText" />
+
+        <ImageButton
+            android:layout_width="11dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/background"
+            android:src="@drawable/account_more_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/accAdminIcon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.cart.CartFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".fragments.cart.CartFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,19 +13,18 @@
         android:layout_height="match_parent">
 
 
-
-    <TextView
-        android:id="@+id/tvCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/cart"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/tvCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/cart"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -33,61 +32,45 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvCart"
             app:layout_constraintBottom_toTopOf="@+id/tvCartTotalCost"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCart" />
 
 
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
             android:text="@string/order_item_total"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvCartTotalCost"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
         <Button
             android:id="@+id/checkoutButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/checkout_btn"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </FrameLayout>

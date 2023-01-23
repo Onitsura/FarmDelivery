@@ -70,7 +70,7 @@ class AddShopItemFragment : Fragment() {
                     cost = etItemCost.text.toString(),
                     imagePath = viewModel.imageUrl.value,
                     count = "0",
-                    weight = null
+                    weight = etItemWeight.text.toString()
                 )
                 REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(etItemTitle.text.toString())
                     .setValue(newItem)
@@ -99,9 +99,13 @@ class AddShopItemFragment : Fragment() {
 
         val titleImagesRef = storageRef.child("images/${title}")
         val file = Uri.fromFile(
-            File(viewModel.createCopyAndReturnRealPath(
-                requireContext(),
-                Uri.parse(viewModel.imagePath.value!!))!!))
+            File(
+                viewModel.createCopyAndReturnRealPath(
+                    requireContext(),
+                    Uri.parse(viewModel.imagePath.value!!)
+                )!!
+            )
+        )
 
         val uploadTask = titleImagesRef.putFile(file)
         val urlTask = uploadTask.continueWithTask { task ->
@@ -119,19 +123,16 @@ class AddShopItemFragment : Fragment() {
 
             }
         }
-        viewModel.imageUrl.observe(viewLifecycleOwner){
-            REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(title).child("imagePath").setValue(it).addOnCompleteListener {
-                Toast.makeText(requireContext(), "Картинка загружена", Toast.LENGTH_SHORT).show()
-            }
+        viewModel.imageUrl.observe(viewLifecycleOwner) {
+            REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(title).child("imagePath").setValue(it)
+                .addOnCompleteListener {
+                    Toast.makeText(requireContext(), "Картинка загружена", Toast.LENGTH_SHORT)
+                        .show()
+                }
 
         }
 
     }
-
-
-
-
-
 
 
 }

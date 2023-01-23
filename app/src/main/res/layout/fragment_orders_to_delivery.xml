@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".fragments.account.AccAddressFragment">
+    tools:context=".fragments.root.OrdersToDeliveryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ImageButton
-            android:id="@+id/accAddressBackButton"
+            android:id="@+id/backButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
@@ -27,34 +26,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/acc_address"
+            android:text="@string/orders_to_delivery"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/accAddressBackButton"
+            app:layout_constraintStart_toStartOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/accAddAddressButton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/background"
-            android:src="@drawable/add_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/addressRcView"
+            android:id="@+id/ordersToDeliveryRcView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/accAddAddressButton" />
+            app:layout_constraintTop_toBottomOf="@id/backButton" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,4 +55,17 @@
     <string name="sample_delivery_date">Ближайшая дата доставки</string>
     <string name="confirm_button">Заказать</string>
     <string name="primary_switch_text">Установить как основной</string>
+    <string name="add_address_button">Добавить адрес</string>
+    <string name="shop_item_cost">250</string>
+    <string name="shop_item_weight">за кг</string>
+    <string name="shop_item_average_weight">примерный вес</string>
+    <string name="change_delivery_date">Смена даты доставки</string>
+    <string name="sample_summary">5800</string>
+    <string name="sample_date">27.01.2023</string>
+    <string name="sample_date_text">Актуальная дата доставки</string>
+    <string name="admin_panel">Панель администратора</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_delivery_date_sample">Изменить дату доставки товаров</string>
+    <string name="orders_to_delivery">Заказы на доставку</string>
 </resources>

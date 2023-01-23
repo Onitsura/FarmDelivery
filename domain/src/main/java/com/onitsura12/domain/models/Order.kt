@@ -4,12 +4,13 @@ import java.util.Date
 
 data class Order(
     val id: String = "",
-    val number: String = "",
+    val number: String = "0",
     val items: ArrayList<ShopItem> = arrayListOf(),
     val address: Address? = null,
     val userPhone: String? = null,
     val userName: String? = null,
-    val amount: Int? = 0
+    val amount: Int? = 0,
+    val placed: Date? = null
 )
 
 data class OrderItem(

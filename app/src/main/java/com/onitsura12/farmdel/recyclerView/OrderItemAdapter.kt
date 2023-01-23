@@ -8,28 +8,65 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.databinding.OrderDetailsItemBinding
-import com.onitsura12.farmdel.databinding.OrderItemBinding
 
-class OrderItemAdapter() : ListAdapter<ShopItem, OrderItemAdapter.ItemHolder>(ItemComparator()) {
+class OrderItemAdapter(
+    private val root: Boolean?,
+    private val click: ((orderItem: ShopItem) -> Unit)?
+) :
+    ListAdapter<ShopItem,
+            OrderItemAdapter
+            .ItemHolder>
+        (ItemComparator()) {
 
 
     class ItemHolder(private val binding: OrderDetailsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(orderItem: ShopItem) {
+        fun bind(orderItem: ShopItem, root: Boolean?, click: ((orderItem: ShopItem) -> Unit)?) {
             binding.apply {
+                if (root != null) {
+                    if (!root) {
+                        if (orderItem.count!!.toInt() > 0) {
+                            tvOrderItemName.text = orderItem.title
+                            tvOrderItemCost.text = orderItem.cost
+                            tvOrderItemCounter.text = orderItem.count
+                        } else {
+                            tvOrderItemName.visibility = View.GONE
+                            tvOrderItemCost.visibility = View.GONE
+                            tvOrderItemCounter.visibility = View.GONE
+                            tvOrderItemCount.visibility = View.GONE
+                            tvOrderItemTotal.visibility = View.GONE
+                        }
+                    } else {
+                        tvOrderItemCost.visibility = View.GONE
+                        tvOrderItemCounter.visibility = View.GONE
+                        tvOrderItemCount.visibility = View.GONE
+                        tvOrderItemTotal.visibility = View.GONE
 
-                if (orderItem.count!!.toInt() > 0) {
-                    tvOrderItemName.text = orderItem.title
-                    tvOrderItemCost.text = orderItem.cost
-                    tvOrderItemCounter.text = orderItem.count
+                        tvOrderItemName.text = orderItem.title
+                        tvChangeDeliveryDateSample.visibility = View.VISIBLE
+                        etChangeDate.visibility = View.VISIBLE
+                        saveButton.visibility = View.VISIBLE
+
+                        saveButton.setOnClickListener {
+                            orderItem.deliveryDate = etChangeDate.text.toString()
+                            click!!.invoke(orderItem)
+                        }
+
+                    }
                 } else {
-                    tvOrderItemName.visibility = View.GONE
-                    tvOrderItemCost.visibility = View.GONE
-                    tvOrderItemCounter.visibility = View.GONE
-                    tvOrderItemCount.visibility = View.GONE
-                    tvOrderItemTotal.visibility = View.GONE
+                    if (orderItem.count!!.toInt() > 0) {
+                        tvOrderItemName.text = orderItem.title
+                        tvOrderItemCost.text = orderItem.cost
+                        tvOrderItemCounter.text = orderItem.count
+                    } else {
+                        tvOrderItemName.visibility = View.GONE
+                        tvOrderItemCost.visibility = View.GONE
+                        tvOrderItemCounter.visibility = View.GONE
+                        tvOrderItemCount.visibility = View.GONE
+                        tvOrderItemTotal.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -55,7 +92,7 @@ class OrderItemAdapter() : ListAdapter<ShopItem, OrderItemAdapter.ItemHolder>(It
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), root = root, click = click)
     }
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {

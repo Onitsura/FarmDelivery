@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.account.AccDetailsFragment"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".fragments.account.AccDetailsFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,16 +14,15 @@
 
 
         <ImageButton
-            android:id="@+id/accAddressBackButton"
+            android:id="@+id/accDetailsBackButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:backgroundTint="@color/background"
-            android:src="@drawable/back_arrow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            />
+            android:backgroundTint="@color/background"
+            android:src="@drawable/back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,140 +33,152 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/accAddressBackButton"
+            app:layout_constraintStart_toStartOf="@+id/accDetailsBackButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/accDetailsHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/personal_details"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/accAddressBackButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
-            />
+            android:layout_marginTop="30dp"
+            android:text="@string/personal_details"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accDetailsBackButton" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/accDetailsHeader"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/accDetailsHeader">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:padding="2dp"
-                android:weightSum="4"
-                android:orientation="horizontal">
-            <com.makeramen.roundedimageview.RoundedImageView
+                android:weightSum="4">
 
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/acc_details_icon"
-                android:layout_weight="1"/>
+                <com.makeramen.roundedimageview.RoundedImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/acc_details_icon" />
 
                 <TextView
                     android:id="@+id/accountName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
+                    android:backgroundTint="@color/background"
                     android:text="@string/sample_name"
                     android:textColor="@color/black" />
+
                 <EditText
                     android:id="@+id/etAccountName"
-                    android:inputType="textPersonName"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="3"
+                    android:backgroundTint="@color/background"
                     android:hint="@string/et_name"
+                    android:inputType="textPersonName"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/editNameButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/edit_pen"
                     android:layout_weight="1"
-                    android:visibility="visible"/>
+                    android:src="@drawable/edit_pen"
+                    android:visibility="visible" />
+
                 <ImageView
                     android:id="@+id/applyNameButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/apply_icon"
                     android:layout_weight="1"
-                    android:visibility="gone"/>
+                    android:src="@drawable/apply_icon"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:padding="2dp"
-                android:weightSum="4"
-                android:orientation="horizontal">
+                android:weightSum="4">
+
                 <com.makeramen.roundedimageview.RoundedImageView
 
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/phone_icon"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:src="@drawable/phone_icon" />
 
                 <TextView
                     android:id="@+id/accountPhone"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
+                    android:backgroundTint="@color/background"
                     android:textColor="@color/black"
-                    android:visibility="visible"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:visibility="visible" />
 
                 <EditText
                     android:id="@+id/etAccountPhone"
-                    android:inputType="phone"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="3"
+                    android:backgroundTint="@color/background"
                     android:hint="@string/sample_phone_number"
+                    android:inputType="phone"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:textSize="14sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/editPhoneButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/edit_pen"
                     android:layout_weight="1"
-                    android:visibility="visible"/>
+                    android:src="@drawable/edit_pen"
+                    android:visibility="visible" />
+
                 <ImageView
                     android:id="@+id/applyPhoneButton"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/apply_icon"
                     android:layout_weight="1"
-                    android:visibility="gone"/>
+                    android:src="@drawable/apply_icon"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:padding="2dp"
-                android:weightSum="4"
-                android:orientation="horizontal">
+                android:weightSum="4">
+
                 <com.makeramen.roundedimageview.RoundedImageView
 
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/email_icon"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:src="@drawable/email_icon" />
 
                 <TextView
                     android:id="@+id/accountEmail"
@@ -179,14 +190,10 @@
             </LinearLayout>
 
 
-
         </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 </FrameLayout>
