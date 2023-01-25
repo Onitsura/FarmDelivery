@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/splash_blur_light"
     tools:context=".fragments.cart.CartFragment">
 
 
@@ -32,14 +32,26 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvCartTotalCost"
+            app:layout_constraintBottom_toTopOf="@+id/tvDisclaimer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvCart" />
 
 
         <TextView
+            android:id="@+id/tvDisclaimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/cart_disclaimer"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvCartTotalCostSample" />
 
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:text="@string/order_item_total"
@@ -56,6 +68,20 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
+            app:layout_constraintEnd_toStartOf="@+id/tvCartTotalCostSample"
+            android:layout_marginEnd="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvCartTotalCostSample"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/roubles"
             app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
             app:layout_constraintEnd_toEndOf="parent" />
 

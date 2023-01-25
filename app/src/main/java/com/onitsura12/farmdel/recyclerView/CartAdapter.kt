@@ -65,6 +65,7 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                 }
 
                 else {
+                    tvDeliveryDateSample.visibility = View.GONE
                     ivPreview.visibility = View.GONE
                     tvCartItemName.visibility = View.GONE
                     tvCartItemCost.visibility = View.GONE
@@ -73,8 +74,12 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                     cartItemCounter.visibility = View.GONE
                     cartItemDecreaseButton.visibility = View.GONE
                     cartItemIncreaseButton.visibility = View.GONE
+                    tvCostPer.visibility = View.GONE
+                    itemAverageWeight.visibility = View.GONE
+                    itemWeightMeasurement.visibility = View.GONE
                 }
             }
+
         }
 
 

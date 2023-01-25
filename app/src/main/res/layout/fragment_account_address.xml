@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/splash_blur_light"
     tools:context=".fragments.account.AccAddressFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            android:backgroundTint="@color/background"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:src="@drawable/back_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
-            android:background="@color/background"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:src="@drawable/add_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -51,8 +51,9 @@
             android:id="@+id/addressRcView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/accAddAddressButton" />
 

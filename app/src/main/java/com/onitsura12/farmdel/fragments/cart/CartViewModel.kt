@@ -21,6 +21,8 @@ import com.onitsura12.domain.models.ShopItem
 class CartViewModel : ViewModel() {
     private val _cart: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
     val cart: LiveData<ArrayList<ShopItem>> = _cart
+    private val _totalCost: MutableLiveData<Int> = MutableLiveData()
+    val totalCost: LiveData<Int> = _totalCost
 
 
 
@@ -40,11 +42,15 @@ class CartViewModel : ViewModel() {
 
     private fun initCart(){
         val list = arrayListOf<ShopItem>()
+        var itemsTotalCost: Int
+        _totalCost.value = 0
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
             .child(CHILD_CART)
             .addValueEventListener(object : ValueEventListener {
+
                 override fun onDataChange(snapshot: DataSnapshot) {
+
                     list.clear()
                     for(cartSnapshot in snapshot.children){
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
@@ -53,6 +59,15 @@ class CartViewModel : ViewModel() {
                     }
 
                     _cart.value = list
+                    itemsTotalCost = 0
+                    for (i in list.indices){
+                        Log.i("counter", list[i].toString())
+                        val itemCost: Int = list[i].cost.toInt() * list[i].weight!!.toInt() *
+                                list[i].count!!.toInt()
+                        itemsTotalCost += itemCost
+                        Log.i("counter", itemCost.toString())
+                    }
+                    _totalCost.value = itemsTotalCost
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -63,6 +78,8 @@ class CartViewModel : ViewModel() {
 
 
     }
+
+
 
     private fun checkTitles(){
         val list = arrayListOf<ShopItem>()

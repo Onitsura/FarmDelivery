@@ -3,10 +3,11 @@ package com.onitsura12.domain.models
 import java.util.Date
 
 data class ShopItem(
-    val title: String = "",
-    val cost: String = "",
+    var title: String = "",
+    var cost: String = "",
+    val per: String? = "",
     var count: String? = "0",
-    val weight: String? = "",
+    var weight: String? = "",
     var imagePath: String? = "",
     var deliveryDate: String? = null
 )

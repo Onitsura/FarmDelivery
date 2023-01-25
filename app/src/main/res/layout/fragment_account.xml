@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/splash_blur_light"
     tools:context=".fragments.account.AccountFragment">
 
 
@@ -74,7 +74,7 @@
                 android:layout_height="18dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/background"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:src="@drawable/account_more_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -106,7 +106,7 @@
                 android:layout_height="18dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/background"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:src="@drawable/account_more_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/accDetailsMoreButton" />
@@ -138,7 +138,7 @@
                 android:layout_height="18dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/background"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:src="@drawable/account_more_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/accOrdersMoreButton" />
@@ -161,7 +161,7 @@
                 android:layout_width="11dp"
                 android:layout_height="18dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/background"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:src="@drawable/account_more_button"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"

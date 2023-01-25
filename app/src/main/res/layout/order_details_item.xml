@@ -17,33 +17,86 @@
             android:id="@+id/tvOrderItemName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:text="@string/order_item_name"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvOrderItemTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="20dp"
-            android:text="@string/order_item_total"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCost"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvOrderItemCost"
+            android:id="@+id/tvChangeTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="20dp"
-            android:text="@string/sample_summary"
+            android:layout_marginStart="10dp"
+            android:text="@string/item_title_sample"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName" />
+
+        <EditText
+            android:id="@+id/etChangeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:hint="@string/order_item_name"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChangeTitle" />
+
+        <TextView
+            android:id="@+id/tvChangeWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:text="@string/average_weight"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etChangeTitle" />
+
+        <EditText
+            android:id="@+id/etChangeWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:hint="@string/sample_weight"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChangeWeight" />
+
+        <TextView
+            android:id="@+id/tvChangeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:text="@string/item_cost_sample"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etChangeWeight" />
+
+        <EditText
+            android:id="@+id/etChangeCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:hint="@string/sample_cost"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChangeCost" />
+
 
         <TextView
             android:id="@+id/tvOrderItemCount"
@@ -64,7 +117,7 @@
             android:text="@string/sample_count"
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/tvOrderItemTotal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -76,13 +129,15 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:visibility="gone"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName" />
+            app:layout_constraintTop_toBottomOf="@+id/etChangeCost" />
 
         <EditText
             android:id="@+id/etChangeDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:hint="@string/sample_date"
             android:inputType="date"
@@ -91,7 +146,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName" />
+            app:layout_constraintTop_toBottomOf="@+id/etChangeCost" />
 
         <Button
             android:id="@+id/saveButton"

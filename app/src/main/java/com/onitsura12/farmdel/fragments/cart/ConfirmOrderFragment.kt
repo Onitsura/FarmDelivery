@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onitsura12.domain.models.Address
@@ -43,7 +44,10 @@ class ConfirmOrderFragment : Fragment() {
 
     private fun initAddressRcView() {
         val markAddress: (address: Address) -> Unit = { viewModel.markAddress(address = it) }
-        addressAdapter = AddressAdapter(markAddress = markAddress)
+        val removeAddress: (address: Address) -> Unit = { viewModel.removeAddress(address = it)}
+        val editAddress: (address: Address) -> Unit = { editAddress(address = it)}
+        addressAdapter = AddressAdapter(markAddress = markAddress, remove = removeAddress, edit =
+        editAddress)
         binding.addressRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.addressRcView.adapter = addressAdapter
         viewModel.addressList.observe(viewLifecycleOwner) {
@@ -101,6 +105,14 @@ class ConfirmOrderFragment : Fragment() {
             findNavController().navigate(R.id.accAddAddressFragment)
 
         }
+    }
+
+    //TODO Edit Address
+    private fun editAddress(address: Address){
+        val selectedAddress = address.id
+        val bundle = Bundle()
+        bundle.putString("selectedAddress", selectedAddress)
+        setFragmentResult("selectedAddress", bundle)
     }
 
 

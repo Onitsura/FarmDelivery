@@ -8,99 +8,146 @@
     android:paddingEnd="2dp"
     android:paddingBottom="4dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="6">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivPreview"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
-            android:src="@drawable/splash" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:orientation="vertical"
-            android:weightSum="4">
-
-            <TextView
-                android:id="@+id/tvCartItemName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/cart_sample_name"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvCartItemCost"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/sample_cost"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/tvCartItemWeight"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/sample_weight" />
-
-            <TextView
-                android:id="@+id/tvDeliveryDate"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/sample_delivery_date" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="3">
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/cartItemIncreaseButton"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:src="@drawable/plus"
-                app:riv_corner_radius="40dip" />
-
-            <TextView
-                android:id="@+id/cartItemCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="18dp"
-                android:layout_weight="1"
-                android:text="@string/sample_count"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/cartItemDecreaseButton"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:src="@drawable/minus"
-                app:riv_corner_radius="40dip" />
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/splash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvCartItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/cart_sample_name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvCostPer"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/item_cost_per"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/tvCartItemCost"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemName" />
+
+        <TextView
+            android:id="@+id/tvCartItemCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/sample_cost"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemName" />
+
+        <TextView
+            android:id="@+id/itemAverageWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/average_weight"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
+
+        <TextView
+            android:id="@+id/tvCartItemWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/item_weight"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/itemAverageWeight"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
+        <TextView
+            android:id="@+id/itemWeightMeasurement"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/weight_measurement"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/tvCartItemWeight"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
+
+        <TextView
+            android:id="@+id/tvDeliveryDateSample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/delivery_date_sample"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toBottomOf="@+id/itemWeightMeasurement" />
+
+        <TextView
+            android:id="@+id/tvDeliveryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/tvDeliveryDateSample"
+            app:layout_constraintTop_toBottomOf="@+id/itemWeightMeasurement" />
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/cartItemIncreaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cartItemCounter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="40dip" />
+
+        <TextView
+            android:id="@+id/cartItemCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_count"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cartItemDecreaseButton"
+            app:layout_constraintEnd_toStartOf="@+id/cartItemIncreaseButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/cartItemDecreaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="100dp"
+            android:src="@drawable/minus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="40dip" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

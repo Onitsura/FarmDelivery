@@ -21,6 +21,38 @@
         android:weightSum="10">
 
 
+
+
+        <TextView
+            android:id="@+id/tvPrimarySwitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/primary_light"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/editAddressButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/edit_pen"
+            android:cropToPadding="true"
+            android:padding="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/removeAddressButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/remove"
+            android:layout_marginTop="10dp"
+            android:cropToPadding="true"
+            android:padding="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
         <TextView
             android:id="@+id/tvCitySample"
             android:layout_width="wrap_content"
@@ -145,24 +177,25 @@
             app:layout_constraintStart_toStartOf="@+id/tvFlatSample"
             app:layout_constraintTop_toBottomOf="@+id/tvFlatSample" />
 
-        <TextView
-            android:id="@+id/tvPrimary"
+
+        <Button
+            android:id="@+id/setPrimaryButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:text="@string/primary_switch_text"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/switchPrimary" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

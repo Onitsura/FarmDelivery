@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/splash_blur_light"
     tools:context=".fragments.account.AccAddAddressFragment">
 
 
@@ -18,7 +18,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            android:backgroundTint="@color/background"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:src="@drawable/back_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,143 +35,172 @@
             app:layout_constraintStart_toStartOf="@+id/accAddAddressBackButton"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            android:weightSum="9"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/address_city"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accAddAddressBackButton" />
+
+        <EditText
+            android:id="@+id/etCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_city"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@id/etStreet"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/accAddAddressBackButton">
+            app:layout_constraintTop_toBottomOf="@id/accAddAddressBackButton" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/address_city"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="@string/address_street"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCity" />
 
-            <EditText
-                android:id="@+id/etCity"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:hint="@string/hint_city"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+        <EditText
+            android:id="@+id/etStreet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_street"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@id/etHouse"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCity" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/address_street"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text="@string/address_house"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etStreet" />
 
-            <EditText
-                android:id="@+id/etStreet"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:hint="@string/hint_street"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/address_house"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/etHouse"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:hint="@string/hint_house"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/address_entrance"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/address_floor"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/address_flat"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="3">
+        <EditText
+            android:id="@+id/etHouse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_house"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@id/etEntrance"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etStreet" />
 
 
-                <EditText
-                    android:id="@+id/etEntrance"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="@string/hint_entrance"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/address_entrance"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
-                <EditText
-                    android:id="@+id/etFloor"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="@string/hint_floor"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_floor"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
-                <EditText
-                    android:id="@+id/etFlat"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:hint="@string/hint_flat"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/address_flat"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
-            </LinearLayout>
-        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etEntrance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_entrance"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@id/etFloor"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
+
+        <EditText
+            android:id="@+id/etFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_floor"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:nextFocusDown="@id/etFlat"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
+
+        <EditText
+            android:id="@+id/etFlat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:hint="@string/hint_flat"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHouse" />
+
 
         <Button
             android:id="@+id/saveButton"

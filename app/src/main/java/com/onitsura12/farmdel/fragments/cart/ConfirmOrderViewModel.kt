@@ -209,4 +209,14 @@ class ConfirmOrderViewModel : ViewModel() {
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_CART).setValue("")
     }
 
+    fun removeAddress(address: Address) {
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_ADDRESS)
+            .child(address.id)
+            .removeValue()
+            .addOnCompleteListener {
+            }
+    }
+
 }

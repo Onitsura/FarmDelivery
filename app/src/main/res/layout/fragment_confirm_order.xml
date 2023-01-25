@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/splash_blur_light"
     tools:context=".fragments.cart.ConfirmOrderFragment">
 
 
@@ -19,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            android:backgroundTint="@color/background"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:src="@drawable/back_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
             android:id="@+id/addressRcView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:backgroundTint="@color/background"
+
             app:layout_constraintBottom_toTopOf="@+id/cartRcView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/background"
+
             app:layout_constraintBottom_toTopOf="@+id/confirmButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

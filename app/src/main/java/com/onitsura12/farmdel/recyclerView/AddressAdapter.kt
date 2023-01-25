@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.recyclerView
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,23 +10,17 @@ import com.onitsura12.domain.models.Address
 import com.onitsura12.farmdel.databinding.AddressItemBinding
 
 
-class AddressAdapter(private val markAddress: (address: Address) -> Unit) : ListAdapter<Address,
-        AddressAdapter
-        .ItemHolder>
-    (
-    ItemComparator
-        ()
-) {
+class AddressAdapter(private val markAddress: (address: Address) -> Unit, private val remove:
+(address: Address) -> Unit, private val edit: (address: Address) -> Unit) :
+    ListAdapter<Address, AddressAdapter.ItemHolder>
+    (ItemComparator()) {
 
 
     class ItemHolder(
         private val binding: AddressItemBinding,
-        private val markAddress: (address: Address) -> Unit
-    ) :
-        RecyclerView.ViewHolder(
-            binding
-                .root
-        ) {
+        private val markAddress: (address: Address) -> Unit, private val remove:
+            (address: Address) -> Unit, private val edit: (address: Address) -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(address: Address) {
             binding.apply {
                 tvCity.text = address.city
@@ -34,15 +29,27 @@ class AddressAdapter(private val markAddress: (address: Address) -> Unit) : List
                 tvEntrance.text = address.entrance
                 tvFloor.text = address.floor
                 tvFlat.text = address.flat
-
                 if (address.primary) {
-                    switchPrimary.isChecked = true
+                    tvPrimarySwitch.visibility = View.VISIBLE
+                    setPrimaryButton.visibility = View.GONE
+                }
+                else{
+                    tvPrimarySwitch.visibility = View.GONE
+                    setPrimaryButton.visibility = View.VISIBLE
                 }
 
-
-                switchPrimary.setOnClickListener {
+                setPrimaryButton.setOnClickListener {
                     markAddress.invoke(address)
+                    tvPrimarySwitch.visibility = View.VISIBLE
+                    setPrimaryButton.visibility = View.GONE
+                }
 
+                editAddressButton.setOnClickListener {
+                    edit.invoke(address)
+                }
+
+                removeAddressButton.setOnClickListener {
+                    remove.invoke(address)
                 }
             }
         }
@@ -51,13 +58,13 @@ class AddressAdapter(private val markAddress: (address: Address) -> Unit) : List
     }
 
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder(
             AddressItemBinding.inflate(
                 LayoutInflater.from(parent.context),
-                parent, false
-            ), markAddress = markAddress
-        )
+                parent, false), markAddress = markAddress, remove = remove, edit = edit)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {

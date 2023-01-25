@@ -23,6 +23,7 @@ class FirebaseHelper {
         const val NODE_SUPPLIES = "supplies"
         const val NODE_USERS = "users"
         const val NODE_ORDERS = "orders"
+        const val NODE_ORDERS_TO_DELIVERY = "ordersToDelivery"
         const val CHILD_ID = "id"
         const val CHILD_PHONE = "phone"
         const val CHILD_FULLNAME = "fullname"

@@ -46,9 +46,15 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUser()
-        initAdminPanel()
+
         viewModel.userName.observe(viewLifecycleOwner) {
             binding.accountName.text = it
+        }
+
+        viewModel.root.observe(viewLifecycleOwner) {
+            if (it) {
+                initAdminPanel()
+            }
         }
 
 
@@ -137,14 +143,12 @@ class AccountFragment : Fragment() {
 
 
     private fun initAdminPanel() {
-        if (viewModel.root.value!!) {
-            binding.accAdminPanel.visibility = View.VISIBLE
-            binding.accAdminPanelButton.visibility = View.VISIBLE
-            binding.accAdminPanel.setOnClickListener {
-                findNavController().navigate(R.id.action_accountFragment_to_adminPanel)
-            }
+        binding.accAdminPanel.visibility = View.VISIBLE
+        binding.accAdminPanelButton.visibility = View.VISIBLE
+        binding.accAdminPanel.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_adminPanel)
         }
     }
-
-
 }
+
+

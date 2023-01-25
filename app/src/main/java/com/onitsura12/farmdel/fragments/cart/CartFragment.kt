@@ -35,6 +35,11 @@ class CartFragment : Fragment() {
         binding.checkoutButton.setOnClickListener {
             findNavController().navigate(R.id.action_cartFragment_to_confirmOrderFragment)
         }
+
+        viewModel.totalCost.observe(viewLifecycleOwner){
+            binding.tvCartTotalCost.text = it.toString()
+        }
+
         initRcView()
     }
 

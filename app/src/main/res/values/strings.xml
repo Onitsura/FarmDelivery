@@ -31,11 +31,11 @@
     <string name="order_cost">Итого:</string>
     <string name="order_item_name">Курочка</string>
     <string name="order_item_total">Стоимость</string>
-    <string name="order_item_count">Штук</string>
+    <string name="order_item_count">Количество</string>
     <string name="cart">Корзина</string>
     <string name="checkout_btn">Далее</string>
     <string name="cart_sample_name">Копчёности</string>
-    <string name="sample_cost">250 руб / кг</string>
+    <string name="sample_cost">250</string>
     <string name="sample_weight">2,5 – 3 кг</string>
     <string name="sample_count">3</string>
     <string name="order_success">Заказ создан</string>
@@ -52,7 +52,7 @@
     <string name="hint_house">Введите номер дома</string>
     <string name="address_house">Номер дома</string>
     <string name="sample_house">Sample house</string>
-    <string name="sample_delivery_date">Ближайшая дата доставки</string>
+    <string name="button_choose_delivery_date">Выбрать дату доставки</string>
     <string name="confirm_button">Заказать</string>
     <string name="primary_switch_text">Установить как основной</string>
     <string name="add_address_button">Добавить адрес</string>
@@ -68,4 +68,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="change_delivery_date_sample">Изменить дату доставки товаров</string>
     <string name="orders_to_delivery">Заказы на доставку</string>
+    <string name="item_cost_per">руб за кг</string>
+    <string name="average_weight">Примерный вес</string>
+    <string name="item_weight">15</string>
+    <string name="weight_measurement">кг</string>
+    <string name="item_title_sample">Название товара</string>
+    <string name="item_cost_sample">Стоимость (в рублях, за единицу/кг товара)</string>
+    <string name="address_primary">Основной</string>
+    <string name="cart_disclaimer">*Стоимость предварительная, так как вес каждой единицы товара индивидуальный</string>
+    <string name="roubles">рублей</string>
+    <string name="zero">0</string>
+    <string name="delivery_date_sample">Дата доставки</string>
 </resources>

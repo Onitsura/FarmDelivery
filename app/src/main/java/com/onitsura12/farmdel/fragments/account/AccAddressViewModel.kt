@@ -37,12 +37,15 @@ class AccAddressViewModel @Inject constructor() : ViewModel() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     list.clear()
+                    _addressList.value = list
                     for (addressSnapshot in snapshot.children) {
                         val address = addressSnapshot.getValue(Address::class.java)
                         list.add(address!!)
+
                     }
                     _addressList.value = list
-                    Log.i("checked2", _addressList.value.toString())
+                    Log.i("checkedVM", list.toString())
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -53,33 +56,44 @@ class AccAddressViewModel @Inject constructor() : ViewModel() {
     }
 
     fun markAddress(address: Address) {
-        val newValue = !address.primary
+        val newValue = true
         address.primary = newValue
-
-
-
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
             .child(CHILD_ADDRESS)
             .child(address.id)
             .child(CHILD_ADDRESS_PRIMARY).setValue(newValue)
             .addOnCompleteListener {
-
-                if (newValue) {
-                    for (i in _addressList.value!!.indices) {
-                        if (_addressList.value!![i].id != address.id) {
-                            val dataMap = mutableMapOf<String, Any?>()
-                            dataMap[CHILD_ADDRESS_PRIMARY] = false
-                            REF_DATABASE_ROOT.child(NODE_USERS)
-                                .child(UID)
-                                .child(CHILD_ADDRESS)
-                                .child(_addressList.value!![i].id)
-                                .updateChildren(dataMap)
-                        }
-                    }
-                    Log.i("checked", _addressList.value.toString())
-                }
+                updateAddresses(address = address)
             }
+    }
+
+    private fun updateAddresses(address: Address) {
+        val list: ArrayList<Address> = _addressList.value!!
+        for (i in list.indices) {
+            if (list[i].id != address.id) {
+                REF_DATABASE_ROOT.child(NODE_USERS)
+                    .child(UID)
+                    .child(CHILD_ADDRESS)
+                    .child(list[i].id)
+                    .child(CHILD_ADDRESS_PRIMARY).setValue(false)
+            }
+        }
+    }
+
+    fun removeAddress(address: Address) {
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_ADDRESS)
+            .child(address.id)
+            .removeValue()
+            .addOnCompleteListener {
+                updateAddresses(address = address)
+            }
+    }
+
+    fun editAddress(address: Address) {
+
     }
 }
 

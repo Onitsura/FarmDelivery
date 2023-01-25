@@ -18,8 +18,7 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
     (ItemComparator()) {
 
 
-    class ItemHolder(private val binding: ShopItemBinding,
-                     ) :
+    class ItemHolder(private val binding: ShopItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
@@ -28,6 +27,7 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
         fun bind(shopItem: ShopItem, clickIncrement:(cartItem: ShopItem)-> Unit, clickDecrement:(cartItem: ShopItem)->
         Unit) {
             binding.apply {
+                itemWeight.text = shopItem.weight
                 itemTitle.text = shopItem.title
                 itemCost.text = shopItem.cost
                 cartItemCounter.text = shopItem.count.toString()
@@ -83,7 +83,7 @@ class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {
         override fun areItemsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
-            return oldItem == newItem
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {

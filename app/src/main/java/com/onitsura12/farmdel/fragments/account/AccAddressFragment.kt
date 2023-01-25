@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,11 +38,8 @@ class AccAddressFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRcView()
-        viewModel.addressList.observe(viewLifecycleOwner){
-            adapter.submitList(it)
-        }
 
+        initRcView()
 
         binding.accAddressBackButton.setOnClickListener {
             findNavController().navigate(R.id.accountFragment)
@@ -52,9 +50,19 @@ class AccAddressFragment : Fragment() {
     }
 
 
-    private fun initRcView(){
-        val markAddress: (address: Address)-> Unit = {viewModel.markAddress(address = it)}
-        adapter = AddressAdapter(markAddress = markAddress)
+    private fun initListener() {
+        val markAddress: (address: Address) -> Unit = { viewModel.markAddress(address = it) }
+        val removeAddress: (address: Address) -> Unit = { viewModel.removeAddress(address = it)}
+        val editAddress: (address: Address) -> Unit = { editAddress(address = it)}
+        adapter = AddressAdapter(markAddress = markAddress, remove = removeAddress, edit = editAddress)
+        viewModel.addressList.observe(viewLifecycleOwner) {
+            adapter.submitList(it.toMutableList())
+        }
+
+    }
+
+    private fun initRcView() {
+        initListener()
         binding.addressRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.addressRcView.adapter = adapter
         val itemAnimator = binding.addressRcView.itemAnimator
@@ -64,13 +72,13 @@ class AccAddressFragment : Fragment() {
 
     }
 
-
-
-
-
-
-
-
+    //TODO Edit Address
+    private fun editAddress(address: Address){
+        val selectedAddress = address.id
+        val bundle = Bundle()
+        bundle.putString("selectedAddress", selectedAddress)
+        setFragmentResult("selectedAddress", bundle)
+    }
 
 
 }

@@ -81,7 +81,6 @@ class ShopFragment : Fragment() {
     }
 
     private fun initListener() {
-
         val clickIncrement: (cartItem: ShopItem) -> Unit = { viewModel.incrementItemCount(it) }
         val clickDecrement: (cartItem: ShopItem) -> Unit = { viewModel.decrementItemCount(it) }
         adapter = ShopAdapter(clickIncrement = clickIncrement, clickDecrement = clickDecrement)

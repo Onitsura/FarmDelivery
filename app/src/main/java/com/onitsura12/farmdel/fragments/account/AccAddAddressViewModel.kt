@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.fragments.account
 
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
@@ -11,6 +12,9 @@ import kotlin.random.Random
 
 
 class AccAddAddressViewModel : ViewModel() {
+    val selectedAddress: MutableLiveData<Address> = MutableLiveData()
+    val selectedAddressId: MutableLiveData<String> = MutableLiveData()
+
 
     fun getId(): Int{
         return Random.nextInt(35000)

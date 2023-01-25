@@ -29,28 +29,36 @@ class OrderItemAdapter(
                     if (!root) {
                         if (orderItem.count!!.toInt() > 0) {
                             tvOrderItemName.text = orderItem.title
-                            tvOrderItemCost.text = orderItem.cost
                             tvOrderItemCounter.text = orderItem.count
                         } else {
                             tvOrderItemName.visibility = View.GONE
-                            tvOrderItemCost.visibility = View.GONE
                             tvOrderItemCounter.visibility = View.GONE
                             tvOrderItemCount.visibility = View.GONE
-                            tvOrderItemTotal.visibility = View.GONE
                         }
                     } else {
-                        tvOrderItemCost.visibility = View.GONE
                         tvOrderItemCounter.visibility = View.GONE
                         tvOrderItemCount.visibility = View.GONE
-                        tvOrderItemTotal.visibility = View.GONE
+                        tvOrderItemName.visibility = View.GONE
 
-                        tvOrderItemName.text = orderItem.title
+                        tvChangeCost.visibility = View.VISIBLE
+                        etChangeCost.visibility = View.VISIBLE
+                        etChangeCost.hint = orderItem.cost
+                        tvChangeTitle.visibility = View.VISIBLE
+                        etChangeTitle.visibility = View.VISIBLE
+                        etChangeTitle.hint = orderItem.title
+                        tvChangeWeight.visibility = View.VISIBLE
+                        etChangeWeight.visibility = View.VISIBLE
+                        etChangeWeight.hint = orderItem.weight
                         tvChangeDeliveryDateSample.visibility = View.VISIBLE
                         etChangeDate.visibility = View.VISIBLE
                         saveButton.visibility = View.VISIBLE
 
                         saveButton.setOnClickListener {
                             orderItem.deliveryDate = etChangeDate.text.toString()
+                            orderItem.weight = etChangeWeight.text.toString()
+                            orderItem.title = etChangeTitle.text.toString()
+                            orderItem.cost = etChangeCost.text.toString()
+
                             click!!.invoke(orderItem)
                         }
 
@@ -58,14 +66,11 @@ class OrderItemAdapter(
                 } else {
                     if (orderItem.count!!.toInt() > 0) {
                         tvOrderItemName.text = orderItem.title
-                        tvOrderItemCost.text = orderItem.cost
                         tvOrderItemCounter.text = orderItem.count
                     } else {
                         tvOrderItemName.visibility = View.GONE
-                        tvOrderItemCost.visibility = View.GONE
                         tvOrderItemCounter.visibility = View.GONE
                         tvOrderItemCount.visibility = View.GONE
-                        tvOrderItemTotal.visibility = View.GONE
                     }
                 }
             }
