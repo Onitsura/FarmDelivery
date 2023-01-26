@@ -11,11 +11,9 @@ import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.ShopItemBinding
 import com.squareup.picasso.Picasso
 
-class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrement:(cartItem: ShopItem)-> Unit) :
-    ListAdapter<ShopItem,
-        ShopAdapter
-.ItemHolder>
-    (ItemComparator()) {
+class ShopAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,
+                  val clickDecrement:(cartItem: ShopItem)-> Unit) :
+    ListAdapter<ShopItem, ShopAdapter.ItemHolder>(ItemComparator()) {
 
 
     class ItemHolder(private val binding: ShopItemBinding) :

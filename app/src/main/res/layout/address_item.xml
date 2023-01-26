@@ -16,21 +16,21 @@
         android:layout_height="250dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/background"
         android:orientation="vertical"
         android:weightSum="10">
 
 
 
 
-        <TextView
-            android:id="@+id/tvPrimarySwitch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ImageView
+            android:id="@+id/ivPrimarySwitch"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/apply_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/primary_light"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
         <ImageView
             android:id="@+id/editAddressButton"
             android:layout_width="30dp"
@@ -50,7 +50,7 @@
             android:cropToPadding="true"
             android:padding="7dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         <TextView

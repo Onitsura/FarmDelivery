@@ -16,7 +16,7 @@ class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHol
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(order: Order) {
-            val adapter = OrderItemAdapter(root = null, click = null)
+            val adapter = OrderItemAdapter(root = null, click = null, clickRemove = null)
             binding.apply {
                 tvName.text = order.userName
                 tvCity.text = order.address!!.city

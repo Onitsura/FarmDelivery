@@ -6,6 +6,10 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.domain.models.ShopItem
 import java.io.*
 
 
@@ -35,6 +39,13 @@ class AddShopItemViewModel : ViewModel() {
             return null
         }
         return file.absolutePath
+    }
+
+    fun addShopItem(newItem: ShopItem){
+        REF_DATABASE_ROOT
+            .child(NODE_SUPPLIES)
+            .child(newItem.title)
+            .setValue(newItem)
     }
 
 

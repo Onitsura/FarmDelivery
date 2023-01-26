@@ -20,14 +20,14 @@ import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentLoginBinding
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
+import com.onitsura12.farmdel.utils.LoginUtils
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.checkAuth
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.signInWithGoogle
 
 
-//TODO разнести логику с вью моделью
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
@@ -44,30 +44,20 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-
-            try {
-                val account = task.getResult(ApiException::class.java)
-
-                if (account != null){
-                    firebaseAuth(account.idToken!!)
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
-                }
-            }
-            catch (e: ApiException){
-                Toast.makeText(requireContext(), "smthng goes wrong", Toast.LENGTH_SHORT).show()
-            }
+        if (checkAuth()){
+            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
         }
 
-        checkAuth()
+        initButtons()
+        initLauncher()
 
-        
+
+
+    }
+
+    private fun initButtons(){
         binding.tvGoogleAuth.setOnClickListener {
-            signInWithGoogle()
+            signInWithGoogle(launcher = launcher, fragment = this, context = requireContext())
 
         }
         binding.tvPrivateMode.setOnClickListener {
@@ -75,32 +65,22 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun initLauncher(){
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+            try {
+                val account = task.getResult(ApiException::class.java)
 
-    private fun getClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        return GoogleSignIn.getClient(requireContext(), gso)
-    }
-
-    private fun signInWithGoogle(){
-        val signInClient = getClient()
-        launcher.launch(signInClient.signInIntent)
-    }
-
-    private fun firebaseAuth(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        AUTH.signInWithCredential(credential)
-    }
-
-    private fun checkAuth(){
-        if (AUTH.currentUser != null){
-            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                if (account != null){
+                    LoginUtils.firebaseAuth(account.idToken!!)
+                    initUser()
+                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                }
+            }
+            catch (e: ApiException){
+                Toast.makeText(requireContext(), "smthng goes wrong", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
-
 
 }

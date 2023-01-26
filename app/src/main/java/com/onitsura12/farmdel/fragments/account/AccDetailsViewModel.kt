@@ -30,61 +30,7 @@ class AccDetailsViewModel @Inject constructor() : ViewModel() {
 
 
     init {
-        setupAccInfo()
-    }
-
-    private fun setupAccInfo() {
-        setupAccName()
-        setupAccEmail()
-        setupAccPhone()
         _user.value = USER
-    }
-
-
-    private fun setupAccName() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_FULLNAME)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.fullname = snapshot.getValue(String::class.java)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-
-    }
-
-    private fun setupAccEmail() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_EMAIL)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.eMail = snapshot.getValue(String::class.java)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-    }
-
-
-    private fun setupAccPhone() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_PHONE)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.phone = snapshot.getValue(String::class.java).toString()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
     }
 
 

@@ -43,9 +43,7 @@ class AccDetailsFragment : Fragment() {
 
             binding.apply {
                 viewModel.user.observe(viewLifecycleOwner) {
-                    //setup e-mail
                     accountEmail.text = it.eMail
-                    //setup phone
                     if (it.phone != "") {
                         accountPhone.text = it.phone
                     } else accountPhone.setBackgroundColor(
@@ -54,7 +52,6 @@ class AccDetailsFragment : Fragment() {
                             R.color.red_light
                         )
                     )
-                    //setup name
                     accountName.text = it.fullname
                 }
             }

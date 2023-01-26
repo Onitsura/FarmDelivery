@@ -1,7 +1,6 @@
 package com.onitsura12.farmdel.fragments.cart
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,8 +24,6 @@ class CartViewModel : ViewModel() {
     val totalCost: LiveData<Int> = _totalCost
 
 
-
-
     init {
         if (UID.isNotBlank()) {
             setupAccInfo()
@@ -37,10 +34,7 @@ class CartViewModel : ViewModel() {
     }
 
 
-
-
-
-    private fun initCart(){
+    private fun initCart() {
         val list = arrayListOf<ShopItem>()
         var itemsTotalCost: Int
         _totalCost.value = 0
@@ -52,7 +46,7 @@ class CartViewModel : ViewModel() {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     list.clear()
-                    for(cartSnapshot in snapshot.children){
+                    for (cartSnapshot in snapshot.children) {
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
                         list.add(cartItem!!)
 
@@ -60,12 +54,12 @@ class CartViewModel : ViewModel() {
 
                     _cart.value = list
                     itemsTotalCost = 0
-                    for (i in list.indices){
-                        Log.i("counter", list[i].toString())
+                    for (i in list.indices) {
+
                         val itemCost: Int = list[i].cost.toInt() * list[i].weight!!.toInt() *
                                 list[i].count!!.toInt()
                         itemsTotalCost += itemCost
-                        Log.i("counter", itemCost.toString())
+
                     }
                     _totalCost.value = itemsTotalCost
                 }
@@ -80,8 +74,7 @@ class CartViewModel : ViewModel() {
     }
 
 
-
-    private fun checkTitles(){
+    private fun checkTitles() {
         val list = arrayListOf<ShopItem>()
         REF_DATABASE_ROOT
             .child(NODE_SUPPLIES)
@@ -125,14 +118,12 @@ class CartViewModel : ViewModel() {
 
     }
 
-    private fun removeFromCart(cartItem: ShopItem){
+    private fun removeFromCart(cartItem: ShopItem) {
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
             .child(CHILD_CART)
             .child(cartItem.title).removeValue()
     }
-
-
 
 
     private fun addNewCartItem(cartItem: ShopItem) {
@@ -218,7 +209,6 @@ class CartViewModel : ViewModel() {
                 USER.phone = it.result.value.toString()
 
             }
-
 
 
     }

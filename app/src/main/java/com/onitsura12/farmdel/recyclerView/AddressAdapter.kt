@@ -30,17 +30,17 @@ class AddressAdapter(private val markAddress: (address: Address) -> Unit, privat
                 tvFloor.text = address.floor
                 tvFlat.text = address.flat
                 if (address.primary) {
-                    tvPrimarySwitch.visibility = View.VISIBLE
+                    ivPrimarySwitch.visibility = View.VISIBLE
                     setPrimaryButton.visibility = View.GONE
                 }
                 else{
-                    tvPrimarySwitch.visibility = View.GONE
+                    ivPrimarySwitch.visibility = View.GONE
                     setPrimaryButton.visibility = View.VISIBLE
                 }
 
                 setPrimaryButton.setOnClickListener {
                     markAddress.invoke(address)
-                    tvPrimarySwitch.visibility = View.VISIBLE
+                    ivPrimarySwitch.visibility = View.VISIBLE
                     setPrimaryButton.visibility = View.GONE
                 }
 

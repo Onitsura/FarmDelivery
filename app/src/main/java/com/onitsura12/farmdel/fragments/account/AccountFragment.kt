@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.fragments.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,13 +23,15 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountBinding
+import com.onitsura12.farmdel.utils.LoginUtils
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.checkAuth
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.firebaseAuth
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.signInWithGoogle
 import com.squareup.picasso.Picasso
 
 class AccountFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AccountFragment()
-    }
+
 
     private val viewModel: AccountViewModel by activityViewModels()
     private lateinit var binding: FragmentAccountBinding
@@ -45,11 +48,11 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUser()
+        checkSignIn()
+        initLauncher()
+        initViews()
 
-        viewModel.userName.observe(viewLifecycleOwner) {
-            binding.accountName.text = it
-        }
+
 
         viewModel.root.observe(viewLifecycleOwner) {
             if (it) {
@@ -58,14 +61,8 @@ class AccountFragment : Fragment() {
         }
 
 
-        binding.apply {
 
-            if (UID == "" || UID == "null") {
-                accSignOut.visibility = View.GONE
-                accSignOutText.visibility = View.GONE
-                tvGoogleAuth.visibility = View.VISIBLE
-                googleIcon.visibility = View.VISIBLE
-            }
+        binding.apply {
             accDetailsText.setOnClickListener {
                 if (UID.isNotEmpty()) {
                     findNavController().navigate(R.id.action_accountFragment_to_accDetailsFragment)
@@ -80,66 +77,57 @@ class AccountFragment : Fragment() {
             accSignOutText.setOnClickListener {
                 AUTH.signOut()
                 Toast.makeText(requireContext(), "Вы вышли из аккаунта", Toast.LENGTH_SHORT).show()
-                accSignOut.visibility = View.GONE
-                accSignOutText.visibility = View.GONE
-                tvGoogleAuth.visibility = View.VISIBLE
-                googleIcon.visibility = View.VISIBLE
+                checkSignIn()
                 USER.fullname = "Пользователь"
                 USER.phone = ""
                 USER.photoUrl = ""
                 UID = ""
-                viewModel.userName.value = USER.fullname
+                viewModel.user.value?.fullname = USER.fullname
+                findNavController().navigate(R.id.shopFragment)
             }
             tvGoogleAuth.setOnClickListener {
-                signInWithGoogle()
-            }
-            if (UID.isNotEmpty()) {
-                Picasso.get().load(AUTH.currentUser?.photoUrl.toString())
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .error(R.drawable.ic_launcher_background)
-                    .centerCrop()
-                    .fit()
-                    .into(accountPhoto)
+                signInWithGoogle(launcher = launcher, fragment = this@AccountFragment, context = requireContext())
+
             }
 
-            launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
 
-                try {
-                    val account = task.getResult(ApiException::class.java)
 
-                    if (account != null) {
-                        firebaseAuth(account.idToken!!)
-//                        initUser()
-                        findNavController().navigate(R.id.shopFragment)
-                    }
-                } catch (e: ApiException) {
-                    Toast.makeText(requireContext(), e.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
         }
 
     }
 
-
-    private fun getClient(): GoogleSignInClient {
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        return GoogleSignIn.getClient(requireContext(), gso)
+    private fun checkSignIn(){
+        binding.apply {
+            if (!checkAuth()) {
+                accSignOut.visibility = View.GONE
+                accSignOutText.visibility = View.GONE
+//                tvGoogleAuth.visibility = View.VISIBLE
+//                googleIcon.visibility = View.VISIBLE
+            }
+        }
     }
 
-    private fun signInWithGoogle() {
-        val signInClient = getClient()
-        launcher.launch(signInClient.signInIntent)
+
+
+    private fun initLauncher(){
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+
+            try {
+                val account = task.getResult(ApiException::class.java)
+
+                if (account != null) {
+                    firebaseAuth(account.idToken!!)
+                    initUser()
+                    viewModel.setupAccInfo()
+                    findNavController().navigate(R.id.shopFragment)
+                }
+            } catch (e: ApiException) {
+                Toast.makeText(requireContext(), e.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    private fun firebaseAuth(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        AUTH.signInWithCredential(credential)
-    }
 
 
     private fun initAdminPanel() {
@@ -147,6 +135,25 @@ class AccountFragment : Fragment() {
         binding.accAdminPanelButton.visibility = View.VISIBLE
         binding.accAdminPanel.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_adminPanel)
+        }
+    }
+
+    private fun initViews(){
+        binding.apply {
+            if (UID.isNotEmpty()) {
+                Picasso.get().load(AUTH.currentUser?.photoUrl)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_background)
+                    .centerCrop()
+                    .fit()
+                    .into(accountPhoto)
+            }
+
+            viewModel.user.observe(viewLifecycleOwner) {
+                binding.accountName.text = it.fullname
+            }
+
+
         }
     }
 }

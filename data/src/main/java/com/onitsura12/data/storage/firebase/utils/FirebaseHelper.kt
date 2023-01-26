@@ -28,7 +28,7 @@ class FirebaseHelper {
         const val CHILD_PHONE = "phone"
         const val CHILD_FULLNAME = "fullname"
         const val CHILD_EMAIL = "e-mail"
-        const val CHILD_PHOTO = "photo"
+        const val CHILD_PHOTO = "photoUrl"
         const val CHILD_ADDRESS = "address"
         const val CHILD_CART = "cart"
         const val CHILD_CART_TITLE = "title"

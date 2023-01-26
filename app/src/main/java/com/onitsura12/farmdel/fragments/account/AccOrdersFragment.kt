@@ -35,7 +35,6 @@ class AccOrdersFragment : Fragment() {
         binding.accOrdersBackButton.setOnClickListener {
             findNavController().navigate(R.id.accountFragment)
         }
-
         initOrderRcView()
     }
 
@@ -44,7 +43,7 @@ class AccOrdersFragment : Fragment() {
         binding.rcViewOrders.layoutManager = LinearLayoutManager(requireContext())
         binding.rcViewOrders.adapter = orderAdapter
         viewModel.ordersList.observe(viewLifecycleOwner) {
-            orderAdapter.submitList(it)
+            orderAdapter.submitList(it.toMutableList())
 
         }
     }

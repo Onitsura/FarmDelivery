@@ -11,7 +11,8 @@ import com.onitsura12.farmdel.databinding.OrderDetailsItemBinding
 
 class OrderItemAdapter(
     private val root: Boolean?,
-    private val click: ((orderItem: ShopItem) -> Unit)?
+    private val click: ((orderItem: ShopItem) -> Unit)?,
+    private val clickRemove: ((shopItem: ShopItem) -> Unit)?
 ) :
     ListAdapter<ShopItem,
             OrderItemAdapter
@@ -23,7 +24,9 @@ class OrderItemAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(orderItem: ShopItem, root: Boolean?, click: ((orderItem: ShopItem) -> Unit)?) {
+        fun bind(orderItem: ShopItem, root: Boolean?,
+                 click: ((orderItem: ShopItem) -> Unit)?,
+        clickRemove: ((shopItem: ShopItem) -> Unit)?) {
             binding.apply {
                 if (root != null) {
                     if (!root) {
@@ -40,6 +43,8 @@ class OrderItemAdapter(
                         tvOrderItemCount.visibility = View.GONE
                         tvOrderItemName.visibility = View.GONE
 
+
+
                         tvChangeCost.visibility = View.VISIBLE
                         etChangeCost.visibility = View.VISIBLE
                         etChangeCost.hint = orderItem.cost
@@ -54,12 +59,25 @@ class OrderItemAdapter(
                         saveButton.visibility = View.VISIBLE
 
                         saveButton.setOnClickListener {
-                            orderItem.deliveryDate = etChangeDate.text.toString()
-                            orderItem.weight = etChangeWeight.text.toString()
-                            orderItem.title = etChangeTitle.text.toString()
-                            orderItem.cost = etChangeCost.text.toString()
+                            if (etChangeCost.text.toString().isNotBlank()){
+                                orderItem.cost = etChangeCost.text.toString()
+                            }
+                            if (etChangeDate.text.toString().isNotBlank()){
+                                orderItem.deliveryDate = etChangeDate.text.toString()
+                            }
+                            if (etChangeWeight.text.toString().isNotBlank()){
+                                orderItem.weight = etChangeWeight.text.toString()
+                            }
+                            if (etChangeTitle.text.toString().isNotBlank()){
+                                orderItem.title = etChangeTitle.text.toString()
+                            }
 
                             click!!.invoke(orderItem)
+                        }
+
+                        removeShopItemButton.visibility = View.VISIBLE
+                        removeShopItemButton.setOnClickListener {
+                            clickRemove!!.invoke(orderItem)
                         }
 
                     }
@@ -97,7 +115,7 @@ class OrderItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position), root = root, click = click)
+        holder.bind(getItem(position), root = root, click = click, clickRemove = clickRemove)
     }
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {

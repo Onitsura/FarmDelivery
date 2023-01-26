@@ -22,7 +22,7 @@ class ConfirmOrderFragment : Fragment() {
     private lateinit var viewModel: ConfirmOrderViewModel
     private lateinit var binding: FragmentConfirmOrderBinding
     private lateinit var addressAdapter: AddressAdapter
-    private val cartAdapter: OrderItemAdapter = OrderItemAdapter(root = null, click = null)
+    private val cartAdapter: OrderItemAdapter = OrderItemAdapter(root = null, click = null, clickRemove = null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

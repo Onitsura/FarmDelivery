@@ -1,5 +1,6 @@
 package com.onitsura12.farmdel.fragments.root
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -105,6 +106,14 @@ class ChangeDeliveryDateViewModel @Inject constructor() : ViewModel() {
                 }
             })
     }
+
+    fun removeShopItem(shopItem: ShopItem) {
+        REF_DATABASE_ROOT.child(NODE_SUPPLIES)
+            .child(shopItem.title)
+            .removeValue()
+    }
+
+
 
 
 }

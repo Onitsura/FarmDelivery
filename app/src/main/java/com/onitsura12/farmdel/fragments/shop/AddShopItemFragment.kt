@@ -62,8 +62,16 @@ class AddShopItemFragment : Fragment() {
 
             }
 
-            saveButton.setOnClickListener {
+            viewModel.imagePath.observe(viewLifecycleOwner) {
+                Picasso.get().load(it)
+                    .placeholder(R.drawable.camera_icon)
+                    .error(R.drawable.ic_launcher_background)
+                    .centerCrop()
+                    .fit()
+                    .into(ivPreview)
+            }
 
+            saveButton.setOnClickListener {
                 uploadImage(etItemTitle.text.toString())
                 val newItem = ShopItem(
                     title = etItemTitle.text.toString(),
@@ -72,18 +80,8 @@ class AddShopItemFragment : Fragment() {
                     count = "0",
                     weight = etItemWeight.text.toString()
                 )
-                REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(etItemTitle.text.toString())
-                    .setValue(newItem)
+                viewModel.addShopItem(newItem = newItem)
 
-
-            }
-            viewModel.imagePath.observe(viewLifecycleOwner) {
-                Picasso.get().load(it)
-                    .placeholder(R.drawable.camera_icon)
-                    .error(R.drawable.ic_launcher_background)
-                    .centerCrop()
-                    .fit()
-                    .into(ivPreview)
             }
 
         }
@@ -126,7 +124,7 @@ class AddShopItemFragment : Fragment() {
         viewModel.imageUrl.observe(viewLifecycleOwner) {
             REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(title).child("imagePath").setValue(it)
                 .addOnCompleteListener {
-                    Toast.makeText(requireContext(), "Картинка загружена", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Товар добавлен", Toast.LENGTH_SHORT)
                         .show()
                 }
 

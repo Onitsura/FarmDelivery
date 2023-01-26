@@ -83,9 +83,11 @@ class ShopFragment : Fragment() {
     private fun initListener() {
         val clickIncrement: (cartItem: ShopItem) -> Unit = { viewModel.incrementItemCount(it) }
         val clickDecrement: (cartItem: ShopItem) -> Unit = { viewModel.decrementItemCount(it) }
-        adapter = ShopAdapter(clickIncrement = clickIncrement, clickDecrement = clickDecrement)
+        adapter = ShopAdapter(
+            clickIncrement = clickIncrement,
+            clickDecrement = clickDecrement)
         viewModel.adapterList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.toMutableList())
         }
 
     }

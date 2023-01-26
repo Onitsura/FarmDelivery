@@ -40,13 +40,14 @@ class ChangeDeliveryDateFragment : Fragment() {
 
     private fun initRcView() {
         val click: (shopItem: ShopItem) -> Unit = { viewModel.changeDeliveryDate(it) }
+        val clickRemove: (shopItem: ShopItem) -> Unit = {viewModel.removeShopItem(it)}
         viewModel.root.observe(viewLifecycleOwner) {
-            adapter = OrderItemAdapter(root = it, click = click)
+            adapter = OrderItemAdapter(root = it, click = click, clickRemove = clickRemove)
             binding.changeDeliveryDateRcView.layoutManager = LinearLayoutManager(requireContext())
             binding.changeDeliveryDateRcView.adapter = adapter
         }
         viewModel.adapterList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.toMutableList())
         }
 
 

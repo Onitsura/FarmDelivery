@@ -19,8 +19,7 @@ import javax.inject.Inject
 class AccOrdersViewModel @Inject constructor() : ViewModel() {
     private val _ordersList: MutableLiveData<ArrayList<Order>> = MutableLiveData()
     val ordersList: LiveData<ArrayList<Order>> = _ordersList
-    private val _orderItemsList: MutableLiveData<ArrayList<OrderItem>> = MutableLiveData()
-    val orderItemsList: LiveData<ArrayList<OrderItem>> = _orderItemsList
+
 
     init {
         getOrders()
