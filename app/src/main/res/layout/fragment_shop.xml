@@ -2,9 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shopFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:animateLayoutChanges="true"
     tools:context=".fragments.shop.ShopFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,11 +46,26 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvCart" />
+
+        <Button
+            android:id="@+id/toCartButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            android:text="@string/to_cart_button"
+            android:textColor="@color/black"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:background="@drawable/corners"
+            />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

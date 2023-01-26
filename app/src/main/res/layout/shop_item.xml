@@ -50,7 +50,7 @@
         android:text="@string/average_weight"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
@@ -63,7 +63,7 @@
         android:text="@string/item_weight"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/itemAverageWeight"
         app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
@@ -75,8 +75,8 @@
         android:text="@string/weight_measurement"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:layout_marginStart="5dp"
+        android:textSize="14sp"
+
         app:layout_constraintStart_toEndOf="@+id/itemWeight"
         app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
 

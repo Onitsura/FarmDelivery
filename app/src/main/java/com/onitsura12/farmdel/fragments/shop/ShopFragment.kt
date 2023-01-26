@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.fragments.shop
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initU
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentShopBinding
+import com.onitsura12.farmdel.fragments.cart.CartFragment
 import com.onitsura12.farmdel.recyclerView.ShopAdapter
 
 class ShopFragment : Fragment() {
@@ -52,6 +54,17 @@ class ShopFragment : Fragment() {
         binding.addShopItem.setOnClickListener {
             findNavController().navigate(R.id.action_shopFragment_to_addShopItemFragment)
         }
+
+        viewModel.isCartEmpty.observe(viewLifecycleOwner) {
+            if(!it) {
+                binding.toCartButton.visibility = View.VISIBLE
+                binding.toCartButton.setOnClickListener {
+                    findNavController().navigate(R.id.)
+                }
+            }
+                else binding.toCartButton.visibility = View.GONE
+            }
+
 
     }
 

@@ -79,4 +79,6 @@
     <string name="roubles">рублей</string>
     <string name="zero">0</string>
     <string name="delivery_date_sample">Дата доставки</string>
+    <string name="to_cart_button">В корзину</string>
+    <string name="confirm_order">Подтверждение заказа</string>
 </resources>

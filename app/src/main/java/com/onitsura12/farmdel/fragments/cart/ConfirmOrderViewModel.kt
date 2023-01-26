@@ -31,6 +31,8 @@ class ConfirmOrderViewModel : ViewModel() {
     val isOrderListEmpty: LiveData<Boolean> = _isOrderListEmpty
     private val _isPhoneNull: MutableLiveData<Boolean> = MutableLiveData()
     val isPhoneNull: LiveData<Boolean> = _isPhoneNull
+    private val _totalCost: MutableLiveData<Int> = MutableLiveData()
+    val totalCost: LiveData<Int> = _totalCost
 
     init {
         initAddressList()
@@ -69,6 +71,7 @@ class ConfirmOrderViewModel : ViewModel() {
     private fun initOrderItemsList() {
 
         val list = arrayListOf<ShopItem>()
+        var itemsTotalCost: Int
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
             .child(CHILD_CART)
@@ -83,6 +86,16 @@ class ConfirmOrderViewModel : ViewModel() {
 
                     _orderItemsList.value = list
                     checkOrder()
+
+                    itemsTotalCost = 0
+                    for (i in list.indices) {
+
+                        val itemCost: Double = list[i].cost.toInt() * list[i].weight!!.toDouble() *
+                                list[i].count!!.toInt()
+                        itemsTotalCost += itemCost.toInt()
+
+                    }
+                    _totalCost.value = itemsTotalCost
                 }
 
                 override fun onCancelled(error: DatabaseError) {

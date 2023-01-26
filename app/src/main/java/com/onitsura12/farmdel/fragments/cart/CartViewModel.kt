@@ -37,6 +37,7 @@ class CartViewModel : ViewModel() {
     private fun initCart() {
         val list = arrayListOf<ShopItem>()
         var itemsTotalCost: Int
+
         _totalCost.value = 0
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
@@ -56,9 +57,9 @@ class CartViewModel : ViewModel() {
                     itemsTotalCost = 0
                     for (i in list.indices) {
 
-                        val itemCost: Int = list[i].cost.toInt() * list[i].weight!!.toInt() *
+                        val itemCost: Double = list[i].cost.toInt() * list[i].weight!!.toDouble() *
                                 list[i].count!!.toInt()
-                        itemsTotalCost += itemCost
+                        itemsTotalCost += itemCost.toInt()
 
                     }
                     _totalCost.value = itemsTotalCost

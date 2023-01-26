@@ -1,24 +1,19 @@
 package com.onitsura12.farmdel.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initFirebase
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentMainBinding
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 
 
 class MainFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: FragmentMainBinding
@@ -35,7 +30,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            FirebaseHelper.initFirebase()
+            initFirebase()
             val bottomNavigationView = mainBottomNavigationView
             val navController = (childFragmentManager.findFragmentById(R.id.mainContainerView) as
                     NavHostFragment).navController

@@ -56,6 +56,7 @@ class OrderItemAdapter(
                         etChangeWeight.hint = orderItem.weight
                         tvChangeDeliveryDateSample.visibility = View.VISIBLE
                         etChangeDate.visibility = View.VISIBLE
+                        etChangeDate.hint = orderItem.deliveryDate
                         saveButton.visibility = View.VISIBLE
 
                         saveButton.setOnClickListener {

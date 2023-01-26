@@ -35,6 +35,11 @@ class ConfirmOrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.totalCost.observe(viewLifecycleOwner){
+            binding.tvCartTotalCost.text = it.toString()
+        }
+
         initButtons()
         initAddressRcView()
         initCartRcView()

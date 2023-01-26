@@ -11,8 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/splash" />
+        android:src="@drawable/background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,8 +27,10 @@
             android:src="@drawable/google_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.703" />
 
         <TextView
             android:id="@+id/tvGoogleAuth"
@@ -37,35 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/sign_google"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.452"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/privateIcon"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="210dp"
-            android:src="@drawable/unauthorized"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/googleIcon" />
-
-        <TextView
-            android:id="@+id/tvPrivateMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="@string/unauthorized"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/googleIcon" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.705" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

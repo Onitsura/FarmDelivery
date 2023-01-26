@@ -32,14 +32,16 @@ class ShopViewModel : ViewModel() {
     val shopItemList: LiveData<ArrayList<ShopItem>> = _shopItemList
     private val _showAddButton: MutableLiveData<Boolean> = MutableLiveData()
     val showAddButton: LiveData<Boolean> = _showAddButton
-    private val isCartEmpty: MutableLiveData<Boolean> = MutableLiveData()
+    val isCartEmpty: MutableLiveData<Boolean> = MutableLiveData()
     private val _cart: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
     val cart: LiveData<ArrayList<ShopItem>> = _cart
     private val _adapterList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
     val adapterList: LiveData<ArrayList<ShopItem>> = _adapterList
+    var counter = 0
+
 
     init {
-
+        isCartEmpty.value = true
         initSuppliesList()
 
         getCart()
@@ -78,9 +80,12 @@ class ShopViewModel : ViewModel() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     list.clear()
+                    counter = 0
                     for (cartSnapshot in snapshot.children) {
                         val cartItem = cartSnapshot.getValue(ShopItem::class.java)
                         list.add(cartItem!!)
+                        counter += cartItem.count!!.toInt()
+                        isCartEmpty.value = counter <= 0
                     }
                     _cart.value = list
                     USER.cart = list
@@ -98,8 +103,9 @@ class ShopViewModel : ViewModel() {
 
 
 
-    private fun updateCart() {
 
+
+    private fun updateCart() {
         val list = arrayListOf<ShopItem>()
         REF_DATABASE_ROOT.child(NODE_SUPPLIES)
             .addValueEventListener(object : ValueEventListener {
@@ -221,6 +227,8 @@ class ShopViewModel : ViewModel() {
         val newValue = cartItem.count?.toInt()?.plus(1)
         cartItem.count = newValue.toString()
         addNewCartItem(cartItem = cartItem)
+        counter += 1
+        isCartEmpty.value = counter <= 0
     }
 
     fun decrementItemCount(cartItem: ShopItem) {
@@ -228,6 +236,8 @@ class ShopViewModel : ViewModel() {
             val newValue = cartItem.count?.toInt()?.minus(1)
             cartItem.count = newValue.toString()
             addNewCartItem(cartItem = cartItem)
+            counter -= 1
+            isCartEmpty.value = counter <= 0
         }
     }
 

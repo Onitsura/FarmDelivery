@@ -60,9 +60,7 @@ class LoginFragment : Fragment() {
             signInWithGoogle(launcher = launcher, fragment = this, context = requireContext())
 
         }
-        binding.tvPrivateMode.setOnClickListener {
-            Toast.makeText(requireContext(), "Can't go this way now", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     private fun initLauncher(){
