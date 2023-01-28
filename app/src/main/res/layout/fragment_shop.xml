@@ -46,24 +46,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/toCartButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvCart" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/toCartButton"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="10dp"
-            android:text="@string/to_cart_button"
-            android:textColor="@color/black"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:background="@drawable/corners"
-            />
+            app:cardCornerRadius="25dp"
+            android:layout_margin="10dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_back"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="@string/to_cart_button"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

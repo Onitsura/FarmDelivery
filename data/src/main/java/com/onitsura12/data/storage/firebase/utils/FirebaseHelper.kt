@@ -37,6 +37,8 @@ class FirebaseHelper {
         const val CHILD_CART_WEIGHT = "weight"
         const val CHILD_CART_IMAGE_PATH = "imagePath"
         const val CHILD_CART_DELIVERY_DATE = "deliveryDate"
+        const val CHILD_CART_DESCRIPTION = "description"
+        const val CHILD_CART_IMAGES_ARRAY = "imagesArray"
         const val CHILD_ADDRESS_CITY = "city"
         const val CHILD_ADDRESS_STREET = "street"
         const val CHILD_ADDRESS_HOUSE = "house"

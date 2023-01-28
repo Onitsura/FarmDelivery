@@ -58,7 +58,7 @@
             android:layout_height="34dp"
             android:text="@string/order_item_total"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
             app:layout_constraintStart_toStartOf="parent" />
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:text="@string/zero"
             app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
@@ -81,22 +81,35 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:text="@string/roubles"
             app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/checkoutButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/checkout_btn"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/checkout_btn"
+                android:background="@drawable/button_back"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
@@ -25,6 +26,7 @@ class CartViewModel : ViewModel() {
 
 
     init {
+        UID = AUTH.currentUser?.uid.toString()
         if (UID.isNotBlank()) {
             setupAccInfo()
             initCart()

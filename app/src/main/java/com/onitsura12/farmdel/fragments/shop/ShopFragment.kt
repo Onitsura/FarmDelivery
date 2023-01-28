@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -21,9 +22,6 @@ import com.onitsura12.farmdel.recyclerView.ShopAdapter
 
 class ShopFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ShopFragment()
-    }
 
     private lateinit var viewModel: ShopViewModel
     private lateinit var binding: FragmentShopBinding
@@ -56,14 +54,13 @@ class ShopFragment : Fragment() {
         }
 
         viewModel.isCartEmpty.observe(viewLifecycleOwner) {
-            if(!it) {
+            if (!it) {
                 binding.toCartButton.visibility = View.VISIBLE
                 binding.toCartButton.setOnClickListener {
-                    findNavController().navigate(R.id.)
+                    findNavController().navigate(R.id.cartFragment)
                 }
-            }
-                else binding.toCartButton.visibility = View.GONE
-            }
+            } else binding.toCartButton.visibility = View.GONE
+        }
 
 
     }
@@ -96,10 +93,19 @@ class ShopFragment : Fragment() {
     private fun initListener() {
         val clickIncrement: (cartItem: ShopItem) -> Unit = { viewModel.incrementItemCount(it) }
         val clickDecrement: (cartItem: ShopItem) -> Unit = { viewModel.decrementItemCount(it) }
+        val chooseClick: (shopItem: ShopItem) -> Unit = {
+            findNavController().navigate(
+                R.id.action_shopFragment_to_shopItemDetailsFragment,
+                bundleOf("title" to it.title)
+            )
+        }
         adapter = ShopAdapter(
             clickIncrement = clickIncrement,
-            clickDecrement = clickDecrement)
+            clickDecrement = clickDecrement,
+            chooseClick = chooseClick
+        )
         viewModel.adapterList.observe(viewLifecycleOwner) {
+
             adapter.submitList(it.toMutableList())
         }
 

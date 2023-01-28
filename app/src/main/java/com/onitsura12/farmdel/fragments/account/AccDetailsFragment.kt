@@ -132,6 +132,7 @@ class AccDetailsFragment : Fragment() {
                                     .white
                             )
                         )
+
                     } else Toast.makeText(
                         requireContext(),
                         "Номер телефона должен содержать 10-12 " + "цифр",

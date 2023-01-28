@@ -27,7 +27,6 @@ class GalleryAdapter : ListAdapter<ImageModel, GalleryAdapter.ItemHolder>(ItemCo
         private val mListener = listener
         fun bind(image: ImageModel) {
             binding.apply {
-
                 Picasso.get().load(image.path)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_background)

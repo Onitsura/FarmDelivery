@@ -10,10 +10,14 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_COST
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_COUNT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_DELIVERY_DATE
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_DESCRIPTION
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_IMAGES_ARRAY
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_IMAGE_PATH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_TITLE
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
@@ -41,9 +45,13 @@ class ShopViewModel : ViewModel() {
 
 
     init {
+        UID = AUTH.currentUser?.uid.toString()
+        if (UID.isNotBlank()) {
+            setupAccInfo()
+        }
+
         isCartEmpty.value = true
         initSuppliesList()
-
         getCart()
 
 
@@ -154,6 +162,7 @@ class ShopViewModel : ViewModel() {
                     ) {
 
                         _adapterList.value = _cart.value
+                        Log.i("shop", _adapterList.value.toString())
                     }
                 }
             }
@@ -179,6 +188,7 @@ class ShopViewModel : ViewModel() {
                             for (j in list.indices) {
                                 if (_cart.value!![i].title == list[j].title){
                                     match = true
+                                    Log.i("shopCart", _cart.value!![i].toString())
                                 }
                             }
 
@@ -209,7 +219,8 @@ class ShopViewModel : ViewModel() {
         dataMap[CHILD_CART_COST] = cartItem.cost
         dataMap[CHILD_CART_WEIGHT] = cartItem.weight
         dataMap[CHILD_CART_DELIVERY_DATE] = cartItem.deliveryDate
-
+        dataMap[CHILD_CART_DESCRIPTION] = cartItem.description
+        dataMap[CHILD_CART_IMAGES_ARRAY] = cartItem.imagesArray
 
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
@@ -261,6 +272,57 @@ class ShopViewModel : ViewModel() {
                 }
 
             })
+
+
+    }
+
+    private fun setupAccInfo() {
+        setupAccName()
+        setupAccEmail()
+        setupAccPhone()
+
+    }
+
+
+
+    private fun setupAccName() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_FULLNAME)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value == null) {
+                        USER.fullname = "Пользователь"
+
+
+                    } else {
+                        USER.fullname = snapshot.value.toString()
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+
+    }
+
+    private fun setupAccEmail() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_EMAIL).get()
+            .addOnCompleteListener {
+                USER.eMail = it.result.value.toString()
+            }
+
+    }
+
+
+    private fun setupAccPhone() {
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_PHONE).get()
+            .addOnCompleteListener {
+                USER.phone = it.result.value.toString()
+
+            }
 
 
     }

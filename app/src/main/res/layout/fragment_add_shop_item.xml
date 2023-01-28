@@ -29,16 +29,36 @@
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:src="@drawable/camera_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imagesRcView"
+            />
+        <TextView
+            android:id="@+id/tvBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/ivPreview"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/add_photo"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imagesRcView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButton"
+            />
+
 
         <EditText
             android:id="@+id/etItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:hint="@string/cart_sample_name"
+            android:hint="@string/item_title_sample"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -46,7 +66,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPreview" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBottomSheet" />
 
         <EditText
             android:id="@+id/etItemCost"
@@ -57,6 +77,7 @@
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             android:textAlignment="center"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etItemTitle" />
@@ -68,34 +89,77 @@
             android:hint="@string/shop_item_weight"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/etItemCost"
             app:layout_constraintTop_toBottomOf="@+id/etItemTitle" />
+
 
         <EditText
             android:id="@+id/etItemWeight"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:hint="@string/shop_item_average_weight"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
             android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etItemCost" />
 
+        <EditText
+            android:id="@+id/etItemDeliveryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:hint="@string/delivery_date_sample"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etItemWeight" />
+        <EditText
+            android:id="@+id/etItemDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:hint="@string/description_sample"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etItemDeliveryDate" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/save_btn"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/save_btn"
+                android:background="@drawable/button_back"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

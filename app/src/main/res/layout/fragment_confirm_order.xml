@@ -89,7 +89,7 @@
             android:layout_height="34dp"
             android:text="@string/order_item_total"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/confirmButton"
             app:layout_constraintStart_toStartOf="parent" />
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:text="@string/zero"
             app:layout_constraintBottom_toTopOf="@+id/confirmButton"
@@ -112,21 +112,31 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:text="@string/roubles"
             app:layout_constraintBottom_toTopOf="@+id/confirmButton"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/confirmButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/confirm_button"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_back"
+                android:text="@string/confirm_button"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

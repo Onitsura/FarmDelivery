@@ -2,12 +2,15 @@ package com.onitsura12.farmdel.fragments.shop
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
@@ -15,18 +18,21 @@ import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAddShopItemBinding
 import com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment
+import com.onitsura12.farmdel.models.ImageModel
+import com.onitsura12.farmdel.recyclerView.GalleryAdapter
+import com.onitsura12.farmdel.recyclerView.SliderAdapter
 import com.squareup.picasso.Picasso
 import java.io.File
 
 
 class AddShopItemFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AddShopItemFragment()
-    }
 
     private lateinit var viewModel: AddShopItemViewModel
     private lateinit var binding: FragmentAddShopItemBinding
+    private val adapter: GalleryAdapter = GalleryAdapter()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +46,8 @@ class AddShopItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRcView()
+
 
 
 
@@ -58,29 +66,31 @@ class AddShopItemFragment : Fragment() {
                     val imagePath = (bundle.getString
                         ("selectedImage")!!)
                     viewModel.imagePath.value = imagePath
+
+                    val title: String = viewModel.getRandomName().toString()
+                    uploadImage(title)
+                    viewModel.imageUrl.observe(viewLifecycleOwner){
+                        val newList = viewModel.imagesList.value
+                        Log.i("list", it)
+                        if (!newList!!.contains(it)) {
+                            newList.add(it)
+                            viewModel.imagesList.value = newList
+                        }
+                    }
                 }
 
             }
 
-            viewModel.imagePath.observe(viewLifecycleOwner) {
-                Picasso.get().load(it)
-                    .placeholder(R.drawable.camera_icon)
-                    .error(R.drawable.ic_launcher_background)
-                    .centerCrop()
-                    .fit()
-                    .into(ivPreview)
-            }
-
             saveButton.setOnClickListener {
-                uploadImage(etItemTitle.text.toString())
-                val newItem = ShopItem(
+                viewModel.addShopItem(viewModel.createShopItem(
                     title = etItemTitle.text.toString(),
                     cost = etItemCost.text.toString(),
                     imagePath = viewModel.imageUrl.value,
-                    count = "0",
-                    weight = etItemWeight.text.toString()
-                )
-                viewModel.addShopItem(newItem = newItem)
+                    weight = etItemWeight.text.toString(),
+                    deliveryDate = etItemDeliveryDate.text.toString(),
+                    description = etItemDescription.text.toString(),
+                    imagesArray = viewModel.imagesList.value!!
+                    ), requireContext())
 
             }
 
@@ -115,21 +125,26 @@ class AddShopItemFragment : Fragment() {
             titleImagesRef.downloadUrl
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
+
                 val downloadUri = task.result
                 viewModel.imageUrl.value = downloadUri.toString()
-            } else {
-
+                Toast.makeText(context, "Фото добавлено", Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel.imageUrl.observe(viewLifecycleOwner) {
-            REF_DATABASE_ROOT.child(NODE_SUPPLIES).child(title).child("imagePath").setValue(it)
-                .addOnCompleteListener {
-                    Toast.makeText(requireContext(), "Товар добавлен", Toast.LENGTH_SHORT)
-                        .show()
-                }
+    }
 
+
+
+    private fun initRcView(){
+        binding.apply {
+            imagesRcView.layoutManager = LinearLayoutManager(requireContext(),
+                RecyclerView.HORIZONTAL, false)
+            imagesRcView.adapter = adapter
+
+            viewModel.imagesList.observe(viewLifecycleOwner){
+                adapter.submitList(viewModel.stringToImageModel(it))
+            }
         }
-
     }
 
 

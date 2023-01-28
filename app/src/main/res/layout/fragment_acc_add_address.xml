@@ -7,9 +7,11 @@
     tools:context=".fragments.account.AccAddAddressFragment">
 
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
 
         <ImageButton
@@ -202,15 +204,25 @@
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/save_btn"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/save_btn"
+                android:background="@drawable/button_back"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
 

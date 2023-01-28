@@ -37,7 +37,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     ): View {
         binding = FragmentBottomSheetBinding.inflate(inflater)
         viewModel = BottomSheetViewModel(contentResolver = requireActivity().contentResolver)
-        binding.rcView.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rcView.layoutManager = GridLayoutManager(requireContext(), 3)
         return binding.root
     }
 

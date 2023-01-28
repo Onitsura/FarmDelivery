@@ -53,13 +53,13 @@
     <string name="address_house">Номер дома</string>
     <string name="sample_house">Sample house</string>
     <string name="button_choose_delivery_date">Выбрать дату доставки</string>
-    <string name="confirm_button">Заказать</string>
+    <string name="confirm_button">Создать заказ</string>
     <string name="primary_switch_text">Установить как основной</string>
     <string name="add_address_button">Добавить адрес</string>
     <string name="shop_item_cost">250</string>
     <string name="shop_item_weight">за кг</string>
-    <string name="shop_item_average_weight">примерный вес</string>
-    <string name="change_delivery_date">Смена даты доставки</string>
+    <string name="shop_item_average_weight">Примерный вес</string>
+    <string name="edit_shop_item">Редактирование товара</string>
     <string name="sample_summary">5800</string>
     <string name="sample_date">27.01.2023</string>
     <string name="sample_date_text">Актуальная дата доставки</string>
@@ -73,7 +73,7 @@
     <string name="item_weight">15</string>
     <string name="weight_measurement">кг</string>
     <string name="item_title_sample">Название товара</string>
-    <string name="item_cost_sample">Стоимость (в рублях, за единицу/кг товара)</string>
+    <string name="item_cost_sample">Стоимость</string>
     <string name="address_primary">Основной</string>
     <string name="cart_disclaimer">*Стоимость предварительная, так как вес каждой единицы товара индивидуальный</string>
     <string name="roubles">рублей</string>
@@ -81,4 +81,8 @@
     <string name="delivery_date_sample">Дата доставки</string>
     <string name="to_cart_button">В корзину</string>
     <string name="confirm_order">Подтверждение заказа</string>
+    <string name="description_sample">Описание</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="sample_description">How often do researchers look for the right survey respondents, either for a market research study or an existing survey in the field? </string>
+    <string name="tv_description">Описание</string>
 </resources>
