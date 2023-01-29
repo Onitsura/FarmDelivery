@@ -39,6 +39,7 @@ class AccOrdersViewModel @Inject constructor() : ViewModel() {
                         val order = orderSnapshot.getValue(Order::class.java)
                         list.add(order!!)
                     }
+                    list.toMutableList().sortedBy { it.number }
                     _ordersList.value = list
 
 
