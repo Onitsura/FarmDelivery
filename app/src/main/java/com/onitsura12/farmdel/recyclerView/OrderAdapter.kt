@@ -16,7 +16,8 @@ class OrderAdapter : ListAdapter<Order, OrderAdapter.ItemHolder>(ItemComparator(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(order: Order) {
-            val adapter = OrderItemAdapter(root = null, click = null, clickRemove = null)
+            val adapter = OrderItemAdapter(root = null, click = null, clickRemove = null,
+                viewType = null, clickAdditional = null)
             binding.apply {
                 tvOrderCost.text = order.amount.toString()
                 tvOrderItems.text = order.items.size.toString()

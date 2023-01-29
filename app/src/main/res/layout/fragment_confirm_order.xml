@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/background"
     tools:context=".fragments.cart.ConfirmOrderFragment">
 
 
@@ -38,17 +38,27 @@
             app:layout_constraintStart_toStartOf="@+id/backButton"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/addAddressButton"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="100dp"
-            android:text="@string/add_address_button"
-            android:textColor="@color/black"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/backButton" />
+            app:layout_constraintTop_toTopOf="@+id/backButton"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_back"
+                android:text="@string/add_address_button"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
+
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initFirebase
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentMainBinding

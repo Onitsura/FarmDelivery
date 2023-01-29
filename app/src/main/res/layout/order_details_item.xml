@@ -36,6 +36,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvOrderAdditionalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:text="@string/additional_title_sample"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemName"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/addAdditional"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            />
+
 
         <TextView
             android:id="@+id/tvChangeTitle"
@@ -120,6 +141,41 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/tvOrderItemCounter"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvCost"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:text="@string/item_cost_sample"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvAdditionalPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemCount" />
+
+        <TextView
+            android:id="@+id/tvAdditionalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:text="@string/sample_cost"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/tvRoubles"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemCount" />
+
+        <TextView
+            android:id="@+id/tvRoubles"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:text="@string/roubles"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/addAdditional"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderItemCount" />
 
         <TextView
             android:id="@+id/tvOrderItemCounter"

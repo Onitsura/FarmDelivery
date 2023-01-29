@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.fragments.account
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.domain.models.User
 import com.onitsura12.domain.repository.UserRepository
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.setupAccInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -34,88 +36,13 @@ class AccountViewModel @Inject constructor(private val userRepository: UserRepos
     init {
         UID = AUTH.currentUser?.uid.toString()
         setupAccInfo()
+        _user.value = USER
         isInWhiteList(UID)
     }
 
 
 
-    fun setupAccInfo() {
-        setupAccName()
-        setupAccEmail()
-        setupAccPhone()
-        setupAccImage()
-        _user.value = USER
-    }
 
-
-    private fun setupAccName() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(
-            CHILD_FULLNAME
-        )
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.fullname = snapshot.getValue(String::class.java)
-                    _user.value = USER
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-
-    }
-
-    private fun setupAccEmail() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(
-            FirebaseHelper.CHILD_EMAIL
-        )
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.eMail = snapshot.getValue(String::class.java)
-                    _user.value = USER
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-    }
-
-
-    private fun setupAccPhone() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(
-            FirebaseHelper.CHILD_PHONE
-        )
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.phone = snapshot.getValue(String::class.java).toString()
-                    _user.value = USER
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-    }
-
-    private fun setupAccImage() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_PHOTO)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    USER.photoUrl = snapshot.getValue(String::class.java).toString()
-                    _user.value = USER
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-    }
 
 
     private fun isInWhiteList(id: String) {

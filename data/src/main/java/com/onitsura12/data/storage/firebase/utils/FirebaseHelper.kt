@@ -4,8 +4,6 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.onitsura12.domain.models.Address
-import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.domain.models.User
 
 
@@ -39,6 +37,8 @@ class FirebaseHelper {
         const val CHILD_CART_DELIVERY_DATE = "deliveryDate"
         const val CHILD_CART_DESCRIPTION = "description"
         const val CHILD_CART_IMAGES_ARRAY = "imagesArray"
+        const val CHILD_CART_ADDITIONAL_SERVICES = "additionalServices"
+        const val CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED = "added"
         const val CHILD_ADDRESS_CITY = "city"
         const val CHILD_ADDRESS_STREET = "street"
         const val CHILD_ADDRESS_HOUSE = "house"
@@ -87,12 +87,8 @@ class FirebaseHelper {
 
             REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
                 .addOnSuccessListener {
-
                         USER.fullname = AUTH.currentUser?.displayName
                         USER.eMail = AUTH.currentUser?.email
-                    Log.i("Auth", USER.fullname.toString())
-
-
                 }
         }
     }

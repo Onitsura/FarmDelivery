@@ -11,7 +11,6 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.domain.models.Order
-import com.onitsura12.domain.models.OrderItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -1,18 +1,18 @@
 package com.onitsura12.farmdel.fragments.cart
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentCartBinding
 import com.onitsura12.farmdel.recyclerView.CartAdapter
-import com.onitsura12.farmdel.recyclerView.ShopAdapter
 
 class CartFragment : Fragment() {
 
@@ -48,7 +48,9 @@ class CartFragment : Fragment() {
     private fun initRcView() {
         val clickIncrement: (cartItem: ShopItem)-> Unit = {viewModel.incrementItemCount(it)}
         val clickDecrement: (cartItem: ShopItem)-> Unit = {viewModel.decrementItemCount(it)}
-        adapter = CartAdapter(clickIncrement = clickIncrement, clickDecrement = clickDecrement)
+        val clickAdditional: (cartItem: ShopItem)-> Unit = {viewModel.addAdditionalServices(it)}
+        adapter = CartAdapter(clickIncrement = clickIncrement, clickDecrement = clickDecrement,
+            clickAdditional = clickAdditional)
         binding.cartRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRcView.adapter = adapter
 
@@ -58,5 +60,6 @@ class CartFragment : Fragment() {
 
 
     }
+
 
 }

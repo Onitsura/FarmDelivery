@@ -40,6 +40,7 @@ class AccDetailsFragment : Fragment() {
             accDetailsBackButton.setOnClickListener {
                 findNavController().popBackStack()
             }
+            Log.i("TAgDetails", USER.toString())
 
             binding.apply {
                 viewModel.user.observe(viewLifecycleOwner) {

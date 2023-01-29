@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">FarmDel</string>
+    <string name="app_name">
+  Фермерский \n
+  продукт \n
+    </string>
     <string name="sample_name">Колбас Мяснов</string>
     <string name="account_info">Информация об аккаунте</string>
     <string name="account_orders">Мои заказы</string>
@@ -19,7 +22,7 @@
     <string name="address_sample_entrance">Sample entrance</string>
     <string name="address_sample_floor">Sample floor</string>
     <string name="address_sample_flat">Sample flat</string>
-    <string name="hint_city">Введите город</string>
+    <string name="hint_city">Выберите город</string>
     <string name="hint_street">Введите улицу</string>
     <string name="hint_entrance">Подъезд</string>
     <string name="hint_floor">Этаж</string>
@@ -85,4 +88,10 @@
     <string name="add_photo">Добавить фото</string>
     <string name="sample_description">How often do researchers look for the right survey respondents, either for a market research study or an existing survey in the field? </string>
     <string name="tv_description">Описание</string>
+    <string name="additional_services_sample">Дополнительные услуги</string>
+    <string name="additional_title_sample">Название услуги</string>
+    <string name="new_supply">Новый товар</string>
+  <string name="city_rnd">Ростов-на-Дону</string>
+  <string name="city_bataysk">Батайск</string>
+  <string name="city_aksay">Аксай</string>
 </resources>

@@ -18,6 +18,7 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_D
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.domain.models.User
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.setupAccInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -30,6 +31,8 @@ class AccDetailsViewModel @Inject constructor() : ViewModel() {
 
 
     init {
+        setupAccInfo()
+        Log.i("TAgDetailsVM", USER.toString())
         _user.value = USER
     }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".fragments.account.AccAddAddressFragment">
 
 
@@ -46,23 +47,20 @@
             android:textStyle="bold"
             android:text="@string/address_city"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/accAddAddressBackButton" />
 
-        <EditText
-            android:id="@+id/etCity"
+        <TextView
+            android:id="@+id/popup_cities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="40dp"
             android:hint="@string/hint_city"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:nextFocusDown="@id/etStreet"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/accAddAddressBackButton" />
@@ -74,9 +72,10 @@
             android:textStyle="bold"
             android:text="@string/address_street"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etCity" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_cities" />
 
         <EditText
             android:id="@+id/etStreet"
@@ -90,9 +89,9 @@
             android:nextFocusDown="@id/etHouse"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etCity" />
+            app:layout_constraintTop_toBottomOf="@+id/popup_cities" />
 
         <TextView
             android:layout_width="match_parent"
@@ -101,7 +100,7 @@
             android:textStyle="bold"
             android:text="@string/address_house"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etStreet" />
 
@@ -117,7 +116,7 @@
             android:nextFocusDown="@id/etEntrance"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etStreet" />
 
@@ -129,7 +128,7 @@
             android:text="@string/address_entrance"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
@@ -139,7 +138,7 @@
             android:text="@string/address_floor"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
@@ -151,7 +150,7 @@
             android:text="@string/address_flat"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
@@ -168,7 +167,7 @@
             android:nextFocusDown="@id/etFloor"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 
@@ -183,7 +182,7 @@
             android:nextFocusDown="@id/etFlat"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
@@ -199,7 +198,7 @@
             android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etHouse" />
 

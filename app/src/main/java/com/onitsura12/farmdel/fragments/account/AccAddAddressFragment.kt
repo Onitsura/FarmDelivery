@@ -3,14 +3,16 @@ package com.onitsura12.farmdel.fragments.account
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.onitsura12.domain.models.Address
+import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccAddAddressBinding
 
 
@@ -31,11 +33,12 @@ class AccAddAddressFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initPopupMenu()
         binding.apply {
             accAddAddressBackButton.setOnClickListener {
                 findNavController().popBackStack()
             }
-            etCity.setOnEditorActionListener { _, p1, _ -> p1 == EditorInfo.IME_ACTION_NEXT }
+            popupCities.setOnEditorActionListener { _, p1, _ -> p1 == EditorInfo.IME_ACTION_NEXT }
             etEntrance.setOnEditorActionListener { _, p1, _ -> p1 == EditorInfo.IME_ACTION_NEXT }
             etHouse.setOnEditorActionListener { _, p1, _ -> p1 == EditorInfo.IME_ACTION_NEXT }
             etStreet.setOnEditorActionListener { _, p1, _ -> p1 == EditorInfo.IME_ACTION_NEXT }
@@ -43,7 +46,7 @@ class AccAddAddressFragment : Fragment() {
             etFlat.setOnEditorActionListener { _, _, _ ->
                 viewModel.addNewAddress(
                     newAddress = viewModel.createNewAddress(
-                        city = etCity.text.toString(),
+                        city = popupCities.text.toString(),
                         street = etStreet.text.toString(),
                         house = etHouse.text.toString(),
                         entrance = etEntrance.text.toString(),
@@ -59,7 +62,7 @@ class AccAddAddressFragment : Fragment() {
             saveButton.setOnClickListener {
                 viewModel.addNewAddress(
                     newAddress = viewModel.createNewAddress(
-                        city = etCity.text.toString(),
+                        city = popupCities.text.toString(),
                         street = etStreet.text.toString(),
                         house = etHouse.text.toString(),
                         entrance = etEntrance.text.toString(),
@@ -80,6 +83,23 @@ class AccAddAddressFragment : Fragment() {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun initPopupMenu(){
+        binding.apply {
+            val popupMenu = PopupMenu(requireContext(), popupCities, Gravity.CENTER)
+
+                popupMenu.inflate(R.menu.popup_cities_menu)
+                popupMenu.setOnMenuItemClickListener { item ->
+                    popupCities.text = item.toString()
+                    return@setOnMenuItemClickListener true
+                }
+
+
+            popupCities.setOnClickListener {
+                popupMenu.show()
+            }
+        }
     }
 
 }

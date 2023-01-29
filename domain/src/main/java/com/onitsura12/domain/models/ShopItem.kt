@@ -9,5 +9,6 @@ data class ShopItem(
     var imagePath: String? = "",
     var deliveryDate: String? = null,
     val description: String? = "",
-    val imagesArray: ArrayList<String>? = arrayListOf()
+    val imagesArray: ArrayList<String>? = arrayListOf(),
+    val additionalServices: AdditionalServices? = null
 )

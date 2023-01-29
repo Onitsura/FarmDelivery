@@ -2,7 +2,6 @@ package com.onitsura12.farmdel.fragments.shop
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAddShopItemBinding
 import com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment
-import com.onitsura12.farmdel.models.ImageModel
 import com.onitsura12.farmdel.recyclerView.GalleryAdapter
-import com.onitsura12.farmdel.recyclerView.SliderAdapter
-import com.squareup.picasso.Picasso
 import java.io.File
 
 
@@ -71,7 +64,6 @@ class AddShopItemFragment : Fragment() {
                     uploadImage(title)
                     viewModel.imageUrl.observe(viewLifecycleOwner){
                         val newList = viewModel.imagesList.value
-                        Log.i("list", it)
                         if (!newList!!.contains(it)) {
                             newList.add(it)
                             viewModel.imagesList.value = newList
@@ -82,6 +74,10 @@ class AddShopItemFragment : Fragment() {
             }
 
             saveButton.setOnClickListener {
+                val additionalServices = viewModel.createAdditional(
+                    title = etAdditionalTitle.text.toString(),
+                    price = etAdditionalPrice.text.toString()
+                )
                 viewModel.addShopItem(viewModel.createShopItem(
                     title = etItemTitle.text.toString(),
                     cost = etItemCost.text.toString(),
@@ -89,7 +85,8 @@ class AddShopItemFragment : Fragment() {
                     weight = etItemWeight.text.toString(),
                     deliveryDate = etItemDeliveryDate.text.toString(),
                     description = etItemDescription.text.toString(),
-                    imagesArray = viewModel.imagesList.value!!
+                    imagesArray = viewModel.imagesList.value!!,
+                    additionalServices = additionalServices
                     ), requireContext())
 
             }

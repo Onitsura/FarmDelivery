@@ -7,15 +7,22 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_COST
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_COUNT
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_DELIVERY_DATE
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_IMAGE_PATH
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_TITLE
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.domain.models.ShopItem
+import com.onitsura12.farmdel.utils.LoginUtils.Companion.setupAccInfo
 
 
 class CartViewModel : ViewModel() {
@@ -27,11 +34,10 @@ class CartViewModel : ViewModel() {
 
     init {
         UID = AUTH.currentUser?.uid.toString()
-        if (UID.isNotBlank()) {
             setupAccInfo()
             initCart()
             checkTitles()
-        }
+
 
     }
 
@@ -58,10 +64,19 @@ class CartViewModel : ViewModel() {
                     _cart.value = list
                     itemsTotalCost = 0
                     for (i in list.indices) {
+                        var itemAdditionalServices = 0
+                        if (list[i].additionalServices != null) {
+                            if (list[i].additionalServices!!.isAdded) itemAdditionalServices =
+                                list[i].additionalServices!!.price.toInt()
 
-                        val itemCost: Double = list[i].cost.toInt() * list[i].weight!!.toDouble() *
-                                list[i].count!!.toInt()
-                        itemsTotalCost += itemCost.toInt()
+                        }
+                        val itemCost = list[i].cost.toInt()
+                        val itemWeight = list[i].weight!!.toDouble()
+                        val itemCount = list[i].count!!.toInt()
+                        val itemAmount: Double = ((itemAdditionalServices * itemCount) +
+                                (itemCost * itemCount * itemWeight))
+
+                        itemsTotalCost += itemAmount.toInt()
 
                     }
                     _totalCost.value = itemsTotalCost
@@ -132,12 +147,13 @@ class CartViewModel : ViewModel() {
     private fun addNewCartItem(cartItem: ShopItem) {
 
         val dataMap = mutableMapOf<String, Any?>()
-        dataMap[FirebaseHelper.CHILD_CART_IMAGE_PATH] = cartItem.imagePath
-        dataMap[FirebaseHelper.CHILD_CART_COUNT] = cartItem.count
-        dataMap[FirebaseHelper.CHILD_CART_TITLE] = cartItem.title
-        dataMap[FirebaseHelper.CHILD_CART_COST] = cartItem.cost
-        dataMap[FirebaseHelper.CHILD_CART_WEIGHT] = cartItem.weight
-        dataMap[FirebaseHelper.CHILD_CART_DELIVERY_DATE] = cartItem.deliveryDate
+        dataMap[CHILD_CART_IMAGE_PATH] = cartItem.imagePath
+        dataMap[CHILD_CART_COUNT] = cartItem.count
+        dataMap[CHILD_CART_TITLE] = cartItem.title
+        dataMap[CHILD_CART_COST] = cartItem.cost
+        dataMap[CHILD_CART_WEIGHT] = cartItem.weight
+        dataMap[CHILD_CART_DELIVERY_DATE] = cartItem.deliveryDate
+        dataMap[CHILD_CART_ADDITIONAL_SERVICES] = cartItem.additionalServices
 
 
         REF_DATABASE_ROOT.child(NODE_USERS)
@@ -149,6 +165,20 @@ class CartViewModel : ViewModel() {
 
             }
 
+
+    }
+
+    fun addAdditionalServices(cartItem: ShopItem) {
+        if (cartItem.additionalServices != null) {
+            val newValue = !cartItem.additionalServices!!.isAdded
+            cartItem.additionalServices!!.isAdded = newValue
+            REF_DATABASE_ROOT.child(NODE_USERS)
+                .child(UID)
+                .child(CHILD_CART)
+                .child(cartItem.title)
+                .child(CHILD_CART_ADDITIONAL_SERVICES)
+                .child(CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED).setValue(newValue)
+        }
 
     }
 
@@ -166,55 +196,8 @@ class CartViewModel : ViewModel() {
         }
     }
 
-    private fun setupAccInfo() {
-        setupAccName()
-        setupAccEmail()
-        setupAccPhone()
-
-    }
 
 
-    private fun setupAccName() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_FULLNAME)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.value == null) {
-                        USER.fullname = "Пользователь"
-
-
-                    } else {
-                        USER.fullname = snapshot.value.toString()
-
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
-
-    }
-
-    private fun setupAccEmail() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_EMAIL).get()
-            .addOnCompleteListener {
-                USER.eMail = it.result.value.toString()
-            }
-
-    }
-
-
-    private fun setupAccPhone() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(FirebaseHelper.CHILD_PHONE).get()
-            .addOnCompleteListener {
-                USER.phone = it.result.value.toString()
-
-            }
-
-
-    }
 }
 
 

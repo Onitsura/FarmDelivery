@@ -1,5 +1,6 @@
 package com.onitsura12.farmdel.recyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -16,7 +17,18 @@ class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHol
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(order: Order) {
-            val adapter = OrderItemAdapter(root = null, click = null, clickRemove = null)
+
+
+                    val adapter = OrderItemAdapter(
+                        root = null,
+                        click = null,
+                        viewType = 2,
+                        clickRemove = null,
+                        clickAdditional = null
+                    )
+                    binding.rcViewOrdersToDelivery.adapter = adapter
+                    adapter.submitList(order.items)
+
             binding.apply {
                 tvName.text = order.userName
                 tvCity.text = order.address!!.city
@@ -26,8 +38,7 @@ class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHol
                 tvFloor.text = order.address!!.floor
                 tvFlat.text = order.address!!.flat
                 tvPhone.text = order.userPhone
-                rcViewOrdersToDelivery.adapter = adapter
-                adapter.submitList(order.items)
+
             }
         }
 

@@ -9,9 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.domain.models.AdditionalServices
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.models.ImageModel
 import java.io.*
+import kotlin.math.cos
 import kotlin.random.Random
 
 
@@ -66,7 +68,8 @@ class AddShopItemViewModel : ViewModel() {
         weight: String? = "0",
         deliveryDate: String?,
         description: String?,
-        imagesArray: ArrayList<String>
+        imagesArray: ArrayList<String>,
+        additionalServices: AdditionalServices
     ): ShopItem {
         return ShopItem(
             title = title,
@@ -76,7 +79,17 @@ class AddShopItemViewModel : ViewModel() {
             weight = weight,
             deliveryDate = deliveryDate,
             description = description,
-            imagesArray = imagesArray
+            imagesArray = imagesArray,
+            additionalServices = additionalServices
+        )
+    }
+
+    fun createAdditional(title: String,
+    price: String): AdditionalServices {
+        return AdditionalServices(
+            title = title,
+            price = price,
+            isAdded = false
         )
     }
 

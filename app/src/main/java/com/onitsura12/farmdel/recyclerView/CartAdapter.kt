@@ -1,5 +1,6 @@
 package com.onitsura12.farmdel.recyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,59 +12,70 @@ import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.CartItemBinding
 import com.squareup.picasso.Picasso
 
-class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrement:(cartItem: ShopItem)-> Unit) : ListAdapter<ShopItem, CartAdapter.ItemHolder>(ItemComparator()) {
+class CartAdapter(
+    private val clickIncrement: (cartItem: ShopItem) -> Unit,
+    private val clickDecrement: (cartItem: ShopItem) -> Unit,
+    private val clickAdditional: (cartItem: ShopItem) -> Unit
+) :
+    ListAdapter<ShopItem,
+            CartAdapter.ItemHolder>(ItemComparator()) {
 
 
     class ItemHolder(private val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(shopItem: ShopItem, clickIncrement:(cartItem: ShopItem)-> Unit, clickDecrement:
-            (cartItem: ShopItem)->
-        Unit) {
+        fun bind(
+            shopItem: ShopItem,
+            clickIncrement: (cartItem: ShopItem) -> Unit,
+            clickDecrement: (cartItem: ShopItem) -> Unit,
+            clickAdditional: (cartItem: ShopItem) -> Unit
+        ) {
             binding.apply {
 
-                if(shopItem.count!!.toInt() > 0) {
+                if (shopItem.count!!.toInt() > 0) {
+                    setupRcViewAdditional(shopItem = shopItem, clickAdditional = clickAdditional)
+
+                    cartItemCounter.text = shopItem.count
+
+                    tvCartItemName.text = shopItem.title
+                    tvCartItemCost.text = shopItem.cost
+                    tvCartItemWeight.text = shopItem.weight
+                    tvDeliveryDate.text = shopItem.deliveryDate.toString()
 
 
-                cartItemCounter.text = shopItem.count
-
-                tvCartItemName.text = shopItem.title
-                tvCartItemCost.text = shopItem.cost
-                tvCartItemWeight.text = shopItem.weight
-                tvDeliveryDate.text = shopItem.deliveryDate.toString()
 
 
-                if (shopItem.imagePath != null && shopItem.imagePath!!.isNotEmpty() && shopItem
-                        .imagePath!!.isNotBlank()
-                ) {
-                    Picasso.get()
-                        .load(shopItem.imagePath)
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_background)
-                        .centerCrop()
-                        .fit()
-                        .into(ivPreview)
 
-                    binding.cartItemDecreaseButton.setOnClickListener {
-                        clickDecrement.invoke(shopItem)
-                        if ((cartItemCounter.text as String).toInt() > 0) {
-                            val newValue = (cartItemCounter.text as String?)!!.toInt() - 1
+                    if (shopItem.imagePath != null &&
+                        shopItem.imagePath!!.isNotEmpty() &&
+                        shopItem.imagePath!!.isNotBlank()
+                    ) {
+                        Picasso.get()
+                            .load(shopItem.imagePath)
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.ic_launcher_background)
+                            .centerCrop()
+                            .fit()
+                            .into(ivPreview)
+
+                        binding.cartItemDecreaseButton.setOnClickListener {
+                            clickDecrement.invoke(shopItem)
+                            if ((cartItemCounter.text as String).toInt() > 0) {
+                                val newValue = (cartItemCounter.text as String?)!!.toInt() - 1
+                                cartItemCounter.text = newValue.toString()
+
+                            }
+                        }
+
+                        binding.cartItemIncreaseButton.setOnClickListener {
+                            clickIncrement.invoke(shopItem)
+                            val newValue = (cartItemCounter.text as String?)!!.toInt() + 1
                             cartItemCounter.text = newValue.toString()
 
                         }
                     }
-
-                    binding.cartItemIncreaseButton.setOnClickListener {
-                        clickIncrement.invoke(shopItem)
-                        val newValue = (cartItemCounter.text as String?)!!.toInt() + 1
-                        cartItemCounter.text = newValue.toString()
-
-                    }
-                }
-                }
-
-                else {
+                } else {
                     tvDeliveryDateSample.visibility = View.GONE
                     ivPreview.visibility = View.GONE
                     tvCartItemName.visibility = View.GONE
@@ -81,6 +93,23 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
 
         }
 
+        private fun setupRcViewAdditional(
+            shopItem: ShopItem,
+            clickAdditional: (cartItem: ShopItem) -> Unit
+        ) {
+            if (shopItem.additionalServices != null) {
+                val adapter = OrderItemAdapter(
+                    root = null,
+                    click = null,
+                    viewType = 1,
+                    clickRemove = null,
+                    clickAdditional = clickAdditional
+                )
+                binding.additionalServicesRcView.adapter = adapter
+                adapter.submitList(listOf(shopItem))
+            }
+        }
+
 
         companion object {
             fun create(parent: ViewGroup): ItemHolder {
@@ -88,7 +117,8 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
                     CartItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent, false
-                    ))
+                    )
+                )
             }
         }
 
@@ -101,7 +131,10 @@ class CartAdapter(val clickIncrement:(cartItem: ShopItem)-> Unit,val clickDecrem
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position), clickDecrement = clickDecrement, clickIncrement = clickIncrement)
+        holder.bind(
+            getItem(position), clickDecrement = clickDecrement, clickIncrement =
+            clickIncrement, clickAdditional = clickAdditional
+        )
     }
 
     class ItemComparator : DiffUtil.ItemCallback<ShopItem>() {

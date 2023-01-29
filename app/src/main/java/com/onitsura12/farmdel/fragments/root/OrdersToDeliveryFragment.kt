@@ -1,13 +1,11 @@
 package com.onitsura12.farmdel.fragments.root
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -44,7 +42,7 @@ class OrdersToDeliveryFragment : Fragment() {
         }
 
         initRcView()
-        setupPopupMenu()
+        initPopupMenu()
     }
 
 
@@ -54,7 +52,7 @@ class OrdersToDeliveryFragment : Fragment() {
             ordersToDeliveryRcView.adapter = adapter
 
             viewModel.adapterList.observe(viewLifecycleOwner) {
-                adapter.submitList(it)
+                adapter.submitList(it.toMutableList())
             }
 
 
@@ -65,7 +63,7 @@ class OrdersToDeliveryFragment : Fragment() {
 
     }
 
-    private fun setupPopupMenu(){
+    private fun initPopupMenu(){
         binding.apply {
             val popupMenu = PopupMenu(requireContext(), sortDateButton, Gravity.CENTER)
 

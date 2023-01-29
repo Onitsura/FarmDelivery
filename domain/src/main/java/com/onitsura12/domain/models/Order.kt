@@ -17,5 +17,11 @@ data class OrderItem(
     val title: String,
     val count: Int,
     val price: Int,
-    val deliveryDate: Date?
+    val deliveryDate: Date?,
+)
+
+data class AdditionalServices(
+    val title: String = "",
+    val price: String = "0",
+    var isAdded: Boolean = false
 )

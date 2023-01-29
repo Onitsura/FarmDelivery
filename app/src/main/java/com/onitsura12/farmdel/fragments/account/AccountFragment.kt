@@ -51,6 +51,7 @@ class AccountFragment : Fragment() {
         checkSignIn()
         initLauncher()
         initViews()
+        Log.i("TAgAccount", USER.toString())
 
 
 
@@ -118,8 +119,7 @@ class AccountFragment : Fragment() {
 
                 if (account != null) {
                     firebaseAuth(account.idToken!!)
-                    initUser()
-                    viewModel.setupAccInfo()
+//                    initUser()
                     findNavController().navigate(R.id.shopFragment)
                 }
             } catch (e: ApiException) {
