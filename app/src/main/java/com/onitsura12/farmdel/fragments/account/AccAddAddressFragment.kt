@@ -85,15 +85,15 @@ class AccAddAddressFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun initPopupMenu(){
+    private fun initPopupMenu() {
         binding.apply {
             val popupMenu = PopupMenu(requireContext(), popupCities, Gravity.CENTER)
 
-                popupMenu.inflate(R.menu.popup_cities_menu)
-                popupMenu.setOnMenuItemClickListener { item ->
-                    popupCities.text = item.toString()
-                    return@setOnMenuItemClickListener true
-                }
+            popupMenu.inflate(R.menu.popup_cities_menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                popupCities.text = item.toString()
+                return@setOnMenuItemClickListener true
+            }
 
 
             popupCities.setOnClickListener {
