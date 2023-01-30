@@ -3,6 +3,7 @@
   Фермерский \n
   продукт \n
     </string>
+
     <string name="sample_name">Колбас Мяснов</string>
     <string name="account_info">Информация об аккаунте</string>
     <string name="account_orders">Мои заказы</string>
@@ -88,7 +89,7 @@
     <string name="add_photo">Добавить фото</string>
     <string name="sample_description">How often do researchers look for the right survey respondents, either for a market research study or an existing survey in the field? </string>
     <string name="tv_description">Описание</string>
-    <string name="additional_services_sample">Дополнительные услуги</string>
+    <string name="additional_services_sample">Добавить дополнительную услугу</string>
     <string name="additional_title_sample">Название услуги</string>
     <string name="new_supply">Новый товар</string>
   <string name="city_rnd">Ростов-на-Дону</string>

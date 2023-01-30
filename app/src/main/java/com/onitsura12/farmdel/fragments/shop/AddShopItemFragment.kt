@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
+import com.onitsura12.domain.models.AdditionalServices
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAddShopItemBinding
 import com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment
@@ -24,7 +25,6 @@ class AddShopItemFragment : Fragment() {
     private lateinit var viewModel: AddShopItemViewModel
     private lateinit var binding: FragmentAddShopItemBinding
     private val adapter: GalleryAdapter = GalleryAdapter()
-
 
 
     override fun onCreateView(
@@ -62,7 +62,7 @@ class AddShopItemFragment : Fragment() {
 
                     val title: String = viewModel.getRandomName().toString()
                     uploadImage(title)
-                    viewModel.imageUrl.observe(viewLifecycleOwner){
+                    viewModel.imageUrl.observe(viewLifecycleOwner) {
                         val newList = viewModel.imagesList.value
                         if (!newList!!.contains(it)) {
                             newList.add(it)
@@ -74,21 +74,20 @@ class AddShopItemFragment : Fragment() {
             }
 
             saveButton.setOnClickListener {
-                val additionalServices = viewModel.createAdditional(
-                    title = etAdditionalTitle.text.toString(),
-                    price = etAdditionalPrice.text.toString()
-                )
-                viewModel.addShopItem(viewModel.createShopItem(
-                    title = etItemTitle.text.toString(),
-                    cost = etItemCost.text.toString(),
-                    imagePath = viewModel.imageUrl.value,
-                    weight = etItemWeight.text.toString(),
-                    deliveryDate = etItemDeliveryDate.text.toString(),
-                    description = etItemDescription.text.toString(),
-                    imagesArray = viewModel.imagesList.value!!,
-                    additionalServices = additionalServices
-                    ), requireContext())
-
+                if (!isInputEmpty()) {
+                    viewModel.addShopItem(
+                        viewModel.createShopItem(
+                            title = etItemTitle.text.toString(),
+                            cost = etItemCost.text.toString(),
+                            imagePath = viewModel.imageUrl.value,
+                            weight = etItemWeight.text.toString(),
+                            deliveryDate = etItemDeliveryDate.text.toString(),
+                            description = etItemDescription.text.toString(),
+                            imagesArray = viewModel.imagesList.value!!,
+                            additionalServices = addAdditionalServices()
+                        ), requireContext()
+                    )
+                }
             }
 
         }
@@ -131,17 +130,60 @@ class AddShopItemFragment : Fragment() {
     }
 
 
-
-    private fun initRcView(){
+    private fun initRcView() {
         binding.apply {
-            imagesRcView.layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.HORIZONTAL, false)
+            imagesRcView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                RecyclerView.HORIZONTAL, false
+            )
             imagesRcView.adapter = adapter
 
-            viewModel.imagesList.observe(viewLifecycleOwner){
+            viewModel.imagesList.observe(viewLifecycleOwner) {
                 adapter.submitList(viewModel.stringToImageModel(it))
             }
         }
+    }
+
+    private fun addAdditionalServices(): AdditionalServices? {
+        var additionalServices: AdditionalServices? = null
+        if (binding.checkboxAdditional.isChecked) {
+            additionalServices = viewModel.createAdditional(
+                title = binding.etAdditionalTitle.text.toString(),
+                price = binding.etAdditionalPrice.text.toString()
+            )
+        }
+        return additionalServices
+    }
+
+    private fun isInputEmpty(): Boolean {
+        if (isEmptyCost() || isEmptyTitle() || isEmptyWeight()) {
+            Toast.makeText(
+                requireContext(), "Должны быть заполнены: Название, вес, стоимость " +
+                        "и дата доставки товара", Toast
+                    .LENGTH_SHORT
+            ).show()
+        }
+
+        return isEmptyCost() || isEmptyTitle() || isEmptyWeight() || isEmptyDate()
+    }
+
+    private fun isEmptyTitle(): Boolean {
+        return binding.etItemTitle.text.isBlank() || binding.etItemTitle.text.isEmpty()
+
+
+    }
+
+    private fun isEmptyCost(): Boolean {
+        return binding.etItemCost.text.isBlank() || binding.etItemCost.text.isEmpty()
+    }
+
+    private fun isEmptyWeight(): Boolean {
+        return binding.etItemWeight.text.isBlank() || binding.etItemWeight.text.isEmpty()
+    }
+
+    private fun isEmptyDate(): Boolean {
+        return binding.etItemDeliveryDate.text.isBlank() || binding.etItemDeliveryDate.text
+            .isEmpty()
     }
 
 

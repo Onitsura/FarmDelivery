@@ -1,6 +1,5 @@
 package com.onitsura12.data.storage.firebase.utils
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -17,6 +16,15 @@ class FirebaseHelper {
         lateinit var REF_DATABASE_ROOT: DatabaseReference
         lateinit var USER: User
 
+
+
+
+        const val NEW_ORDER_TITLE = "Новый заказ создан"
+        const val NEW_ORDER_MESSAGE = ""
+        const val ADMIN_TOPIC = "/topics/adminTopic"
+        const val BASE_URL = "https://fcm.googleapis.com"
+        const val SERVER_KEY = "AAAA_7FJ4zo:APA91bHpnexK9iVL29Lw9UJSaB6UNbxPIFed-R3PbIKyYX3ozTkK4fQhNFhAaQ1zG769zwiD3z5e6DwNkrMBu7WOyKGMTYRFWhp1RtrezUeaYFxvXh3Gtg8tXeY7o5UqNudLdZHqN5Pm"
+        const val CONTENT_TYPE = "application/json"
         const val NODE_WHITELIST = "whitelist"
         const val NODE_SUPPLIES = "supplies"
         const val NODE_USERS = "users"
@@ -62,6 +70,7 @@ class FirebaseHelper {
         const val CHILD_SUPPLY_WEIGHT = "weight"
         const val CHILD_SUPPLY_IMAGE_PATH = "imagePath"
         const val CHILD_SUPPLY_DELIVERY_DATE = "deliveryDate"
+
 
 
 

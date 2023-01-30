@@ -1,14 +1,19 @@
 package com.onitsura12.farmdel.fragments.cart
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.gson.Gson
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.ADMIN_TOPIC
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_ORDER_MESSAGE
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_ORDER_TITLE
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
@@ -17,7 +22,17 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
 import com.onitsura12.domain.models.Address
 import com.onitsura12.domain.models.Order
 import com.onitsura12.domain.models.ShopItem
+import com.onitsura12.farmdel.utils.notification.NotificationData
+import com.onitsura12.farmdel.utils.notification.PushNotification
+import com.onitsura12.farmdel.utils.notification.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
+
+
+
+
 
 class ConfirmOrderViewModel : ViewModel() {
     private val _addressList: MutableLiveData<ArrayList<Address>> = MutableLiveData()
@@ -40,6 +55,29 @@ class ConfirmOrderViewModel : ViewModel() {
         getNumber()
         checkPhone()
     }
+
+    fun createNotification(){
+        PushNotification(
+            NotificationData(title = NEW_ORDER_TITLE, message = NEW_ORDER_MESSAGE),
+            ADMIN_TOPIC
+        ).also { sendNotification(it) }
+    }
+
+     private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+         try {
+
+             val response = RetrofitInstance.api.postNotification(notification = notification)
+
+             if (response.isSuccessful){
+
+             }
+             else Log.e("sendNotification", response.errorBody().toString())
+
+         }
+         catch (e: Exception){
+             Log.e("sendNotification", e.toString())
+         }
+     }
 
 
     private fun initAddressList() {

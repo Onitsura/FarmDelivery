@@ -86,6 +86,7 @@ class ConfirmOrderFragment : Fragment() {
                 if (!viewModel.isOrderListEmpty.value!!) {
                     if (!viewModel.isPhoneNull.value!!) {
                         viewModel.createOrder()
+                        viewModel.createNotification()
                         viewModel.cleanCart()
                         findNavController().navigate(R.id.action_confirmOrderFragment_to_cartSuccessFragment)
                     } else {

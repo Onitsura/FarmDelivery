@@ -34,9 +34,9 @@ class CartViewModel : ViewModel() {
 
     init {
         UID = AUTH.currentUser?.uid.toString()
-            setupAccInfo()
-            initCart()
-            checkTitles()
+        setupAccInfo()
+        initCart()
+        checkTitles()
 
 
     }

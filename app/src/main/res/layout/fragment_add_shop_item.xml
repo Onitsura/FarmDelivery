@@ -74,6 +74,7 @@
             android:id="@+id/etItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:inputType="text"
             android:hint="@string/item_title_sample"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -89,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="160dp"
+            android:inputType="number"
             android:hint="@string/shop_item_cost"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -102,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
+            android:inputType="text"
             android:hint="@string/shop_item_weight"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -116,6 +119,7 @@
             android:id="@+id/etItemWeight"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:inputType="number"
             android:hint="@string/shop_item_average_weight"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -131,6 +135,7 @@
             android:id="@+id/etItemDeliveryDate"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:inputType="date"
             android:hint="@string/delivery_date_sample"
             android:textSize="16sp"
             android:textAlignment="center"
@@ -169,10 +174,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etItemDescription" />
 
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkboxAdditional"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                app:layout_constraintStart_toEndOf="@+id/tvAdditional"
+                app:layout_constraintTop_toBottomOf="@+id/etItemDescription"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+
         <EditText
             android:id="@+id/etAdditionalTitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:inputType="text"
             android:hint="@string/additional_title_sample"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -186,6 +201,7 @@
             android:id="@+id/etAdditionalPrice"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:inputType="number"
             android:hint="@string/sample_cost"
             android:textAlignment="center"
             android:textColor="@color/black"

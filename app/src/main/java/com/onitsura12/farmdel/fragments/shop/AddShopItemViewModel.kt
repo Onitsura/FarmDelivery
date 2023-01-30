@@ -7,6 +7,8 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
 import com.onitsura12.domain.models.AdditionalServices
@@ -25,6 +27,7 @@ class AddShopItemViewModel : ViewModel() {
 
     init {
         imagesList.value = arrayListOf()
+
     }
 
 
@@ -65,11 +68,11 @@ class AddShopItemViewModel : ViewModel() {
         title: String,
         cost: String = "0",
         imagePath: String?,
-        weight: String? = "0",
+        weight: String = "0",
         deliveryDate: String?,
         description: String?,
         imagesArray: ArrayList<String>,
-        additionalServices: AdditionalServices
+        additionalServices: AdditionalServices?
     ): ShopItem {
         return ShopItem(
             title = title,

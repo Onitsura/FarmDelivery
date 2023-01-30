@@ -10,7 +10,9 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.ADMIN_TOPIC
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
@@ -269,6 +271,7 @@ class ShopViewModel : ViewModel() {
                         val whiteListItem = supplySnapshot.getValue(String::class.java)
                         if (id == whiteListItem) {
                             _showAddButton.value = true
+                            FirebaseMessaging.getInstance().subscribeToTopic(ADMIN_TOPIC)
                         }
 
                     }
