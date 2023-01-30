@@ -20,7 +20,7 @@
             android:id="@+id/ivPreview"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/splash"
+            android:src="@drawable/background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="20dp" />

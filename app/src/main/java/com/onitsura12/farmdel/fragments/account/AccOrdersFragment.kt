@@ -43,7 +43,7 @@ class AccOrdersFragment : Fragment() {
         binding.rcViewOrders.layoutManager = LinearLayoutManager(requireContext())
         binding.rcViewOrders.adapter = orderAdapter
         viewModel.ordersList.observe(viewLifecycleOwner) {
-            orderAdapter.submitList(it.toMutableList())
+            orderAdapter.submitList(it.toMutableList().reversed())
 
         }
     }

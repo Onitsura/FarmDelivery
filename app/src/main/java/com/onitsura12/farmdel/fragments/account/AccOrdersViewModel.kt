@@ -53,7 +53,7 @@ class AccOrdersViewModel @Inject constructor() : ViewModel() {
 
 
 
-                    _ordersList.value = list.reversed() as ArrayList<Order>
+                        _ordersList.value = list
 
 
                 }
