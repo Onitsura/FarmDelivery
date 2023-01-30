@@ -12,6 +12,7 @@ import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
 import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.Order
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.Collections.swap
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,8 +40,20 @@ class AccOrdersViewModel @Inject constructor() : ViewModel() {
                         val order = orderSnapshot.getValue(Order::class.java)
                         list.add(order!!)
                     }
-                    list.toMutableList().sortedBy { it.number }
-                    _ordersList.value = list
+                    for (left in 0 until list.size) {
+                        var minInd = left
+                        for (i in left until list.size) {
+                            if (list[i].number.toInt() < list[minInd].number.toInt()) {
+                                minInd = i
+                            }
+                        }
+                        swap(list, left, minInd)
+                    }
+
+
+
+
+                    _ordersList.value = list.reversed() as ArrayList<Order>
 
 
                 }
