@@ -1,13 +1,17 @@
 package com.onitsura12.farmdel.fragments.login
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -37,6 +41,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (AUTH.currentUser != null){
@@ -51,12 +56,23 @@ class LoginFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun initButtons(){
         binding.tvGoogleAuth.setOnClickListener {
-            signInWithGoogle(launcher = launcher, fragment = this, context = requireContext())
+            if (binding.userAgreement.isChecked) {
+                signInWithGoogle(launcher = launcher, fragment = this, context = requireContext())
+            }
+            else {
+                Toast.makeText(requireContext(), "Для продолжения надо принять " +
+                        "пользовательское соглашение", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
+        binding.tvUserAgreement.movementMethod = LinkMovementMethod.getInstance()
+        binding.tvUserAgreement.text = Html.fromHtml("Я прочитал и согласен с <a " +
+                "href=http://drive" +
+                ".google.com/drive/folders/1upBJFhQLntlTk-mqbT0HxI9AuOoPZ5zJ?usp=sharing>пользовательским соглашением и политикой конфиденциальности</a>", 0)
     }
 
     private fun initLauncher(){
@@ -80,5 +96,8 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+
+
 
 }

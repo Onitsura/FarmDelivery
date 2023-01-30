@@ -97,4 +97,7 @@
   <string name="city_aksay">Аксай</string>
     <string name="go_to_button">Выехал</string>
     <string name="complete_button">Доставлен</string>
+    <string name="user_agreement">Я прочитал и согласен с <a href="http://drive.google.com/drive/folders/1upBJFhQLntlTk-mqbT0HxI9AuOoPZ5zJ?usp=sharing">пользовательским соглашением и
+      политикой конфиденциальности</a></string>
+
 </resources>
