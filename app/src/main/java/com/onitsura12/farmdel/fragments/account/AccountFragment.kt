@@ -13,17 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
+import com.onitsura12.data.storage.firebase.utils.AUTH
+import com.onitsura12.data.storage.firebase.utils.UID
+import com.onitsura12.data.storage.firebase.utils.USER
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountBinding
-import com.onitsura12.farmdel.utils.LoginUtils
 import com.onitsura12.farmdel.utils.LoginUtils.Companion.checkAuth
 import com.onitsura12.farmdel.utils.LoginUtils.Companion.firebaseAuth
 import com.onitsura12.farmdel.utils.LoginUtils.Companion.signInWithGoogle
@@ -51,7 +46,6 @@ class AccountFragment : Fragment() {
         checkSignIn()
         initLauncher()
         initViews()
-        Log.i("TAgAccount", USER.toString())
 
 
 

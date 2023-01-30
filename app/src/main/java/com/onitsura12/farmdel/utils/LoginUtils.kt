@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.utils
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -11,16 +12,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.*
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_EMAIL
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_PHOTO
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
-import com.onitsura12.domain.models.User
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
 import com.onitsura12.farmdel.R
 
 class LoginUtils {
@@ -48,7 +45,11 @@ class LoginUtils {
 
         fun firebaseAuth(idToken: String) {
             val credential = GoogleAuthProvider.getCredential(idToken, null)
-            AUTH.signInWithCredential(credential)
+            AUTH.signInWithCredential(credential).addOnCompleteListener {
+                if (it.isSuccessful){
+                    initUser()
+                }
+            }
         }
 
         fun checkAuth(): Boolean {

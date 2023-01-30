@@ -9,10 +9,4 @@ import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.domain.models.User
 
-class LoginViewModel : ViewModel() {
-
-
-
-
-
-}
+class LoginViewModel : ViewModel()

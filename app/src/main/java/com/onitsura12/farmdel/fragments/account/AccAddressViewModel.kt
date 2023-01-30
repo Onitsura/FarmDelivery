@@ -7,14 +7,12 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.Address
-import com.onitsura12.domain.models.ShopItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -44,7 +42,6 @@ class AccAddressViewModel @Inject constructor() : ViewModel() {
 
                     }
                     _addressList.value = list
-                    Log.i("checkedVM", list.toString())
 
                 }
 

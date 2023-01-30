@@ -2,18 +2,15 @@ package com.onitsura12.farmdel.fragments.shop
 
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
+import com.onitsura12.data.storage.firebase.utils.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.ADMIN_TOPIC
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_COST
@@ -27,9 +24,9 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_WHITELIST
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
+import com.onitsura12.data.storage.firebase.utils.USER
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.utils.LoginUtils.Companion.setupAccInfo
 
@@ -49,16 +46,9 @@ class ShopViewModel : ViewModel() {
 
 
     init {
-        UID = AUTH.currentUser?.uid.toString()
-        if (UID.isNotEmpty()) {
-            setupAccInfo()
-        }
-
         isCartEmpty.value = true
         initSuppliesList()
         getCart()
-
-
     }
 
 

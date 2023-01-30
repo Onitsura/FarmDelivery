@@ -2,7 +2,6 @@ package com.onitsura12.farmdel.fragments.account
 
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
@@ -11,8 +10,8 @@ import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.Address
 import kotlin.random.Random
 
@@ -53,7 +52,6 @@ class AccAddAddressViewModel : ViewModel() {
 
                     }
                     _addressList.value = list
-                    Log.i("checkedVM", list.toString())
 
                 }
 

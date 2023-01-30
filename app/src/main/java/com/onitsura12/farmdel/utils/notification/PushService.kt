@@ -21,11 +21,6 @@ import kotlin.random.Random
 private const val CHANNEL_ID = "channel_admin"
 class PushService: FirebaseMessagingService() {
 
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)

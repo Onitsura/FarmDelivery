@@ -8,8 +8,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.Order
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

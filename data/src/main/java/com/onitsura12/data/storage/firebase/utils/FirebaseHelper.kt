@@ -1,23 +1,21 @@
 package com.onitsura12.data.storage.firebase.utils
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.onitsura12.domain.models.User
+
+lateinit var AUTH: FirebaseAuth
+lateinit var UID: String
+lateinit var REF_DATABASE_ROOT: DatabaseReference
+lateinit var USER: User
 
 
 class FirebaseHelper {
 
 
     companion object {
-
-        lateinit var AUTH: FirebaseAuth
-        lateinit var UID: String
-        lateinit var REF_DATABASE_ROOT: DatabaseReference
-        lateinit var USER: User
-
-
-
 
         const val NEW_ORDER_TITLE = "Новый заказ создан"
         const val NEW_ORDER_MESSAGE = ""
@@ -95,9 +93,13 @@ class FirebaseHelper {
             dataMap[CHILD_EMAIL] = AUTH.currentUser?.email
 
             REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dataMap)
-                .addOnSuccessListener {
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
                         USER.fullname = AUTH.currentUser?.displayName
                         USER.eMail = AUTH.currentUser?.email
+                        Log.i("init", USER.toString())
+                    }
+
                 }
         }
     }

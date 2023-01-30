@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.gson.Gson
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.ADMIN_TOPIC
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
@@ -16,9 +15,9 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_O
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_ORDER_TITLE
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
+import com.onitsura12.data.storage.firebase.utils.USER
 import com.onitsura12.domain.models.Address
 import com.onitsura12.domain.models.Order
 import com.onitsura12.domain.models.ShopItem
@@ -29,9 +28,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
-
-
-
 
 
 class ConfirmOrderViewModel : ViewModel() {

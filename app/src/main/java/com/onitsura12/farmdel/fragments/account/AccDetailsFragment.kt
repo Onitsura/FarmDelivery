@@ -10,12 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_PHONE
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.USER
+import com.onitsura12.data.storage.firebase.utils.USER
+
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountDetailsBinding
 
@@ -40,7 +36,6 @@ class AccDetailsFragment : Fragment() {
             accDetailsBackButton.setOnClickListener {
                 findNavController().popBackStack()
             }
-            Log.i("TAgDetails", USER.toString())
 
             binding.apply {
                 viewModel.user.observe(viewLifecycleOwner) {
@@ -84,12 +79,8 @@ class AccDetailsFragment : Fragment() {
                     etAccountName.visibility = View.GONE
                     editNameButton.visibility = View.VISIBLE
                     applyNameButton.visibility = View.GONE
-                    accountName.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(), R.color
-                                .white
-                        )
-                    )
+
+
                 }
             }
         }
@@ -127,12 +118,6 @@ class AccDetailsFragment : Fragment() {
                         etAccountPhone.visibility = View.GONE
                         editPhoneButton.visibility = View.VISIBLE
                         applyPhoneButton.visibility = View.GONE
-                        accountPhone.setBackgroundColor(
-                            ContextCompat.getColor(
-                                requireContext(), R.color
-                                    .white
-                            )
-                        )
 
                     } else Toast.makeText(
                         requireContext(),

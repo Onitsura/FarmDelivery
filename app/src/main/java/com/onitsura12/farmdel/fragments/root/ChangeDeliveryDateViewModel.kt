@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_SUPPLY_COST
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_SUPPLY_COUNT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_SUPPLY_DELIVERY_DATE
@@ -15,8 +15,8 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_SUPPLY_WEIGHT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_WHITELIST
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.ShopItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

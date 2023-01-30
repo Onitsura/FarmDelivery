@@ -46,7 +46,7 @@ class GalleryAdapter : ListAdapter<ImageModel, GalleryAdapter.ItemHolder>(ItemCo
     }
 
 
-    class ItemComparator() : DiffUtil.ItemCallback<ImageModel>() {
+    class ItemComparator : DiffUtil.ItemCallback<ImageModel>() {
         override fun areItemsTheSame(oldItem: ImageModel, newItem: ImageModel): Boolean {
             return oldItem.path == newItem.path
         }

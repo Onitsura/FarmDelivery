@@ -1,7 +1,6 @@
 package com.onitsura12.farmdel.fragments.shop
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentShopBinding
-import com.onitsura12.farmdel.fragments.cart.CartFragment
 import com.onitsura12.farmdel.recyclerView.ShopAdapter
 
 class ShopFragment : Fragment() {

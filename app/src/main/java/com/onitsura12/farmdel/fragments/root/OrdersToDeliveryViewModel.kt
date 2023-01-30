@@ -1,7 +1,6 @@
 package com.onitsura12.farmdel.fragments.root
 
 import android.util.Log
-import androidx.core.view.get
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS_TO_DELIVERY
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
 import com.onitsura12.domain.models.Order
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

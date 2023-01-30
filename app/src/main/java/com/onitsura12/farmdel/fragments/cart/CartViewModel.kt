@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.AUTH
+import com.onitsura12.data.storage.firebase.utils.AUTH
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED
@@ -19,8 +19,9 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.REF_DATABASE_ROOT
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.UID
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
+import com.onitsura12.data.storage.firebase.utils.REF_DATABASE_ROOT
+import com.onitsura12.data.storage.firebase.utils.UID
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.utils.LoginUtils.Companion.setupAccInfo
 
@@ -33,8 +34,9 @@ class CartViewModel : ViewModel() {
 
 
     init {
-        UID = AUTH.currentUser?.uid.toString()
-        setupAccInfo()
+//        UID = AUTH.currentUser?.uid.toString()
+//        initUser()
+//        setupAccInfo()
         initCart()
         checkTitles()
 
