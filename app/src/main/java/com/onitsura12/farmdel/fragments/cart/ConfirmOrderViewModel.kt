@@ -29,6 +29,8 @@ import com.onitsura12.farmdel.utils.notification.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -236,7 +238,9 @@ class ConfirmOrderViewModel : ViewModel() {
         }
         val now = Calendar.getInstance()
 
-        val placedDate = now.time
+        val currentDate = now.time
+        val targetFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy 'в' HH:mm", Locale.ROOT)
+        val placedDate: String = targetFormat.format(currentDate)
 
         val newOrder = Order(
             id = getId(_number.value.toString()),
@@ -249,6 +253,8 @@ class ConfirmOrderViewModel : ViewModel() {
             token = PushService.token
         )
         USER.token = PushService.token
+
+
 
         REF_DATABASE_ROOT.child(NODE_ORDERS).child(newOrder.id).setValue(newOrder)
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(NODE_ORDERS).child(newOrder.id)

@@ -19,7 +19,6 @@ class OrderAdapter : ListAdapter<Order, OrderAdapter.ItemHolder>(ItemComparator(
             val adapter = OrderItemAdapter(root = null, click = null, clickRemove = null,
                 viewType = null, clickAdditional = null)
             binding.apply {
-                tvOrderCost.text = order.amount.toString()
                 tvOrderItems.text = order.items.size.toString()
                 tvOrderNumber.text = order.number
                 tvOrderPlaced.text = order.placed.toString()

@@ -10,7 +10,7 @@ data class Order(
     val userPhone: String? = null,
     val userName: String? = null,
     val amount: Int? = 0,
-    val placed: Date? = null,
+    val placed: String? = null,
     val token: String? = ""
 )
 
