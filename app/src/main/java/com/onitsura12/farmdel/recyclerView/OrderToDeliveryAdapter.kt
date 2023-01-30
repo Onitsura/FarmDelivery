@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.recyclerView
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,24 +11,34 @@ import com.onitsura12.domain.models.Order
 import com.onitsura12.farmdel.databinding.OrderItemBinding
 import com.onitsura12.farmdel.databinding.OrderToDeliveryItemBinding
 
-class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHolder>(ItemComparator()) {
+class OrderToDeliveryAdapter(
+    private val clickGoTo: (order: Order) -> Unit,
+    private val clickComplete: (order: Order) -> Unit
+) : ListAdapter<Order,
+        OrderToDeliveryAdapter
+        .ItemHolder>
+    (ItemComparator()) {
 
 
     class ItemHolder(private val binding: OrderToDeliveryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(order: Order) {
+        fun bind(
+            order: Order,
+            clickGoTo: (order: Order) -> Unit,
+            clickComplete: (order: Order) -> Unit
+        ) {
 
 
-                    val adapter = OrderItemAdapter(
-                        root = null,
-                        click = null,
-                        viewType = 2,
-                        clickRemove = null,
-                        clickAdditional = null
-                    )
-                    binding.rcViewOrdersToDelivery.adapter = adapter
-                    adapter.submitList(order.items)
+            val adapter = OrderItemAdapter(
+                root = null,
+                click = null,
+                viewType = 2,
+                clickRemove = null,
+                clickAdditional = null
+            )
+            binding.rcViewOrdersToDelivery.adapter = adapter
+            adapter.submitList(order.items)
 
             binding.apply {
                 tvName.text = order.userName
@@ -39,6 +50,14 @@ class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHol
                 tvFlat.text = order.address!!.flat
                 tvPhone.text = order.userPhone
 
+                goToButton.setOnClickListener {
+                    clickGoTo.invoke(order)
+                    goToButton.visibility = View.GONE
+                    completeButton.visibility = View.VISIBLE
+                }
+                completeButton.setOnClickListener {
+                    clickComplete.invoke(order)
+                }
             }
         }
 
@@ -63,7 +82,7 @@ class OrderToDeliveryAdapter : ListAdapter<Order, OrderToDeliveryAdapter.ItemHol
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickGoTo = clickGoTo, clickComplete = clickComplete)
     }
 
     class ItemComparator : DiffUtil.ItemCallback<Order>() {

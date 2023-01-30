@@ -95,4 +95,6 @@
   <string name="city_rnd">Ростов-на-Дону</string>
   <string name="city_bataysk">Батайск</string>
   <string name="city_aksay">Аксай</string>
+    <string name="go_to_button">Выехал</string>
+    <string name="complete_button">Доставлен</string>
 </resources>

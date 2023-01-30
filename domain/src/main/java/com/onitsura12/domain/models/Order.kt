@@ -10,7 +10,8 @@ data class Order(
     val userPhone: String? = null,
     val userName: String? = null,
     val amount: Int? = 0,
-    val placed: Date? = null
+    val placed: Date? = null,
+    val token: String? = ""
 )
 
 data class OrderItem(

@@ -17,6 +17,9 @@ class FirebaseHelper {
 
     companion object {
 
+
+        const val COURIER_GO_TO_TITLE = "Курьер выехал к вам"
+        const val COURIER_GO_TO_MESSAGE = "в течение 1 - 1.5 часов будем у вас"
         const val NEW_ORDER_TITLE = "Новый заказ создан"
         const val NEW_ORDER_MESSAGE = ""
         const val ADMIN_TOPIC = "/topics/adminTopic"
@@ -28,6 +31,7 @@ class FirebaseHelper {
         const val NODE_USERS = "users"
         const val NODE_ORDERS = "orders"
         const val NODE_ORDERS_TO_DELIVERY = "ordersToDelivery"
+        const val CHILD_TOKEN = "token"
         const val CHILD_ID = "id"
         const val CHILD_PHONE = "phone"
         const val CHILD_FULLNAME = "fullname"

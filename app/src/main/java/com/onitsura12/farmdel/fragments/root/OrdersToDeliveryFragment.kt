@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onitsura12.domain.models.Order
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentOrdersToDeliveryBinding
 import com.onitsura12.farmdel.recyclerView.OrderToDeliveryAdapter
@@ -17,7 +19,7 @@ import com.onitsura12.farmdel.recyclerView.OrderToDeliveryAdapter
 class OrdersToDeliveryFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersToDeliveryBinding
-    private val adapter: OrderToDeliveryAdapter = OrderToDeliveryAdapter()
+    private lateinit var adapter: OrderToDeliveryAdapter
     private val viewModel: OrdersToDeliveryViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -48,8 +50,14 @@ class OrdersToDeliveryFragment : Fragment() {
 
     private fun initRcView() {
         binding.apply {
+            val clickToGo: (order: Order) -> Unit = {viewModel.createNotification(it)
+            Toast.makeText(requireContext(), "Пуш отправлен", Toast.LENGTH_SHORT).show()}
+            val clickComplete: (order: Order) -> Unit = {viewModel.finishDelivery(it)
+            Toast.makeText(requireContext(), "Заказ доставлен", Toast.LENGTH_SHORT).show()}
+            adapter = OrderToDeliveryAdapter(clickGoTo = clickToGo, clickComplete = clickComplete)
             ordersToDeliveryRcView.layoutManager = LinearLayoutManager(requireContext())
             ordersToDeliveryRcView.adapter = adapter
+
 
             viewModel.adapterList.observe(viewLifecycleOwner) {
                 adapter.submitList(it.toMutableList())

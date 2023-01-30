@@ -8,5 +8,6 @@ data class User(
     var photoUrl: String? = "",
     var orders: List<Order?> = listOf(),
     var address: Address? = null,
-    var cart: List<ShopItem?> = listOf()
+    var cart: List<ShopItem?> = listOf(),
+    var token: String? = ""
 )

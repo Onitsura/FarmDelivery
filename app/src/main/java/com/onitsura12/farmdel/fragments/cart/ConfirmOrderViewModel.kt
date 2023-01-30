@@ -11,6 +11,7 @@ import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.ADMIN
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_CART
+import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_TOKEN
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_ORDER_MESSAGE
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NEW_ORDER_TITLE
 import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_ORDERS
@@ -23,6 +24,7 @@ import com.onitsura12.domain.models.Order
 import com.onitsura12.domain.models.ShopItem
 import com.onitsura12.farmdel.utils.notification.NotificationData
 import com.onitsura12.farmdel.utils.notification.PushNotification
+import com.onitsura12.farmdel.utils.notification.PushService
 import com.onitsura12.farmdel.utils.notification.RetrofitInstance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,10 +58,10 @@ class ConfirmOrderViewModel : ViewModel() {
         PushNotification(
             NotificationData(title = NEW_ORDER_TITLE, message = NEW_ORDER_MESSAGE),
             ADMIN_TOPIC
-        ).also { sendNotification(it) }
+        ).also { sendNotificationToAdmin(it) }
     }
 
-     private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+     private fun sendNotificationToAdmin(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
          try {
 
              val response = RetrofitInstance.api.postNotification(notification = notification)
@@ -243,12 +245,15 @@ class ConfirmOrderViewModel : ViewModel() {
             address = _addressList.value!![0],
             userPhone = USER.phone,
             userName = USER.fullname,
-            placed = placedDate
+            placed = placedDate,
+            token = PushService.token
         )
+        USER.token = PushService.token
 
         REF_DATABASE_ROOT.child(NODE_ORDERS).child(newOrder.id).setValue(newOrder)
         REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(NODE_ORDERS).child(newOrder.id)
             .setValue(newOrder)
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_TOKEN).setValue(USER.token)
 
     }
 
