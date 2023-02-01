@@ -2,7 +2,6 @@ package com.onitsura12.farmdel.utils
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -12,13 +11,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.onitsura12.data.storage.firebase.utils.*
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_EMAIL
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_FULLNAME
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.CHILD_PHOTO
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.NODE_USERS
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initUser
 import com.onitsura12.farmdel.R
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_EMAIL
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_FULLNAME
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_PHOTO
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initUser
 
 class LoginUtils {
 

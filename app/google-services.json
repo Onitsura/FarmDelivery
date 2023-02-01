@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "1098191070010-fho5fm7b3sq7mqpr312aeoe23nfelm09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onitsura12.farmdel",
+            "certificate_hash": "ca0e3139c4918aeca05c267110d022b9d279ae15"
+          }
+        },
+        {
+          "client_id": "1098191070010-nv5kpd3dnc7qnuvmg8kj9ql7617jcij5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onitsura12.farmdel",
+            "certificate_hash": "cff064144ac12df53d999ddb3bd50c6443ebd5cd"
+          }
+        },
+        {
           "client_id": "1098191070010-ibjt4egr37up81rtb7rpdc6u4hismc7s.apps.googleusercontent.com",
           "client_type": 3
         }

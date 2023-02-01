@@ -14,5 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FarmDel"
 include ':app'
-include ':domain'
-include ':data'

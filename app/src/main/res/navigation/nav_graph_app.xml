@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.onitsura12.farmdel.fragments.splash_screen.SplashFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.splash_screen.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.onitsura12.farmdel.fragments.login.LoginFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.onitsura12.farmdel.fragments.MainFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 </navigation>

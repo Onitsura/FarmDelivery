@@ -1,19 +1,13 @@
 package com.onitsura12.farmdel
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.activityViewModels
-import com.google.firebase.iid.FirebaseInstanceIdReceiver
-import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
-import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.messaging.FirebaseMessaging
 import com.onitsura12.farmdel.databinding.ActivityMainBinding
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper
-import com.onitsura12.data.storage.firebase.utils.FirebaseHelper.Companion.initFirebase
-import com.onitsura12.farmdel.fragments.MainViewModel
-import com.onitsura12.farmdel.utils.notification.PushService
+import com.onitsura12.farmdel.notification.PushService
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.initFirebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

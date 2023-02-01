@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.onitsura12.farmdel.fragments.shop.ShopFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.shop.ShopFragment"
         android:label="fragment_shop"
-        tools:layout="@layout/fragment_shop" >
+        tools:layout="@layout/fragment_shop">
         <action
             android:id="@+id/action_shopFragment_to_addShopItemFragment"
             app:destination="@id/addShopItemFragment" />
@@ -19,22 +19,22 @@
     </fragment>
     <fragment
         android:id="@+id/addShopItemFragment"
-        android:name="com.onitsura12.farmdel.fragments.shop.AddShopItemFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.shop.AddShopItemFragment"
         android:label="fragment_add_shop_item"
-        tools:layout="@layout/fragment_add_shop_item" >
+        tools:layout="@layout/fragment_add_shop_item">
         <action
             android:id="@+id/action_addShopItemFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
-        android:name="com.onitsura12.farmdel.fragments.bottomsheet.BottomSheetFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.bottomsheet.BottomSheetFragment"
         android:label="BottomSheetFragment" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.onitsura12.farmdel.fragments.account.AccountFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.account.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" >
+        tools:layout="@layout/fragment_account">
         <action
             android:id="@+id/action_accountFragment_to_accDetailsFragment"
             app:destination="@id/accDetailsFragment" />
@@ -50,33 +50,33 @@
     </fragment>
     <fragment
         android:id="@+id/accAddAddressFragment"
-        android:name="com.onitsura12.farmdel.fragments.account.AccAddAddressFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.account.AccAddAddressFragment"
         android:label="fragment_acc_add_address"
         tools:layout="@layout/fragment_acc_add_address" />
     <fragment
         android:id="@+id/accOrdersFragment"
-        android:name="com.onitsura12.farmdel.fragments.account.AccOrdersFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.account.AccOrdersFragment"
         android:label="fragment_acc_orders"
         tools:layout="@layout/fragment_acc_orders" />
     <fragment
         android:id="@+id/accAddressFragment"
-        android:name="com.onitsura12.farmdel.fragments.account.AccAddressFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.account.AccAddressFragment"
         android:label="fragment_account_address"
-        tools:layout="@layout/fragment_account_address" >
+        tools:layout="@layout/fragment_account_address">
         <action
             android:id="@+id/action_accAddressFragment_to_accAddAddressFragment"
             app:destination="@id/accAddAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/accDetailsFragment"
-        android:name="com.onitsura12.farmdel.fragments.account.AccDetailsFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.account.AccDetailsFragment"
         android:label="fragment_account_details"
         tools:layout="@layout/fragment_account_details" />
     <fragment
         android:id="@+id/adminPanel"
-        android:name="com.onitsura12.farmdel.fragments.root.AdminPanel"
+        android:name="com.onitsura12.farmdel.presentation.fragments.root.AdminPanel"
         android:label="fragment_admin_panel"
-        tools:layout="@layout/fragment_admin_panel" >
+        tools:layout="@layout/fragment_admin_panel">
         <action
             android:id="@+id/action_adminPanel_to_ordersToDeliveryFragment"
             app:destination="@id/ordersToDeliveryFragment" />
@@ -86,39 +86,39 @@
     </fragment>
     <fragment
         android:id="@+id/changeDeliveryDateFragment"
-        android:name="com.onitsura12.farmdel.fragments.root.ChangeDeliveryDateFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.root.ChangeDeliveryDateFragment"
         android:label="fragment_change_delivery_date"
         tools:layout="@layout/fragment_change_delivery_date" />
     <fragment
         android:id="@+id/ordersToDeliveryFragment"
-        android:name="com.onitsura12.farmdel.fragments.root.OrdersToDeliveryFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.root.OrdersToDeliveryFragment"
         android:label="fragment_orders_to_delivery"
         tools:layout="@layout/fragment_orders_to_delivery" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.onitsura12.farmdel.fragments.cart.CartFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.cart.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_cartFragment_to_confirmOrderFragment"
             app:destination="@id/confirmOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/confirmOrderFragment"
-        android:name="com.onitsura12.farmdel.fragments.cart.ConfirmOrderFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.cart.ConfirmOrderFragment"
         android:label="fragment_confirm_order"
-        tools:layout="@layout/fragment_confirm_order" >
+        tools:layout="@layout/fragment_confirm_order">
         <action
             android:id="@+id/action_confirmOrderFragment_to_cartSuccessFragment"
             app:destination="@id/cartSuccessFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartSuccessFragment"
-        android:name="com.onitsura12.farmdel.fragments.cart.CartSuccessFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.cart.CartSuccessFragment"
         android:label="CartSuccessFragment" />
     <fragment
         android:id="@+id/shopItemDetailsFragment"
-        android:name="com.onitsura12.farmdel.fragments.shop.ShopItemDetailsFragment"
+        android:name="com.onitsura12.farmdel.presentation.fragments.shop.ShopItemDetailsFragment"
         android:label="fragment_shop_item_details"
         tools:layout="@layout/fragment_shop_item_details" />
 </navigation>
