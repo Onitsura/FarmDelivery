@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1098191070010-dtg3fclrlbdjg7qqu499p9unqe1u2jjo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onitsura12.farmdel",
+            "certificate_hash": "73ed34961a0ab07ac4bf6a3c519c4f4149e5cd46"
+          }
+        },
+        {
           "client_id": "1098191070010-fho5fm7b3sq7mqpr312aeoe23nfelm09.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

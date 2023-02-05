@@ -2,11 +2,12 @@ package com.onitsura12.farmdel.domain.repository
 
 
 import com.onitsura12.farmdel.domain.models.User
+import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun getUser(): User
+    suspend fun getUser(): Flow<User>
 
-    fun saveUser(newUser: User)
+    suspend fun saveUser(newUser: User)
 
 }

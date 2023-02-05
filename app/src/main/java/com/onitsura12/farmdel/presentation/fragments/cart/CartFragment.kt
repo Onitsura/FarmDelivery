@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentCartBinding
 import com.onitsura12.farmdel.domain.models.ShopItem
+import com.onitsura12.farmdel.presentation.fragments.cart.CartViewModel
 import com.onitsura12.farmdel.presentation.recyclerView.CartAdapter
 
 class CartFragment : Fragment() {
