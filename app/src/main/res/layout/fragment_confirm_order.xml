@@ -10,6 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/background"
         android:layout_height="match_parent">
 
 
@@ -46,6 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/backButton"
+            app:cardCornerRadius="20dp"
             android:visibility="gone">
 
             <TextView
@@ -135,9 +137,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="20dp"
             android:layout_margin="10dp">
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/button_back"

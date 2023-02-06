@@ -1,16 +1,15 @@
 package com.onitsura12.farmdel.presentation.fragments.cart
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentCartBinding
 import com.onitsura12.farmdel.domain.models.ShopItem
-import com.onitsura12.farmdel.presentation.fragments.cart.CartViewModel
 import com.onitsura12.farmdel.presentation.recyclerView.CartAdapter
 
 class CartFragment : Fragment() {
@@ -53,8 +52,8 @@ class CartFragment : Fragment() {
         binding.cartRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRcView.adapter = adapter
 
-        viewModel.cart.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.adapterList.observe(viewLifecycleOwner) {
+            adapter.submitList(it.toMutableList())
         }
 
 

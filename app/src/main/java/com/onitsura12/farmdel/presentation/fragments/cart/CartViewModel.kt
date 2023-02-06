@@ -28,6 +28,8 @@ class CartViewModel : ViewModel() {
     val cart: LiveData<ArrayList<ShopItem>> = _cart
     private val _totalCost: MutableLiveData<Int> = MutableLiveData()
     val totalCost: LiveData<Int> = _totalCost
+    private val _adapterList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
+    val adapterList: LiveData<ArrayList<ShopItem>> = _adapterList
 
 
     init {
@@ -59,6 +61,7 @@ class CartViewModel : ViewModel() {
                     }
 
                     _cart.value = list
+                    getAdapterList(_cart.value!!)
                     itemsTotalCost = 0
                     for (i in list.indices) {
                         var itemAdditionalServices = 0
@@ -131,6 +134,17 @@ class CartViewModel : ViewModel() {
 
             })
 
+    }
+
+    private fun getAdapterList(list: ArrayList<ShopItem>) {
+        val removeList = arrayListOf<ShopItem>()
+        for (i in list.indices) {
+            if (list[i].count!!.toInt() == 0) {
+                removeList.add(list[i])
+            }
+        }
+        list.removeAll(removeList.toSet())
+        _adapterList.value = list
     }
 
     private fun removeFromCart(cartItem: ShopItem) {

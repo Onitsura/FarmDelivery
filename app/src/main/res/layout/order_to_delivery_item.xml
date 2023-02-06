@@ -184,6 +184,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
             >
 
         <TextView

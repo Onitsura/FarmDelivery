@@ -107,7 +107,7 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/cartItemDecreaseButton"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="25dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="30dp"
         android:src="@drawable/minus"
@@ -131,8 +131,8 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/cartItemIncreaseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"

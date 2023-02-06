@@ -97,6 +97,7 @@ class CartAdapter(
             clickAdditional: (cartItem: ShopItem) -> Unit
         ) {
             if (shopItem.additionalServices != null) {
+                binding.additionalServicesRcView.visibility = View.VISIBLE
                 val adapter = OrderItemAdapter(
                     root = null,
                     click = null,
