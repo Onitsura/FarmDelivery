@@ -49,6 +49,7 @@ class FirebaseHelper {
         const val CHILD_CART_IMAGES_ARRAY = "imagesArray"
         const val CHILD_CART_ADDITIONAL_SERVICES = "additionalServices"
         const val CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED = "added"
+        const val CHILD_CART_MIN_COUNT = "minCountValue"
         const val CHILD_ADDRESS_CITY = "city"
         const val CHILD_ADDRESS_STREET = "street"
         const val CHILD_ADDRESS_HOUSE = "house"

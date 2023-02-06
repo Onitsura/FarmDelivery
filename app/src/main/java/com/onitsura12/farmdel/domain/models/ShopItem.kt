@@ -10,5 +10,7 @@ data class ShopItem(
     var deliveryDate: String? = null,
     val description: String? = "",
     val imagesArray: ArrayList<String>? = arrayListOf(),
-    val additionalServices: AdditionalServices? = null
+    val additionalServices: AdditionalServices? = null,
+    var minCount: Boolean? = false,
+    var minCountValue: String? = "0",
 )

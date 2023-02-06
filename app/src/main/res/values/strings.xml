@@ -99,5 +99,6 @@
     <string name="complete_button">Доставлен</string>
     <string name="user_agreement">Я прочитал и согласен с <a href="http://drive.google.com/drive/folders/1upBJFhQLntlTk-mqbT0HxI9AuOoPZ5zJ?usp=sharing">пользовательским соглашением и
       политикой конфиденциальности</a></string>
+    <string name="min_count">Минимальный заказ от 2 шт.</string>
 
 </resources>

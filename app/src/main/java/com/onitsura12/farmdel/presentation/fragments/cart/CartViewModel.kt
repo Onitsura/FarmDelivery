@@ -11,12 +11,7 @@ import com.onitsura12.farmdel.domain.models.ShopItem
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES_IS_ADDED
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_COST
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_COUNT
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_DELIVERY_DATE
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_IMAGE_PATH
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_TITLE
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_SUPPLIES
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_USERS
 import com.onitsura12.farmdel.utils.REF_DATABASE_ROOT
@@ -155,17 +150,10 @@ class CartViewModel : ViewModel() {
     }
 
 
-    private fun addNewCartItem(cartItem: ShopItem) {
+    private fun updateCartCount(cartItem: ShopItem) {
 
         val dataMap = mutableMapOf<String, Any?>()
-        dataMap[CHILD_CART_IMAGE_PATH] = cartItem.imagePath
         dataMap[CHILD_CART_COUNT] = cartItem.count
-        dataMap[CHILD_CART_TITLE] = cartItem.title
-        dataMap[CHILD_CART_COST] = cartItem.cost
-        dataMap[CHILD_CART_WEIGHT] = cartItem.weight
-        dataMap[CHILD_CART_DELIVERY_DATE] = cartItem.deliveryDate
-        dataMap[CHILD_CART_ADDITIONAL_SERVICES] = cartItem.additionalServices
-
 
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
@@ -196,14 +184,14 @@ class CartViewModel : ViewModel() {
     fun incrementItemCount(cartItem: ShopItem) {
         val newValue = cartItem.count?.toInt()?.plus(1)
         cartItem.count = newValue.toString()
-        addNewCartItem(cartItem = cartItem)
+        updateCartCount(cartItem = cartItem)
     }
 
     fun decrementItemCount(cartItem: ShopItem) {
         if (cartItem.count?.toInt()!! > 0) {
             val newValue = cartItem.count?.toInt()?.minus(1)
             cartItem.count = newValue.toString()
-            addNewCartItem(cartItem = cartItem)
+            updateCartCount(cartItem = cartItem)
         }
     }
 

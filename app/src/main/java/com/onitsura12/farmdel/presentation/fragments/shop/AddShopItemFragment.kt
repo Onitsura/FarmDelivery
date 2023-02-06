@@ -14,6 +14,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAddShopItemBinding
 import com.onitsura12.farmdel.domain.models.AdditionalServices
+import com.onitsura12.farmdel.domain.models.ShopItem
 import com.onitsura12.farmdel.presentation.fragments.bottomsheet.BottomSheetFragment
 import com.onitsura12.farmdel.presentation.recyclerView.GalleryAdapter
 import java.io.File
@@ -75,17 +76,19 @@ class AddShopItemFragment : Fragment() {
 
             saveButton.setOnClickListener {
                 if (!isInputEmpty()) {
+                    val item = viewModel.createShopItem(
+                        title = etItemTitle.text.toString(),
+                        cost = etItemCost.text.toString(),
+                        imagePath = viewModel.imageUrl.value,
+                        weight = etItemWeight.text.toString(),
+                        deliveryDate = etItemDeliveryDate.text.toString(),
+                        description = etItemDescription.text.toString(),
+                        imagesArray = viewModel.imagesList.value!!,
+                        additionalServices = addAdditionalServices()
+                    )
+                    addMinCount(item)
                     viewModel.addShopItem(
-                        viewModel.createShopItem(
-                            title = etItemTitle.text.toString(),
-                            cost = etItemCost.text.toString(),
-                            imagePath = viewModel.imageUrl.value,
-                            weight = etItemWeight.text.toString(),
-                            deliveryDate = etItemDeliveryDate.text.toString(),
-                            description = etItemDescription.text.toString(),
-                            imagesArray = viewModel.imagesList.value!!,
-                            additionalServices = addAdditionalServices()
-                        ), requireContext()
+                        newItem = item, requireContext()
                     )
                 }
             }
@@ -153,6 +156,13 @@ class AddShopItemFragment : Fragment() {
             )
         }
         return additionalServices
+    }
+
+    private fun addMinCount(shopItem: ShopItem) {
+        if (binding.checkboxAddMinCount.isChecked) {
+            shopItem.minCountValue = binding.etMinCount.text.toString()
+            shopItem.minCount = binding.checkboxAddMinCount.isChecked
+        }
     }
 
     private fun isInputEmpty(): Boolean {

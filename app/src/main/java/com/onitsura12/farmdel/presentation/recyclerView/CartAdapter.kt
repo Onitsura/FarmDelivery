@@ -33,6 +33,7 @@ class CartAdapter(
             binding.apply {
 
                 if (shopItem.count!!.toInt() > 0) {
+                    showMinCountWarning(shopItem)
                     setupRcViewAdditional(shopItem = shopItem, clickAdditional = clickAdditional)
 
                     cartItemCounter.text = shopItem.count
@@ -63,7 +64,7 @@ class CartAdapter(
                             if ((cartItemCounter.text as String).toInt() > 0) {
                                 val newValue = (cartItemCounter.text as String?)!!.toInt() - 1
                                 cartItemCounter.text = newValue.toString()
-
+                                showMinCountWarning(shopItem)
                             }
                         }
 
@@ -71,7 +72,7 @@ class CartAdapter(
                             clickIncrement.invoke(shopItem)
                             val newValue = (cartItemCounter.text as String?)!!.toInt() + 1
                             cartItemCounter.text = newValue.toString()
-
+                            showMinCountWarning(shopItem)
                         }
                     }
                 } else {
@@ -107,6 +108,17 @@ class CartAdapter(
                 )
                 binding.additionalServicesRcView.adapter = adapter
                 adapter.submitList(listOf(shopItem))
+            }
+        }
+
+        private fun showMinCountWarning(shopItem: ShopItem, ) {
+            binding.apply {
+                if (shopItem.minCountValue != "") {
+                    if (shopItem.count!!.toInt() >= shopItem.minCountValue!!.toInt()) {
+
+                        tvMinCount.visibility = View.GONE
+                    } else tvMinCount.visibility = View.VISIBLE
+                }
             }
         }
 

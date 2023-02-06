@@ -19,6 +19,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_DELIVERY
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_DESCRIPTION
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_IMAGES_ARRAY
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_IMAGE_PATH
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_MIN_COUNT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_TITLE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_SUPPLIES
@@ -217,6 +218,24 @@ class ShopViewModel : ViewModel() {
         dataMap[CHILD_CART_DESCRIPTION] = cartItem.description
         dataMap[CHILD_CART_IMAGES_ARRAY] = cartItem.imagesArray
         dataMap[CHILD_CART_ADDITIONAL_SERVICES] = cartItem.additionalServices
+        dataMap[CHILD_CART_MIN_COUNT] = cartItem.minCountValue
+
+        REF_DATABASE_ROOT.child(NODE_USERS)
+            .child(UID)
+            .child(CHILD_CART)
+            .child(cartItem.title)
+            .updateChildren(dataMap)
+            .addOnCompleteListener {
+
+            }
+
+
+    }
+
+    private fun updateCartCount(cartItem: ShopItem) {
+
+        val dataMap = mutableMapOf<String, Any?>()
+        dataMap[CHILD_CART_COUNT] = cartItem.count
 
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)
@@ -233,7 +252,7 @@ class ShopViewModel : ViewModel() {
     fun incrementItemCount(cartItem: ShopItem) {
         val newValue = cartItem.count?.toInt()?.plus(1)
         cartItem.count = newValue.toString()
-        addNewCartItem(cartItem = cartItem)
+        updateCartCount(cartItem)
         counter += 1
         isCartEmpty.value = counter <= 0
     }
@@ -242,7 +261,7 @@ class ShopViewModel : ViewModel() {
         if (cartItem.count?.toInt()!! > 0) {
             val newValue = cartItem.count?.toInt()?.minus(1)
             cartItem.count = newValue.toString()
-            addNewCartItem(cartItem = cartItem)
+            updateCartCount(cartItem)
             counter -= 1
             isCartEmpty.value = counter <= 0
         }

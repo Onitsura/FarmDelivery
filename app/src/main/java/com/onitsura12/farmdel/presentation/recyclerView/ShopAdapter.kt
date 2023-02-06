@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.presentation.recyclerView
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -29,6 +30,9 @@ class ShopAdapter(
             chooseClick: ((shopItem: ShopItem) -> Unit)?
         ) {
             binding.apply {
+                if (shopItem.minCount!!) {
+                    tvMinCount.visibility = View.VISIBLE
+                }
                 itemWeight.text = shopItem.weight
                 itemTitle.text = shopItem.title
                 itemCost.text = shopItem.cost
@@ -52,6 +56,7 @@ class ShopAdapter(
                     if (cartItemCounter.text!!.toString().toInt() > 0) {
                         val newValue = cartItemCounter.text!!.toString().toInt() - 1
                         cartItemCounter.text = newValue.toString()
+
                     }
 
 
@@ -60,10 +65,10 @@ class ShopAdapter(
                     clickIncrement.invoke(shopItem)
                     val newValue = cartItemCounter.text!!.toString().toInt() + 1
                     cartItemCounter.text = newValue.toString()
+
                 }
             }
         }
-
 
     }
 

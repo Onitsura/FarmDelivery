@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentCartBinding
@@ -31,6 +32,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.checkoutButton.setOnClickListener {
+
             findNavController().navigate(R.id.action_cartFragment_to_confirmOrderFragment)
         }
 
@@ -52,6 +54,10 @@ class CartFragment : Fragment() {
         binding.cartRcView.layoutManager = LinearLayoutManager(requireContext())
         binding.cartRcView.adapter = adapter
 
+        val itemAnimator = binding.cartRcView.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
+        }
         viewModel.adapterList.observe(viewLifecycleOwner) {
             adapter.submitList(it.toMutableList())
         }
