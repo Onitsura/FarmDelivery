@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FarmDel"
         tools:targetApi="31">
-        <service android:name=".utils.notification.PushService"
+        <service android:name=".notification.PushService"
             android:permission="com.google.android.c2dm.permission.SEND"
             android:exported="true">
             <intent-filter>

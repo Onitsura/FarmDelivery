@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/accountFragment"
     android:background="@color/background"
-    tools:context=".fragments.account.AccountFragment">
+    tools:context=".presentation.fragments.account.AccountFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

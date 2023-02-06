@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/cartFragment"
     android:background="@color/background"
-    tools:context=".fragments.cart.CartFragment">
+    tools:context=".presentation.fragments.cart.CartFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
