@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.onitsura12.farmdel.R
@@ -60,17 +61,20 @@ class AccAddAddressFragment : Fragment() {
             }
 
             saveButton.setOnClickListener {
-                viewModel.addNewAddress(
-                    newAddress = viewModel.createNewAddress(
-                        city = popupCities.text.toString(),
-                        street = etStreet.text.toString(),
-                        house = etHouse.text.toString(),
-                        entrance = etEntrance.text.toString(),
-                        floor = etFloor.text.toString(),
-                        flat = etFlat.text.toString()
+                if (popupCities.text.isNotEmpty() && popupCities.text.isNotBlank()) {
+                    viewModel.addNewAddress(
+                        newAddress = viewModel.createNewAddress(
+                            city = popupCities.text.toString(),
+                            street = etStreet.text.toString(),
+                            house = etHouse.text.toString(),
+                            entrance = etEntrance.text.toString(),
+                            floor = etFloor.text.toString(),
+                            flat = etFlat.text.toString()
+                        )
                     )
-                )
-                findNavController().popBackStack()
+                    findNavController().popBackStack()
+                }
+                else Toast.makeText(requireContext(), "Выберите город", Toast.LENGTH_SHORT).show()
             }
         }
     }
