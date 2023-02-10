@@ -32,6 +32,8 @@ class ShopAdapter(
             binding.apply {
                 if (shopItem.minCount!!) {
                     tvMinCount.visibility = View.VISIBLE
+                    val text = "Минимальный заказ от ${shopItem.minCountValue} шт"
+                    tvMinCount.text = text
                 }
                 itemWeight.text = shopItem.weight
                 itemTitle.text = shopItem.title
@@ -97,7 +99,7 @@ class ShopAdapter(
         }
 
         override fun areContentsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean {
-            return oldItem.count == newItem.count
+            return oldItem == newItem
         }
 
     }

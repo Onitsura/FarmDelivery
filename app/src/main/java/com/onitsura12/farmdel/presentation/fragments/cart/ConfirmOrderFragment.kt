@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.onitsura12.farmdel.domain.models.Address
 import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentConfirmOrderBinding
+import com.onitsura12.farmdel.domain.models.Address
 import com.onitsura12.farmdel.presentation.recyclerView.AddressAdapter
 import com.onitsura12.farmdel.presentation.recyclerView.OrderItemAdapter
 
@@ -82,29 +82,36 @@ class ConfirmOrderFragment : Fragment() {
             findNavController().navigate(R.id.cartFragment)
         }
         binding.confirmButton.setOnClickListener {
-            if (!viewModel.isAddressNull.value!!) {
-                if (!viewModel.isOrderListEmpty.value!!) {
-                    if (!viewModel.isPhoneNull.value!!) {
-                        viewModel.createOrder()
-                        viewModel.createNotification()
-                        viewModel.cleanCart()
-                        findNavController().navigate(R.id.action_confirmOrderFragment_to_cartSuccessFragment)
-                    } else {
-                        Toast.makeText(
-                            requireContext(), "Добавьте номер телефона", Toast
-                                .LENGTH_SHORT
-                        ).show()
-                        findNavController().navigate(R.id.accDetailsFragment)
-                    }
+
+                if (!viewModel.isAddressNull.value!!) {
+                    if (!viewModel.isOrderListEmpty.value!!) {
+                        if (!viewModel.isPhoneNull.value!!) {
+                            viewModel.createOrder()
+                            viewModel.createNotification()
+                            viewModel.cleanCart()
+                            findNavController().navigate(R.id.action_confirmOrderFragment_to_cartSuccessFragment)
+                        } else {
+                            Toast.makeText(
+                                requireContext(), "Добавьте номер телефона", Toast
+                                    .LENGTH_SHORT
+                            ).show()
+                            findNavController().navigate(R.id.accDetailsFragment)
+                        }
+                    } else Toast.makeText(
+                        requireContext(), "Добавьте товары в корзину", Toast
+                            .LENGTH_SHORT
+                    ).show()
                 } else Toast.makeText(
-                    requireContext(), "Добавьте товары в корзину", Toast
-                        .LENGTH_SHORT
-                ).show()
-            } else Toast.makeText(requireContext(), "Добавьте адрес доставки", Toast.LENGTH_SHORT)
-                .show()
+                    requireContext(),
+                    "Добавьте адрес доставки",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
 
 
-        }
+            }
+
+
 
 
         binding.addAddressButton.setOnClickListener {

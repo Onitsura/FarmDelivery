@@ -68,6 +68,7 @@ class ConfirmOrderViewModel : ViewModel() {
             try {
 
                 val response = RetrofitInstance.api.postNotification(notification = notification)
+                Log.i("notif", notification.toString())
 
                 if (!response.isSuccessful) {
                     Log.e("sendNotification", response.errorBody().toString())
@@ -122,6 +123,7 @@ class ConfirmOrderViewModel : ViewModel() {
                     }
 
                     _orderItemsList.value = list
+                    getAdapterList(_orderItemsList.value!!)
                     checkOrder()
 
                     itemsTotalCost = 0
@@ -142,6 +144,17 @@ class ConfirmOrderViewModel : ViewModel() {
             })
 
 
+    }
+
+
+    private fun getAdapterList(list: ArrayList<ShopItem>) {
+        val removeList = arrayListOf<ShopItem>()
+        for (i in list.indices) {
+            if (list[i].count!!.toInt() == 0) {
+                removeList.add(list[i])
+            }
+        }
+        list.removeAll(removeList.toSet())
     }
 
     fun markAddress(address: Address) {

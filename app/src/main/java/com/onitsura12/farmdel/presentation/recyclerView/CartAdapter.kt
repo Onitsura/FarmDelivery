@@ -117,7 +117,11 @@ class CartAdapter(
                     if (shopItem.count!!.toInt() >= shopItem.minCountValue!!.toInt()) {
 
                         tvMinCount.visibility = View.GONE
-                    } else tvMinCount.visibility = View.VISIBLE
+                    } else {
+                        tvMinCount.visibility = View.VISIBLE
+                        val text = "Минимальный заказ от ${shopItem.minCountValue} шт"
+                        tvMinCount.text = text
+                    }
                 }
             }
         }

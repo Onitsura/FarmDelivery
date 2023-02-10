@@ -2,6 +2,7 @@ package com.onitsura12.farmdel.presentation.fragments.shop
 
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,7 @@ import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_DESCRIPT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_IMAGES_ARRAY
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_IMAGE_PATH
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_MIN_COUNT
+import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_MIN_COUNT_IS_TRUE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_TITLE
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_WEIGHT
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.NODE_SUPPLIES
@@ -114,17 +116,20 @@ class ShopViewModel : ViewModel() {
                     for (supplySnapshot in snapshot.children) {
                         val shopItem = supplySnapshot.getValue(ShopItem::class.java)
                         list.add(shopItem!!)
+                        Log.i("shopItem", shopItem.toString())
                     }
+                    for (i in list.indices){
+                        Log.i("listItem", list[i].toString())
+                    }
+
                     for (i in _cart.value!!.indices) {
                         for (y in list.indices) {
                             if (list[y].title == _cart.value!![i].title) {
                                 if (_cart.value!![i].count!!.toInt() > list[y].count!!.toInt()) {
                                     list[y].count = _cart.value!![i].count
                                 }
-                                if (_cart.value!![i].additionalServices?.isAdded != list[y]
-                                        .additionalServices?.isAdded){
-                                    list[y].additionalServices?.isAdded = _cart.value!![i]
-                                        .additionalServices?.isAdded == true
+                                if (_cart.value!![i].additionalServices?.isAdded != list[y].additionalServices?.isAdded){
+                                    list[y].additionalServices?.isAdded = _cart.value!![i].additionalServices?.isAdded == true
                                 }
                             }
                         }
@@ -138,6 +143,7 @@ class ShopViewModel : ViewModel() {
                     for (i in list.indices) {
                         addNewCartItem(list[i])
                     }
+
                     _cart.value!!.addAll(list)
                     checkTitles()
 
@@ -160,6 +166,7 @@ class ShopViewModel : ViewModel() {
                     ) {
 
                         _adapterList.value = _cart.value
+                        Log.i("adapter", _cart.value.toString())
                     }
                 }
             }
@@ -219,6 +226,8 @@ class ShopViewModel : ViewModel() {
         dataMap[CHILD_CART_IMAGES_ARRAY] = cartItem.imagesArray
         dataMap[CHILD_CART_ADDITIONAL_SERVICES] = cartItem.additionalServices
         dataMap[CHILD_CART_MIN_COUNT] = cartItem.minCountValue
+        dataMap[CHILD_CART_MIN_COUNT_IS_TRUE] = cartItem.minCount
+
 
         REF_DATABASE_ROOT.child(NODE_USERS)
             .child(UID)

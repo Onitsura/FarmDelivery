@@ -149,6 +149,20 @@ class CartViewModel : ViewModel() {
             .child(cartItem.title).removeValue()
     }
 
+    fun checkMinCount(): Boolean {
+        val list = _cart.value!!
+        var isCountEnough = true
+        for (i in list.indices) {
+            if (list[i].minCount == true) {
+                if (list[i].count.toString().toInt() < list[i].minCountValue.toString().toInt()) {
+                    isCountEnough = false
+                }
+            }
+
+        }
+        return isCountEnough
+    }
+
 
     private fun updateCartCount(cartItem: ShopItem) {
 
