@@ -66,7 +66,7 @@ class OrderItemAdapter(
 
                                 tvOrderAdditionalTitle.visibility = View.VISIBLE
                                 tvOrderAdditionalTitle.text =
-                                    orderItem.additionalServices.title.toString()
+                                    orderItem.additionalServices.title
                             }
 
                         }
@@ -86,7 +86,6 @@ class OrderItemAdapter(
                     tvOrderAdditionalTitle.visibility = View.VISIBLE
                     tvRoubles.visibility = View.VISIBLE
                     tvOrderAdditionalTitle.text = orderItem.additionalServices.title
-                    tvCost.visibility = View.VISIBLE
                     tvAdditionalPrice.visibility = View.VISIBLE
                     tvAdditionalPrice.text = orderItem.additionalServices.price
                     addAdditional.visibility = View.VISIBLE

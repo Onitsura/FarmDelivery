@@ -22,7 +22,7 @@ class FirebaseHelper {
         const val COURIER_GO_TO_MESSAGE = "в течение 1 - 1.5 часов будем у вас"
         const val NEW_ORDER_TITLE = "Новый заказ создан"
         const val NEW_ORDER_MESSAGE = ""
-        const val ADMIN_TOPIC = "/adminTopic"
+        const val ADMIN_TOPIC = "topics/adminTopic"
         const val BASE_URL = "https://fcm.googleapis.com"
         const val SERVER_KEY = "AAAA_7FJ4zo:APA91bHpnexK9iVL29Lw9UJSaB6UNbxPIFed-R3PbIKyYX3ozTkK4fQhNFhAaQ1zG769zwiD3z5e6DwNkrMBu7WOyKGMTYRFWhp1RtrezUeaYFxvXh3Gtg8tXeY7o5UqNudLdZHqN5Pm"
         const val CONTENT_TYPE = "application/json"

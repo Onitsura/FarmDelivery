@@ -9,9 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.onitsura12.farmdel.domain.models.ShopItem
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.ADMIN_TOPIC
+import com.onitsura12.farmdel.notification.PushService
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_ADDITIONAL_SERVICES
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART_COST
@@ -282,11 +281,12 @@ class ShopViewModel : ViewModel() {
         REF_DATABASE_ROOT.child(NODE_WHITELIST)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for (supplySnapshot in snapshot.children) {
-                        val whiteListItem = supplySnapshot.getValue(String::class.java)
+                    for (data in snapshot.children) {
+                        val whiteListItem = data.getValue(String::class.java)
                         if (id == whiteListItem) {
                             _showAddButton.value = true
-                            FirebaseMessaging.getInstance().subscribeToTopic(ADMIN_TOPIC)
+                            REF_DATABASE_ROOT.child("tokens").child(UID)
+                                .setValue(PushService.token)
                         }
 
                     }

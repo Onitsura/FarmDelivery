@@ -14,7 +14,6 @@ import com.onitsura12.farmdel.notification.NotificationData
 import com.onitsura12.farmdel.notification.PushNotification
 import com.onitsura12.farmdel.notification.PushService
 import com.onitsura12.farmdel.notification.RetrofitInstance
-import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.ADMIN_TOPIC
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ADDRESS
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_ADDRESS_PRIMARY
 import com.onitsura12.farmdel.utils.FirebaseHelper.Companion.CHILD_CART
@@ -35,6 +34,7 @@ import java.util.*
 
 
 class ConfirmOrderViewModel : ViewModel() {
+    private val adminsTokens: MutableLiveData<ArrayList<String>> = MutableLiveData()
     private val _addressList: MutableLiveData<ArrayList<Address>> = MutableLiveData()
     val addressList: LiveData<ArrayList<Address>> = _addressList
     private val _orderItemsList: MutableLiveData<ArrayList<ShopItem>> = MutableLiveData()
@@ -57,19 +57,20 @@ class ConfirmOrderViewModel : ViewModel() {
     }
 
     fun createNotification() {
-        PushNotification(
-            NotificationData(title = NEW_ORDER_TITLE, message = NEW_ORDER_MESSAGE),
-            ADMIN_TOPIC
-        ).also { sendNotificationToAdmin(it) }
+        for (i in adminsTokens.value!!.indices) {
+            PushNotification(
+                NotificationData(title = NEW_ORDER_TITLE, message = NEW_ORDER_MESSAGE),
+                adminsTokens.value!![i]
+            ).also { sendNotification(it) }
+        }
+
+
     }
 
-    private fun sendNotificationToAdmin(notification: PushNotification) =
+    private fun sendNotification(notification: PushNotification) =
         CoroutineScope(Dispatchers.IO).launch {
             try {
-
                 val response = RetrofitInstance.api.postNotification(notification = notification)
-                Log.i("notif", notification.toString())
-
                 if (!response.isSuccessful) {
                     Log.e("sendNotification", response.errorBody().toString())
                 }
@@ -128,10 +129,19 @@ class ConfirmOrderViewModel : ViewModel() {
 
                     itemsTotalCost = 0
                     for (i in list.indices) {
+                        var itemAdditionalServices = 0
+                        if (list[i].additionalServices != null) {
+                            if (list[i].additionalServices!!.isAdded) itemAdditionalServices =
+                                list[i].additionalServices!!.price.toInt()
 
-                        val itemCost: Double = list[i].cost.toInt() * list[i].weight!!.toDouble() *
-                                list[i].count!!.toInt()
-                        itemsTotalCost += itemCost.toInt()
+                        }
+                        val itemCost = list[i].cost.toInt()
+                        val itemWeight = list[i].weight!!.toDouble()
+                        val itemCount = list[i].count!!.toInt()
+                        val itemAmount: Double = ((itemAdditionalServices * itemCount) +
+                                (itemCost * itemCount * itemWeight))
+
+                        itemsTotalCost += itemAmount.toInt()
 
                     }
                     _totalCost.value = itemsTotalCost
@@ -287,6 +297,28 @@ class ConfirmOrderViewModel : ViewModel() {
             .removeValue()
             .addOnCompleteListener {
             }
+    }
+
+    fun sendNotificationsToAdmin(){
+        val list: ArrayList<String> = arrayListOf()
+        adminsTokens.value = list
+        REF_DATABASE_ROOT.child("tokens").addValueEventListener(object :
+            ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                list.clear()
+                for (data in snapshot.children){
+                    val token = data.getValue(String::class.java)
+                    list.add(token!!)
+                }
+                adminsTokens.value = list
+                createNotification()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }

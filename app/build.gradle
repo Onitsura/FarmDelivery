@@ -16,8 +16,8 @@ android {
         applicationId "com.onitsura12.farmdel"
         minSdk 21
         targetSdk 33
-        versionCode 4
-        versionName "1.2.0"
+        versionCode 6
+        versionName "1.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -102,7 +102,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

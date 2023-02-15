@@ -23,7 +23,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/primary_lighter"
-            android:visibility="gone"/>
+            android:padding="5dp"
+            android:visibility="gone"
+            />
 
 
     <com.makeramen.roundedimageview.RoundedImageView
