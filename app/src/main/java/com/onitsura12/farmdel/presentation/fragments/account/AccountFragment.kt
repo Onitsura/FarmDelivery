@@ -1,6 +1,7 @@
 package com.onitsura12.farmdel.presentation.fragments.account
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,6 +68,20 @@ class AccountFragment : Fragment() {
             }
             accOrdersText.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_accOrdersFragment)
+            }
+            feedbackText.setOnClickListener {
+                try {
+                    val mobile = "79888976162"
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://api.whatsapp.com/send?phone=$mobile")
+                        )
+                    )
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Возможно, у вас не установлен WhatsApp",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
             accSignOutText.setOnClickListener {
                 AUTH.signOut()
