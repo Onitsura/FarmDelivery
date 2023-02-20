@@ -101,5 +101,6 @@
       политикой конфиденциальности</a></string>
     <string name="min_count">Минимальный заказ от 2 шт.</string>
     <string name="feedback_text">Обратная связь</string>
+    <string name="feedback_warning"><![CDATA[Детали по заказу можно уточнить во вкладке Аккаунт - Обратная связь]]></string>
 
 </resources>

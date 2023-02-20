@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.onitsura12.farmdel.R
 import com.onitsura12.farmdel.databinding.FragmentAccountDetailsBinding
 import com.onitsura12.farmdel.utils.USER
 
@@ -41,14 +39,12 @@ class AccDetailsFragment : Fragment() {
             binding.apply {
                 viewModel.user.observe(viewLifecycleOwner) {
                     accountEmail.text = it.eMail
-                    if (it.phone != "") {
+                    if (it.phone != "" && it.phone != "null") {
                         accountPhone.text = it.phone
-                    } else accountPhone.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.red_light
-                        )
-                    )
+                    } else {
+
+                        accountPhone.text = "Укажите номер телефона"
+                    }
                     accountName.text = it.fullname
                 }
             }
@@ -61,7 +57,7 @@ class AccDetailsFragment : Fragment() {
     private fun editFullName() {
         binding.apply {
 
-            etAccountName.setOnEditorActionListener {_,_,_ ->
+            etAccountName.setOnEditorActionListener { _, _, _ ->
                 val newName: String = etAccountName.text.toString()
 
                 viewModel.saveNewName(newName = newName, context = requireContext())
@@ -106,7 +102,7 @@ class AccDetailsFragment : Fragment() {
     private fun editPhoneNumber() {
         binding.apply {
 
-            etAccountPhone.setOnEditorActionListener {_,_,_ ->
+            etAccountPhone.setOnEditorActionListener { _, _, _ ->
 
                 if (etAccountPhone.text.isEmpty() || etAccountPhone.text.isBlank()) {
                     Toast.makeText(
@@ -116,12 +112,11 @@ class AccDetailsFragment : Fragment() {
                     ).show()
 
                 } else {
-                    val newName: String = etAccountName.text.toString()
                     viewModel.checkPhone(phone = etAccountPhone.text.toString())
-                    viewModel.saveNewName(newName = newName, context = requireContext())
                     if (viewModel.isPhoneCorrect.value!!) {
 
-                        val newNumber: String = etAccountPhone.text.toString()
+                        val newNumber: String = convertNum(etAccountPhone.text.toString())
+
 
                         viewModel.saveNewPhone(newPhone = newNumber, context = requireContext())
 
@@ -167,7 +162,7 @@ class AccDetailsFragment : Fragment() {
 
                     if (viewModel.isPhoneCorrect.value!!) {
 
-                        val newNumber: String = etAccountPhone.text.toString()
+                        val newNumber: String = convertNum(etAccountPhone.text.toString())
 
                         viewModel.saveNewPhone(newPhone = newNumber, context = requireContext())
 
@@ -186,6 +181,14 @@ class AccDetailsFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun convertNum(number: String): String {
+        var correctNumber = number
+        if (number[0] == '8'){
+            correctNumber = "+7" + number.substring(1)
+        }
+        return correctNumber
     }
 
     private fun Fragment.hideKeyboard() {
