@@ -30,6 +30,10 @@ class CartAdapter(
             clickDecrement: (cartItem: ShopItem) -> Unit,
             clickAdditional: (cartItem: ShopItem) -> Unit
         ) {
+            val itemWeightText = "Примерный вес ${shopItem.weight} кг"
+            val itemCostText = "${shopItem.cost} рублей за кг"
+
+
             binding.apply {
 
                 if (shopItem.count!!.toInt() > 0) {
@@ -39,8 +43,8 @@ class CartAdapter(
                     cartItemCounter.text = shopItem.count
 
                     tvCartItemName.text = shopItem.title
-                    tvCartItemCost.text = shopItem.cost
-                    tvCartItemWeight.text = shopItem.weight
+                    tvCartItemCost.text = itemCostText
+                    tvCartItemWeight.text = itemWeightText
                     tvDeliveryDate.text = shopItem.deliveryDate.toString()
 
 
@@ -80,14 +84,11 @@ class CartAdapter(
                     ivPreview.visibility = View.GONE
                     tvCartItemName.visibility = View.GONE
                     tvCartItemCost.visibility = View.GONE
-                    tvCartItemWeight.visibility = View.GONE
                     tvDeliveryDate.visibility = View.GONE
                     cartItemCounter.visibility = View.GONE
                     cartItemDecreaseButton.visibility = View.GONE
                     cartItemIncreaseButton.visibility = View.GONE
-                    tvCostPer.visibility = View.GONE
-                    itemAverageWeight.visibility = View.GONE
-                    itemWeightMeasurement.visibility = View.GONE
+                    tvCartItemWeight.visibility = View.GONE
                 }
             }
 

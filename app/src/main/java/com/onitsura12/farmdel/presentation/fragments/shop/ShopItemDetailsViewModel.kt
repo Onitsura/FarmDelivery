@@ -56,6 +56,25 @@ class ShopItemDetailsViewModel @Inject constructor() : ViewModel() {
             })
     }
 
+    fun removeExtraWhitespaces(title: String): String{
+        val charArray = arrayListOf<Char>()
+        for (i in title.iterator()){
+            charArray.add(i)
+        }
+        var newTitle = ""
+        for (i in charArray.indices) {
+            if (charArray[i] != ' '){
+                newTitle += charArray[i]
+            }
+            else {
+                if (charArray[i - 1] != charArray[i]){
+                    newTitle += charArray[i]
+                }
+            }
+        }
+        return newTitle
+    }
+
 
 
 

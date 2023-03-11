@@ -53,17 +53,6 @@
             app:layout_constraintStart_toEndOf="@+id/ivPreview"
             app:layout_constraintTop_toBottomOf="@+id/tvMinCount"/>
 
-        <TextView
-            android:id="@+id/tvCostPer"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/item_cost_per"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/tvCartItemCost"
-            app:layout_constraintTop_toBottomOf="@+id/tvCartItemName" />
 
         <TextView
             android:id="@+id/tvCartItemCost"
@@ -77,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCartItemName" />
 
         <TextView
-            android:id="@+id/itemAverageWeight"
+            android:id="@+id/tvCartItemWeight"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
@@ -89,30 +78,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
 
         <TextView
-            android:id="@+id/tvCartItemWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/item_weight"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/itemAverageWeight"
-            app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
-
-        <TextView
-            android:id="@+id/itemWeightMeasurement"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/weight_measurement"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/tvCartItemWeight"
-            app:layout_constraintTop_toBottomOf="@+id/tvCartItemCost" />
-
-        <TextView
             android:id="@+id/tvDeliveryDateSample"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +86,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/ivPreview"
-            app:layout_constraintTop_toBottomOf="@+id/itemWeightMeasurement" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemWeight" />
 
         <TextView
             android:id="@+id/tvDeliveryDate"
@@ -131,7 +96,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/tvDeliveryDateSample"
-            app:layout_constraintTop_toBottomOf="@+id/itemWeightMeasurement" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCartItemWeight" />
 
         <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

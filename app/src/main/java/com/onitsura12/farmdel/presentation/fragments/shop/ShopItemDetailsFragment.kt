@@ -64,7 +64,7 @@ class ShopItemDetailsFragment : Fragment() {
     private fun setupInfo(){
         viewModel.shopItem.observe(viewLifecycleOwner){
             binding.apply {
-                title.text = it!!.title
+                title.text = viewModel.removeExtraWhitespaces(it!!.title)
                 itemWeight.text = it.weight
                 itemCost.text = it.cost
                 tvDeliveryDate.text = it.deliveryDate

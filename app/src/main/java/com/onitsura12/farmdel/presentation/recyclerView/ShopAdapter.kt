@@ -29,15 +29,19 @@ class ShopAdapter(
             clickDecrement: (cartItem: ShopItem) -> Unit,
             chooseClick: ((shopItem: ShopItem) -> Unit)?
         ) {
+            val itemWeightText = "Примерный вес ${shopItem.weight} кг"
+            val minCountText = "Минимальный заказ от ${shopItem.minCountValue} шт"
+            val itemCostText = "${shopItem.cost} рублей за кг"
+
             binding.apply {
                 if (shopItem.minCount!!) {
                     tvMinCount.visibility = View.VISIBLE
-                    val text = "Минимальный заказ от ${shopItem.minCountValue} шт"
-                    tvMinCount.text = text
+                    tvMinCount.text = minCountText
                 }
-                itemWeight.text = shopItem.weight
+
+                itemWeight.text = itemWeightText
                 itemTitle.text = shopItem.title
-                itemCost.text = shopItem.cost
+                itemCost.text = itemCostText
                 cartItemCounter.text = shopItem.count.toString()
                 if (shopItem.imagePath != null && shopItem.imagePath!!.isNotEmpty() && shopItem
                         .imagePath!!.isNotBlank()
